@@ -16,5 +16,5 @@ git push -u origin main
 ソース管理でブランチ作成
 ブランチプッシュ
 ブランチマージ
-GitHubでPull requestsでリクエストして
+GitHubでプルリクエストを作成
 GitHubでプルリクエストをマージする
