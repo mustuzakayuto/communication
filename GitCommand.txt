@@ -17,4 +17,4 @@ git push -u origin main
 ブランチプッシュ
 ブランチマージ
 GitHubでPull requestsでリクエストして
-GitHubで
+GitHubでプルリクエストをマージする
