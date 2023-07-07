@@ -10,3 +10,8 @@ git branch -D newBranch
 git branch -m newBranch testBranch
 ブランチをオリジナルに追加・変更
 git push -u origin main
+
+
+
+ソース管理でブランチ作成
+プッシュ
