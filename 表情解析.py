@@ -6,7 +6,15 @@ from fer import FER
 # pip install --upgrade opencv-python
 import datetime
 import os
-
+# 辞書型の感情
+emotion={
+    'angry': "怒り",
+    'disgust': "嫌悪",
+    'fear': "恐怖",
+    'happy':"幸せ",
+    'sad': "悲しみ",
+    'surprise': "驚き",
+    'neutral': "無"}
 def main():
     # 文字の色
     character_collar = (255,97,0)
@@ -65,7 +73,7 @@ def main():
             posy=0
             # すべての種類を取得
             for emotion2 in face["emotions"]:
-                # 文字列設定
+                # 文字列設定(日本語できない)
                 text2=emotion2+":"+str(face['emotions'][emotion2])
                 # 文字を入れる
                 cv2.putText(frame, text2, (x-120, y+10+(20*posy)),
