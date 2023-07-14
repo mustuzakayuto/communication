@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>顔の感情解析</title>
+    <meta charset="UTF-8">
+    <meta  name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <style>
+        video {
+            width: 50%;
+            height: auto;
+            transform: scaleX(-1);
+            
+        }
+        .result p{
+            height: 32px;
+            padding-left: 10px;
+            margin: 0;
+            border: solid;
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>顔の感情解析</h1>
+    <div style="display: flex;">
+        <video id="video" autoplay></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <div class="result">
+            <p id="angry"></p>
+            <p id="disgust"></p>
+            <p id="fear"></p>
+            <p id="happy"></p>
+            <p id="sad"></p>
+            <p id="surprise"></p>
+            <p id="neutral"></p>
+        </div>
+        
+    </div>
+    
+    
+    <button id="startButton">感情解析を開始</button>
+    <button id="endButton">感情解析を修了</button>
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const startButton = document.getElementById('startButton');
+        const endButton = document.getElementById('endButton');
+        
+        const window_video = document.getElementById('window');
+        const angry = document.getElementById('angry');
+        const disgust = document.getElementById('disgust');
+        const fear = document.getElementById('fear');
+        const happy = document.getElementById('happy');
+        const sad = document.getElementById('sad');
+        const surprise = document.getElementById('surprise');
+        const neutral = document.getElementById('neutral')
+        startButton.addEventListener('click', startEmotionDetection);
+        endButton.addEventListener('click', endEmotionDetection);
+        
+        var frame_time = 0
+        const framerate = 60
+        var activevideo = false
+        let stream
+        
+        function set(){
+            angry.innerHTML = "怒り:0%"
+            disgust.innerHTML = "嫌悪:0%"
+            fear.innerHTML = "恐怖:0%"
+            happy.innerHTML = "幸せ:0%"
+            sad.innerHTML = "悲しみ:0%"
+            surprise.innerHTML = "驚き:0%"
+            neutral.innerHTML = "無:0%"
+        }
+        set()
+        async function endEmotionDetection() {
+            activevideo = false
+            stream.getTracks().forEach(track => {
+                track.stop();
+            });
+            video.srcObject = null
+            set()
+        }
+        async function startEmotionDetection() {
+            // メディアデバイスにアクセスし、カメラの映像を取得
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            
+            
+            activevideo = true
+            // カメラ映像のフレームをキャプチャして感情解析を行う
+            const context = canvas.getContext('2d');
+            
+
+            function captureFrame() {
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const frame = canvas.toDataURL('image/png');
+                if (frame_time %framerate == 0){
+                    // フレームのデータをサーバーに送信
+                    fetch('/upload', {
+                        method: 'POST',
+                        body: JSON.stringify({ frame }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log(result);
+                        if (result.len !=0){
+                            
+                            
+                            console.log(result.arr.angry)
+                            angry.innerHTML = "怒り:"+(result.arr.angry*100).toFixed()+"%"
+                            disgust.innerHTML = "嫌悪:"+(result.arr.disgust*100).toFixed()+"%"
+                            fear.innerHTML = "恐怖:"+(result.arr.fear*100).toFixed()+"%"
+                            happy.innerHTML = "幸せ:"+(result.arr.happy*100).toFixed()+"%"
+                            sad.innerHTML = "悲しみ:"+(result.arr.sad*100).toFixed()+"%"
+                            surprise.innerHTML = "驚き:"+(result.arr.surprise*100).toFixed()+"%"
+                            neutral.innerHTML = "無感情:"+(result.arr.neutral*100).toFixed()+"%"
+                            
+                                
+                                
+                                
+                            
+                        }             
+
+                        
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+                }
+                frame_time += 1
+                
+                // 次のフレームをキャプチャする
+                if(activevideo){
+                    requestAnimationFrame(captureFrame);
+                }       
+            }
+
+            // フレームキャプチャを開始
+            requestAnimationFrame(captureFrame);
+        }
+    </script>
+</body>
+</html>
