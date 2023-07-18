@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顔の感情解析</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/face.css') }}">
+</head>
+<body>
+    <h1>顔の感情解析</h1>
+    <div style="display: flex;">
+      <video id="video" autoplay></video>
+      <canvas id="canvas" style="display: none;"></canvas>
+      <div class="result">
+          <p id="angry">怒り: 0%</p>
+          <p id="disgust">嫌悪: 0%</p>
+          <p id="fear">恐怖: 0%</p>
+          <p id="happy">幸せ: 0%</p>
+          <p id="sad">悲しみ: 0%</p>
+          <p id="surprise">驚き: 0%</p>
+          <p id="neutral">無感情: 0%</p>
+      </div>
+    </div>
+    <button id="startButton">感情解析を開始</button>
+    <button id="endButton">感情解析を修了</button>
+    <script src="{{ url_for('static', filename='js/face.js') }}"></script>
+</body>
+</html>

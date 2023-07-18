@@ -1,0 +1,11 @@
+video {
+    width: 50%;
+    height: auto;
+    transform: scaleX(-1);
+}
+.result p {
+    height: 32px;
+    padding-left: 10px;
+    margin: 0;
+    border: 1px solid;
+}

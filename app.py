@@ -6,56 +6,25 @@ from fer import FER
 import numpy as np
 import os
 import json
+import secrets
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(16)  # 16バイトのランダムなバイト列を16進数文字列に変換してシークレットキーに設定
 app.debug = True
 app.template_folder = 'template'
-
-
-emotion_detector = FER(mtcnn=True)
-
+app.static_folder = 'static'
+from login import user
+import Face
+app.register_blueprint(user.bp)
+app.register_blueprint(Face.face)
+app.config.from_pyfile('config.py')
 
 @app.route('/')
 def index():
-    return render_template('Facial_Expression_Analysis.html')
+    
+    return render_template('index.html')
+
 @app.errorhandler(500)
 def internal_server_error(e):
     return "Internal Server Error", 500
-
-@app.route('/upload', methods=['POST'])
-def upload():
-    
-    frame = request.json['frame']
-    
-    detected_faces = emotion_detector.detect_emotions(frame)
-    
-    
-    
-    for i, face in enumerate(detected_faces):
-        
-        print(face)
-        
-        
-        emotion = max(face['emotions'], key=face['emotions'].get)
-        score = face['emotions'][emotion]
-
-        x, y, w, h = face['box']
-
-        text = f"{emotion}: {score:.2f}"
-        
-
-        dt_now = datetime.datetime.now()
-        posy = 0
-        for emotion2 in face["emotions"]:
-            text2 = emotion2 + ":" + str(face['emotions'][emotion2])
-            
-            posy += 1
-
-        
-    if detected_faces !=[]:
-        detected_faces = detected_faces[0]["emotions"]
-    result = {"len":len(detected_faces),"arr":detected_faces}
-    
-    return jsonify(result)
-
 if __name__ == '__main__':
     app.run()
