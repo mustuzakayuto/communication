@@ -5,24 +5,28 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from . import database
 import hashlib
-
+# インスタンス化
 bp = Blueprint('user', __name__)
 
+# (ipアドレス:5000)/signupと入力で表示
 @bp.route('/signup')
 def sign_up():
     
     return render_template('signup.html')
-# 追記
+
+# (ipアドレス:5000)/loginと入力で表示
 @bp.route('/login')
 def log_in():
     return render_template('login.html')
 
+
 @bp.route('/auth', methods=('GET', 'POST'))
 def auth():
     if request.method == 'POST':
+        # 名前とパスワード取得
         username = request.form['username']
         password = request.form['password']
-        # SHA-256でハッシュ化
+        # SHA-256でハッシュ化 (暗号化)
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
         db = database.get_db()
 
@@ -50,6 +54,7 @@ def member():
         flash('メンバーページにアクセスするにはログインしてください')
         return redirect(url_for('user.log_in'))
 
+# (ipアドレス:5000)/log_outと入力で表示
 @bp.route('/logout')
 def log_out():
     session.clear()
@@ -61,7 +66,7 @@ def log_out():
 
 
 
-
+# ユーザ登録
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
