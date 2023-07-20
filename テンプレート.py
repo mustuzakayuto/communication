@@ -14,3 +14,11 @@ def face_emotion():
 @face.errorhandler(500)
 def internal_server_error(e):
     return "Internal Server Error", 500
+
+# フォームからの関数
+@face.route('/auth', methods=('GET', 'POST'))
+def auth():
+    if request.method == 'POST':
+        return "postを受け取りました"
+    elif request.method == 'GET':
+        return "getを受け取りました"
