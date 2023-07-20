@@ -1,8 +1,9 @@
 import sqlite3
-
+import os
 
 def main():
-    
+    path = os.getcwd()
+    os.chdir(path+'/data')
     con = sqlite3.connect('users.db')
     con.execute("DROP TABLE IF EXISTS USERS")
     con.execute("CREATE TABLE USERS (\
