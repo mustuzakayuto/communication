@@ -1,0 +1,39 @@
+body{
+    /* background-image: url(image/pexels-nubia-navarro-\(nubikini\)-385997.jpg); */
+    background-image: url("../images/pexels-nubia-navarro-(nubikini)-385997.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1{
+    font-family: cursive;
+    font-size: 82px;
+    text-align: center;
+    color: coral;
+}
+#logoin-menu{
+    font-size: 36px;
+    text-align: center;
+    color: #00FFFF ;
+}
+
+.container{
+    width: 200px;
+    height: 200px;    
+    padding: 10px;
+    position: absolute;
+    top: 76%;
+    left: 45%;
+    transform: translate(-50%,-50%);
+}
+
+.login-input{
+    color: rgb(5, 211, 112);
+    text-align: center;
+}
+
+input{
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
