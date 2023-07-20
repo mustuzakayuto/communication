@@ -8,9 +8,11 @@ def main():
     con.execute("DROP TABLE IF EXISTS USERS")
     con.execute("CREATE TABLE USERS (\
         USERNAME TEXT PRIMARY KEY UNIQUE NOT NULL, \
-        PASSWORD TEXT NOT NULL)"
+        PASSWORD TEXT NOT NULL, \
+        USEREMAIL TEXT NOT NULL)"  # USEREMAIL カラムを追加
     )
     print('データベースを初期化しました')
+
 
 
 if __name__ == '__main__':

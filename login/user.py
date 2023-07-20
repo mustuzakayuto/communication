@@ -12,7 +12,7 @@ bp = Blueprint('user', __name__)
 @bp.route('/signup')
 def sign_up():
     
-    return render_template('signup.html')
+    return render_template('test03.html')
 
 # (ipアドレス:5000)/loginと入力で表示
 @bp.route('/login')
@@ -26,6 +26,7 @@ def auth():
         # 名前とパスワード取得
         username = request.form['username']
         password = request.form['password']
+        
         # SHA-256でハッシュ化 (暗号化)
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
         db = database.get_db()
@@ -49,7 +50,7 @@ def auth():
 @bp.route('/member')
 def member():
     if 'username' in session:
-        return render_template('delete.html')
+        return render_template('test01.html')
     else:
         flash('メンバーページにアクセスするにはログインしてください')
         return redirect(url_for('user.log_in'))
@@ -67,6 +68,7 @@ def delete_user():
         # 名前とパスワード取得
         username = request.form['username']
         password = request.form['password']
+        
         # SHA-256でハッシュ化 (暗号化)
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
         db = database.get_db()
@@ -99,25 +101,30 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        useremail = request.form['email']
         # SHA-256でハッシュ化
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
         db = database.get_db()
         user = db.execute(
             "SELECT * FROM USERS WHERE USERNAME = ?", (username, )
         ).fetchone()
+        email = db.execute(
+            "SELECT * FROM USERS WHERE USERNAME = ?", (useremail, )
+        ).fetchone()
 
         if user:
             flash(f'ユーザー「{username}」はすでに存在しています')
             return redirect(url_for('user.sign_up'))
-
+        if email:
+            flash(f'ユーザー「{useremail}」はすでに存在しています')
+            return redirect(url_for('user.sign_up'))
         db.execute(
-            "INSERT INTO USERS (USERNAME, PASSWORD) VALUES (?, ?)",
-            
-            
-            
-            (username, generate_password_hash(password))
+            "INSERT INTO USERS (USERNAME, PASSWORD, USEREMAIL) VALUES (?, ?, ?)",
+            (username, generate_password_hash(password), useremail)
         )
+
         db.commit()
-        return 'ユーザー登録が完了しました'
+        # return 'ユーザー登録が完了しました'
+        return render_template('test02.html')
 
     return redirect(url_for('index'))

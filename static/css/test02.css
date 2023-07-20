@@ -1,0 +1,38 @@
+/* 添加样式来美化注册页面 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+    padding-top: 100px;
+  }
+  h1 {
+    color: #333;
+  }
+  form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  label{
+    width: 200px;
+    text-align: right;
+    margin-right: 10px;
+  }
+
+  input {
+    width: 300px;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
