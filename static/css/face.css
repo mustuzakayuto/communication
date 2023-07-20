@@ -9,3 +9,6 @@ video {
     margin: 0;
     border: 1px solid;
 }
+.data{
+    display: flex;
+}

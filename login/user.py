@@ -49,7 +49,7 @@ def auth():
 @bp.route('/member')
 def member():
     if 'username' in session:
-        return f"こんにちは。{session['username']}さん"
+        return render_template('delete.html')
     else:
         flash('メンバーページにアクセスするにはログインしてください')
         return redirect(url_for('user.log_in'))
@@ -60,7 +60,34 @@ def log_out():
     session.clear()
     return redirect(url_for('index'))
 
+# データベースから削除処理
+@bp.route('/delete_user', methods=['POST'])
+def delete_user():
+    if request.method == 'POST':
+        # 名前とパスワード取得
+        username = request.form['username']
+        password = request.form['password']
+        # SHA-256でハッシュ化 (暗号化)
+        password = hashlib.sha256(password.encode("utf-8")).hexdigest()
+        db = database.get_db()
 
+        user = db.execute(
+            "SELECT * FROM USERS WHERE USERNAME = ?", (username, )
+        ).fetchone()
+        
+        if user is None:
+            flash('ユーザー名が間違っています')
+        elif not check_password_hash(user['PASSWORD'], password):
+            flash('パスワードが間違っています')
+        else:
+            if 'username' in session:
+                username = session['username']
+                db = database.get_db()
+                db.execute("DELETE FROM USERS WHERE USERNAME = ?", (username,))
+                db.commit()
+                session.clear()
+                flash(f'ユーザー「{username}」を削除しました')
+    return redirect(url_for('index'))
 
 
 

@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>顔の感情解析</title>
+    <!-- staticフォルダーのfilenameがcssフォルダー内のface.css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/face.css') }}">
 </head>
 <body>
     <h1>顔の感情解析</h1>
-    <div style="display: flex;">
+    <div class="data">
       <video id="video" autoplay></video>
       <canvas id="canvas" style="display: none;"></canvas>
       <div class="result">
