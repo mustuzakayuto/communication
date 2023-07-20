@@ -35,7 +35,13 @@ def internal_server_error(e):
     return "Internal Server Error", 500
 
 if __name__ == '__main__':
-    # 自分だけ確認用
-    # app.run()
-    # Wi-Fiにいる人だけアクセスできる
-    app.run(host='0.0.0.0', port=5000)
+    run = input("Wi-Fi上に公開しますか?:y/n")
+
+    if run == "y" or run =="Y" :
+        # Wi-Fiにいる人だけアクセスできる
+        app.run(host='0.0.0.0', port=5000)
+    elif run == "n" or run =="N" :
+        # 自分だけ確認用
+        app.run()
+    else:
+        print("設定外")

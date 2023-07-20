@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>template</title>
     <!-- staticフォルダーのcssフォルダーのcssファイル -->
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/face.css') }}"> -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}"> -->
 </head>
 <body>
     <!-- インスタンス時の指定した文字列.関数名 -->
-    <form action="{{ url_for('user.auth') }}" method="post">
+    <form action="{{ url_for('template.auth') }}" method="post">
 
     </form>
     <!-- staticフォルダーのimagesフォルダーの画像ファイル 
         altは表示されなかった場合の表示する文字列 -->
-    <img src="{{ url_for('static', filename='images/image1.jpg') }}" alt="Image 1">
+    <img src="{{ url_for('static', filename='images/template.jpg') }}" alt="Image 1">
     <!-- staticフォルダーのjsフォルダーjsファイル -->
-    <script src="{{ url_for('static', filename='js/face.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/template.js') }}"></script>
 </body>
 </html>
