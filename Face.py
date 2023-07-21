@@ -1,9 +1,6 @@
 from flask import Flask, render_template, request, jsonify,Blueprint
-import base64
-
-import datetime
 from fer import FER
-import numpy as np
+
 
 # インスタンス化
 face = Blueprint("face",__name__)

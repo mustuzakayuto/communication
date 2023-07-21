@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify,Blueprint
+from flask import Flask, render_template, request, jsonify,Blueprint ,session
 import requests
 url = "https://api-mebo.dev/api"
 headers = {'content-type': 'application/json'}
@@ -18,7 +18,6 @@ aichat = Blueprint("aichat",__name__)
 # 関数と文字列の名前は同じに
 @aichat.route('/chat_index')
 def chat_index():
-    
     return render_template('ai_chat.html')
 
 # エラー対策

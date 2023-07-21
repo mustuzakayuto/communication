@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, redirect, render_template, request, session, url_for
+    Blueprint, flash, redirect, render_template, request, session, url_for,jsonify
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -42,10 +42,19 @@ def auth():
         else:
             session.pop('username', None)
             session['username'] = username
+            session["usermail"] = user['USEREMAIL']
             return redirect(url_for('user.member'))
         return redirect(url_for('user.log_in'))
 
     return redirect(url_for('index'))
+
+@bp.route("/account")
+def account():
+    return render_template('account.html')
+
+@bp.route('/getaccount',methods=('GET', 'POST'))
+def getaccount():
+    return jsonify({"name":session['username'],"mail":session["usermail"]})
 
 @bp.route('/member')
 def member():

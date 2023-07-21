@@ -2,3 +2,5 @@ Flaskの説明
 https://start-python.hateblo.jp/entry/2020/01/31/090000
 Flaskのログイン設定
 https://fuji-pocketbook.net/flask-login/
+インターネットに公開
+https://zenn.dev/karaage0703/articles/0267c64d5d857d

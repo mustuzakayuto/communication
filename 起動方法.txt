@@ -1,0 +1,16 @@
+1:インストール系統
+    pip install flask
+    pip install numpy
+    pip install FER
+    pip install requests
+2:ウェブ起動
+    python app.py
+    app.run()は本人のみ
+    app.run(host='0.0.0.0', port=5000)は同じWi-Fiにいる人もアクセス可能
+        (表情解析は実行できない{httpsではないためセキュルティー上ロックがかかる})
+3:AIと会話
+    1つ前のフォルダーにagent.txtを作成
+    その中に
+        1行目にapi_key
+        2行目にagent_id
+        を入れる

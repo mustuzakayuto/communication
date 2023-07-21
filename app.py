@@ -1,12 +1,7 @@
 from flask import Flask, render_template, request, jsonify
-import base64
-import cv2
-import datetime
-from fer import FER
-import numpy as np
-import os
-import json
 import secrets
+
+
 # メインのFlaskをインスタンス化
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)  # 16バイトのランダムなバイト列を16進数文字列に変換してシークレットキーに設定
