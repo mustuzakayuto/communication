@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アカウント情報</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+</head>
+<body>
+    <h1>アカウント情報</h1>
+    <div class="half">
+        <p class="tag">ユーザーネーム</p>
+        <p id="name"></p>
+    </div>
+    <div class="half">
+        <p class="tag">ユーザーメールアドレス</p>
+        <p id="mail"></p>
+    </div>
+    <form action="{{ url_for('user.delete_user') }}" method="post">
+        <label for="">パスワード</label>
+        <input type="password" name="password" id="">
+        <button id="remove">アカウント削除</button>
+    </form>
+    
+
+    <script src="{{ url_for('static', filename='js/test01.js') }}"></script>
+</body>
+</html>
