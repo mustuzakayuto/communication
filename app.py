@@ -10,7 +10,7 @@ import secrets
 # メインのFlaskをインスタンス化
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)  # 16バイトのランダムなバイト列を16進数文字列に変換してシークレットキーに設定
-app.debug = True
+# app.debug = True
 # htmlのフォルダー設定
 app.template_folder = 'template'
 # staticフォルダー設定
@@ -18,10 +18,11 @@ app.static_folder = 'static'
 from login import user
 
 import Face
-
+import AIchat 
 # 他のインスタンス化したものを追加
 app.register_blueprint(user.bp)
 app.register_blueprint(Face.face)
+app.register_blueprint(AIchat.aichat)
 # configファイル設定
 app.config.from_pyfile('config.py')
 
@@ -37,6 +38,6 @@ def internal_server_error(e):
     return "Internal Server Error", 500
 
 if __name__ == '__main__':
-    # app.run()
-    app.run(host='0.0.0.0', port=5000)
+    app.run()
+    # app.run(host='0.0.0.0', port=5000)
     

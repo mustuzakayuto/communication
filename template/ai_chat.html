@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>template</title>
+    <!-- staticフォルダーのcssフォルダーのcssファイル -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}"> -->
+</head>
+<body>
+    <h1>AIchat</h1>
+
+    <label for="">質問</label>
+    <input type="text" name="" id="input">
+    
+    <p id="result">回答: </p>
+    
+    <button id="transmission">送信</button>
+    
+    <script src="{{ url_for('static', filename='js/ai_chat.js') }}"></script>
+</body>
+</html>
