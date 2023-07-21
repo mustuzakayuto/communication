@@ -75,9 +75,8 @@ def log_out():
 def delete_user():
     if request.method == 'POST':
         # 名前とパスワード取得
-        username = request.form['username']
+        username = session['username']
         password = request.form['password']
-        
         # SHA-256でハッシュ化 (暗号化)
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
         db = database.get_db()

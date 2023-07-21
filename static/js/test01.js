@@ -1,6 +1,8 @@
 const nameElement = document.getElementById("name")
 const mailElement = document.getElementById("mail")
-
+const remove = document.getElementById('remove');
+var name;
+var mail;
 fetch('/getaccount', {
     method: 'POST',
     
