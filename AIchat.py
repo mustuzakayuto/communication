@@ -7,7 +7,7 @@ headers = {'content-type': 'application/json'}
 # agent_id = "agent_id"
 
 # ITALKエージェントを設定
-with open('../agent.txt', 'r',encoding="utf-8") as f:
+with open('./agent.txt', 'r',encoding="utf-8") as f:
     api_key = f.readline().strip()
     agent_id = f.readline().strip()
     

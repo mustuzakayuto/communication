@@ -4,3 +4,5 @@ Flaskのログイン設定
 https://fuji-pocketbook.net/flask-login/
 インターネットに公開
 https://zenn.dev/karaage0703/articles/0267c64d5d857d
+コミュニケーション評価 chatGPTプロンプト
+https://qiita.com/tregu148/items/9c2a930744155c097916
