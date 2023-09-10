@@ -1,0 +1,31 @@
+
+Flask
+    app.py
+        mainプログラム
+    Face.py
+        顔の表情
+    user.py
+        ユーザー設定
+        login/user.py
+    AIchat.py
+    
+プログラム
+    config.py
+        データベースの場所などの登録
+    トピック収集.py
+    アカウント数.py
+    表情解析.py
+    create_db.py
+        初期化
+        data/create_db.py
+    
+    database.py
+        データベースの取得
+
+
+data 
+    agent.txt
+        aiのapi(api_key,id)
+    user.db
+        データベースファイル
+        data/user.db

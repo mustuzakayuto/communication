@@ -3,7 +3,6 @@ const canvas = document.getElementById('canvas');
 const startButton = document.getElementById('startButton');
 const endButton = document.getElementById('endButton');
 const angry = document.getElementById('angry');
-const disgust = document.getElementById('disgust');
 const fear = document.getElementById('fear');
 const happy = document.getElementById('happy');
 const sad = document.getElementById('sad');
@@ -13,11 +12,10 @@ const neutral = document.getElementById('neutral');
 let stream;
 let activeVideo = false;
 let frameTime = 0;
-const frameRate = 60;
+const frameRate = 120;
 
 function setEmotionValues(emotionValues) {
     angry.innerHTML = `怒り: ${(emotionValues.angry * 100).toFixed()}%`;
-    disgust.innerHTML = `嫌悪: ${(emotionValues.disgust * 100).toFixed()}%`;
     fear.innerHTML = `恐怖: ${(emotionValues.fear * 100).toFixed()}%`;
     happy.innerHTML = `幸せ: ${(emotionValues.happy * 100).toFixed()}%`;
     sad.innerHTML = `悲しみ: ${(emotionValues.sad * 100).toFixed()}%`;
@@ -51,6 +49,7 @@ async function startEmotionDetection() {
 
         function captureFrame() {
             if (frameTime % frameRate === 0) {
+                console.log(frameTime)
                 const context = canvas.getContext('2d');
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
                 const frame = canvas.toDataURL('image/png');
