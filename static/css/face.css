@@ -3,12 +3,31 @@ video {
     height: auto;
     transform: scaleX(-1);
 }
+h1{
+    width: 200px;
+    background-color: white;
+}
+.result{
+    padding-left: 250px;
+}
 .result p {
-    height: 32px;
+    background-color: white;
+    font-size: 170%;
+    height: 15%;
     padding-left: 10px;
+    padding-right: 20px;
     margin: 0;
     border: 1px solid;
 }
 .data{
     display: flex;
+}
+html{
+    height: 100%;
+}
+body{
+    background-image: url("../images/pexels-nubia-navarro-(nubikini)-385997.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100%;
 }

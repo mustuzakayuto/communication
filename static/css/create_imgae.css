@@ -1,0 +1,40 @@
+html{
+    height: 100%;
+}
+body{
+    
+    background-image: url("../images/sky_image.png");
+    background-size:cover;
+    background-repeat: no-repeat;
+    min-height: 100%;
+    
+}
+#search{
+    width: 100px;
+}
+#search_Results_Page{
+    width: 150px;
+}
+
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.box1{
+    padding-left: 15px;
+    height: 70;
+}
+
+#PROMPT{
+    width: 45%;
+}
+
+#inputdata{
+    width: 45%;
+}
+.create_image{
+    width: 65%;
+    height: 65%;
+}

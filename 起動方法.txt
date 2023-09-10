@@ -5,12 +5,16 @@
     pip install requests
 2:ウェブ起動
     python app.py
-    app.run()は本人のみ
-    app.run(host='0.0.0.0', port=5000)は同じWi-Fiにいる人もアクセス可能
-        (表情解析は実行できない{httpsではないためセキュルティー上ロックがかかる})
+    起動すると("0:非公開,1:公開")と聞かれそれに合わせて変わる
+    非公開
+        app.run()は本人のみ
+    公開
+        app.run(host='0.0.0.0', port=5000)は同じWi-Fiにいる人もアクセス可能
+            (表情解析は実行できない{httpsではないためセキュルティー上ロックがかかる})
 3:AIと会話
-    1つ前のフォルダーにagent.txtを作成
+    現在のフォルダーにagent.txtを作成
     その中に
+        https://mebo.work/で作成したものを使用
         1行目にapi_key
         2行目にagent_id
         を入れる

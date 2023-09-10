@@ -5,9 +5,16 @@ headers = {'content-type': 'application/json'}
 # miiboの設定(api)
 # api_key = "api_key"
 # agent_id = "agent_id"
+import os
 
+path = os.getcwd()
+print(path.split("\\")[2])
+if (path.split("\\")[2]=="220063"):
+    tag = ".." 
+else :
+    tag="."
 # ITALKエージェントを設定
-with open('./agent.txt', 'r',encoding="utf-8") as f:
+with open(tag+'/agent.txt', 'r',encoding="utf-8") as f:
     api_key = f.readline().strip()
     agent_id = f.readline().strip()
     
@@ -41,6 +48,8 @@ def chat():
         }
         print(item_data)
         r = requests.post(url,json=item_data,headers=headers)
+        print(r)
+        print(agent_id,api_key)
         result = "回答: "+r.json()["bestResponse"]["utterance"]
         return jsonify({"result":result})
     elif request.method == 'GET':
