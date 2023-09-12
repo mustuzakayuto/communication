@@ -48,7 +48,7 @@ def search_Results_Page():
 def Ranking():
     
     result = {"arr":トピック取得.main()}
-    print(result)
+    # print(result)
     return jsonify(result)
 
 # エラー対策

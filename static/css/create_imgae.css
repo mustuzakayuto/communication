@@ -38,3 +38,7 @@ body{
     width: 65%;
     height: 65%;
 }
+#translationresult{
+    /* height: 200px; */
+    height: 150px;
+}

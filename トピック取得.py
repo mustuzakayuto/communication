@@ -57,7 +57,7 @@ def main(keyword="None"):
             if not newstring.strip() in data:
                 data.append(newstring.strip())        
         
-    print(data)
+    # print(data)
     return data
 if __name__ =="__main__":
     print(main("Null"))

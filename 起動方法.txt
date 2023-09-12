@@ -1,8 +1,15 @@
 1:インストール系統
+    python -m venv com
+    com/Scripts/Activate.ps1
+    python.exe -m pip install --upgrade pip
     pip install flask
-    pip install numpy
     pip install FER
-    pip install requests
+    pip install tensorflow
+    pip install diffusers
+    pip install googletrans
+    pip install pytrends
+    pip install bs4
+  
 2:ウェブ起動
     python app.py
     起動すると("0:非公開,1:公開")と聞かれそれに合わせて変わる
@@ -12,6 +19,7 @@
         app.run(host='0.0.0.0', port=5000)は同じWi-Fiにいる人もアクセス可能
             (表情解析は実行できない{httpsではないためセキュルティー上ロックがかかる})
 3:AIと会話
+    https://qiita.com/maKunugi/items/14f1b82a2c0b6fa5c202
     現在のフォルダーにagent.txtを作成
     その中に
         https://mebo.work/で作成したものを使用
