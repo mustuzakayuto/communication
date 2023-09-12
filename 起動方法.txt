@@ -8,7 +8,7 @@
     pip install pytrends
     pip install bs4
     pip install transformers==4.29.2
-  
+    pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
 2:ウェブ起動
     python app.py
     起動すると("0:非公開,1:公開")と聞かれそれに合わせて変わる
