@@ -9,24 +9,30 @@
 </head>
 <body>
     <main class="container">
+        <a href="{{ url_for('index') }}">最初の画面</a>
         <div class="row">
             <div class="account col-6">
                 <h2>画像生成</h2>
                 <h3>prompt(英語で入力)</h3>
                 <input type="text" id="PROMPT">
-                <button id="startcreate">検索</button><br>
+                <button id="startcreate">作成</button><br>
                 
                 <div id="imgcreateresult">
 
                 </div>
             </div>
-            <div class="account col-6">
+            <div class="translation col-6">
                 <h2>翻訳</h2>
                 <input type="text" id="inputdata">
-                <button id="starttranslation">検索</button>
+                <button id="starttranslation">翻訳</button>
                 <div id="translationresult">
 
                 </div>
+                <h2>使い方・遊び方</h2>
+                <h4>英語でプロンプトを設定して作成ボタンをクリック</h4>
+                <h4>画像を見せてもらって同じようなものを作成するや</h4>
+                <h4>例：アイス →アイスという言葉を使わずに絵をかいてもらい、<br>
+                    どれだけ近い絵が生成されるか。などの使い方</h4>
             </div>
         </div>
     </main>

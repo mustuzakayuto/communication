@@ -8,7 +8,13 @@ from fer import FER
 face = Blueprint("face",__name__)
 
 # モデル設定
-emotion_detector = FER(mtcnn=True)
+try:
+    
+    emotion_detector = FER(mtcnn=True)
+    
+    # Load the model here
+except UnicodeDecodeError as e:
+    print("UnicodeDecodeError:", e)
 
 # (ipアドレス:5000)/face_emotionと入力で表示
 @face.route('/face_emotion')

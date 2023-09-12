@@ -3,7 +3,6 @@ from diffusers import StableDiffusionPipeline
 from torch import autocast 
 import datetime 
 import json 
-import pyexiv2 
 def main(PROMPT,ISanimation=False):
     if ISanimation:
         MODEL_ID = "xyn-ai/anything-v4.0"
@@ -36,9 +35,7 @@ def main(PROMPT,ISanimation=False):
         file_path = "./static/images/create/"+str(SEED) + "_" + str(now) + ".png"
         # ファイル保存 
         image.save(file_path) 
-        # Exif編集 
-        with pyexiv2.Image(file_path) as img: 
-            img.modify_exif({'Exif.Image.ImageDescription': json_str})
+        
     torch.cuda.empty_cache()
     return file_path    
 if __name__ == "__main__":
