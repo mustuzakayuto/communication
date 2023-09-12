@@ -1,7 +1,5 @@
 1:インストール系統
-    python -m venv com
-    com/Scripts/Activate.ps1
-    python.exe -m pip install --upgrade pip
+    
     pip install flask
     pip install FER
     pip install tensorflow
@@ -9,6 +7,7 @@
     pip install googletrans
     pip install pytrends
     pip install bs4
+    pip install transformers==4.29.2
   
 2:ウェブ起動
     python app.py

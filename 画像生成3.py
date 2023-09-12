@@ -15,7 +15,7 @@ def main(PROMPT,ISanimation=False):
     SEED = 512
     STEP = 20
     SCALE = 7.5
-    negative_prompt = "worst quality ,low quality, normal quality	,out of focus/blurry/bokeh,	ugly,	bad anatomy,	jpeg artifacts,	lowres,	error,nsfw(Not safe for work) ,username,text ,signature	,watermark	,missing limb	,bad hands	,missing fingers ,extra digit,fewer digits"
+    negative_prompt = "I want the image to have worst quality with low resolution, out of focus, , heavy jpeg artifacts. Make it look ugly with bad anatomy. Add a visible watermark, use inappropriate language in the text,  make it irrelevant to the topic. Ensure it doesn't match the story , feels unsettling with a gloomy tone ,worst quality,low quality, bad anatomy,Skin Exposure"
     pipe = StableDiffusionPipeline.from_pretrained(MODEL_ID, torch_dtype=torch.float16, 
                                                 use_auth_token=YOUR_TOKEN) 
     pipe.to(DEVICE) 
