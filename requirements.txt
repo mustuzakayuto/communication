@@ -1,6 +1,6 @@
 
 
-pip install FER
+pip install fer
 pip install tensorflow
 pip install diffusers
 pip install googletrans
