@@ -1,5 +1,5 @@
 
-pip install flask
+
 pip install FER
 pip install tensorflow
 pip install diffusers
