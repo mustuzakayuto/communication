@@ -5,6 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from . import database
 import hashlib
+import chat
 # インスタンス化
 bp = Blueprint('user', __name__)
 
@@ -102,14 +103,19 @@ def delete_user():
 
 
 
-
+import re
 # ユーザ登録
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
+    chat.regist()
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         useremail = request.form['email']
+        # 特殊文字を含む正規表現パターン
+        special_characters_pattern = r'[!@#$%^&*()_+{}\[\]:;<>,.?~\\|/-]'
+        if re.search(special_characters_pattern, username) or re.search(special_characters_pattern, password):
+            return redirect(url_for('user.sign_up'))
         # SHA-256でハッシュ化
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
         db = database.get_db()
@@ -117,14 +123,14 @@ def register():
             "SELECT * FROM USERS WHERE USERNAME = ?", (username, )
         ).fetchone()
         email = db.execute(
-            "SELECT * FROM USERS WHERE USERNAME = ?", (useremail, )
+            "SELECT * FROM USERS WHERE USEREMAIL = ?", (useremail, )
         ).fetchone()
-
+        print(email,user)
         if user:
-            flash(f'ユーザー「{username}」はすでに存在しています')
+            print(f'ユーザー「{username}」はすでに存在しています')
             return redirect(url_for('user.sign_up'))
         if email:
-            flash(f'ユーザー「{useremail}」はすでに存在しています')
+            print(f'ユーザー「{useremail}」はすでに存在しています')
             return redirect(url_for('user.sign_up'))
         db.execute(
             "INSERT INTO USERS (USERNAME, PASSWORD, USEREMAIL) VALUES (?, ?, ?)",

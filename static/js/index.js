@@ -142,8 +142,38 @@ function startsearchfunction(){
 const startsearch = document.getElementById('startsearch');
 startsearch.addEventListener('click', startsearchfunction);
 
+const pageresult = document.getElementById('pageresult');
+function Results_Page(){
+    fetch('/search_Results_Page', {
+        method: 'POST',
+        
+        body: JSON.stringify({"search":search.value}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json())
+    .then(result => {
+        console.log(result);
+        pageresult.innerHTML="";
+        console.log(result.title)
+        console.log(result.title.length)
+        for (var i=0 ;i<= result.title.length-1;i++) {
+            
+
+            if(result.title[i]!="Not Found" ){
+                pageresult.innerHTML += "<h6>"+'<a href="'+result.link[i]+'">'+result.title[i]+'</a>'+"</h6>"
+            }
+        }
+        // Result.value=result.arr;
+        
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
 
 
-
+const search_Results_Page = document.getElementById("search_Results_Page")
+search_Results_Page.addEventListener("click",Results_Page)
 startEmotionDetection()
 rerod()

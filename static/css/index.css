@@ -26,3 +26,8 @@ body{
     padding-left: 15px;
     height: 70;
 }
+#pageresult{
+    
+    overflow: scroll;
+    height: 500px;
+}

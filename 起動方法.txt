@@ -1,5 +1,6 @@
-1:インストール系統
-    
+1:インストール系統        
+    python のインストール
+
     pip install flask
     pip install FER
     pip install tensorflow
@@ -8,20 +9,33 @@
     pip install pytrends
     pip install bs4
     pip install transformers==4.29.2
-    pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+    pip3 install torch torchvision torchaudio
+    pip install email-validator
+
 2:ウェブ起動
     python app.py
     起動すると("0:非公開,1:公開")と聞かれそれに合わせて変わる
-    非公開
-        app.run()は本人のみ
-    公開
-        app.run(host='0.0.0.0', port=5000)は同じWi-Fiにいる人もアクセス可能
-            (表情解析は実行できない{httpsではないためセキュルティー上ロックがかかる})
-3:AIと会話
-    https://qiita.com/maKunugi/items/14f1b82a2c0b6fa5c202
-    現在のフォルダーにagent.txtを作成
-    その中に
-        https://mebo.work/で作成したものを使用
-        1行目にapi_key
-        2行目にagent_id
+    説明{
+        非公開
+            app.run()は本人のみ
+        公開
+            app.run(host='0.0.0.0', port=5000)は同じWi-Fiにいる人もアクセス可能
+                (表情解析は実行できない{httpsではないためセキュルティー上ロックがかかる})
+    }
+
+3:API_key&API_id設定
+    現在のフォルダーのconfig.jsonの設定
+    AIと会話
+        https://qiita.com/maKunugi/items/14f1b82a2c0b6fa5c202
+        
+
+        
+        https://mebo.work/ で作成したものを使用
+
+        {agent}の{key}にミーボで作成した{API_KEY}を入れる
+        {agent}の{id}にミーボで作成した{API_ID}を入れる
         を入れる
+    画像生成
+        https://laboratory.kazuuu.net/obtain-an-api-token-access-token-for-hugging-face/
+        
+        {create_image}の{token}にHugging Faceで作成した{token}を入れる

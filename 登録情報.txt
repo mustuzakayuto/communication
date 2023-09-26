@@ -24,8 +24,8 @@ Flask
 
 
 data 
-    agent.txt
-        aiのapi(api_key,id)
+    config.json
+        [api関連,token]の設定
     user.db
         データベースファイル
         data/user.db

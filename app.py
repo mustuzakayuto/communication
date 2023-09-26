@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify ,session
 import secrets
 import sys
 
@@ -15,11 +15,15 @@ from login import user
 import Face
 import AIchat 
 import create_image
+import chat
+import re_set_password
 # 他のインスタンス化したものを追加
 app.register_blueprint(user.bp)
 app.register_blueprint(Face.face)
 app.register_blueprint(AIchat.aichat)
 app.register_blueprint(create_image.create_imgae)
+app.register_blueprint(chat.chat)
+app.register_blueprint(re_set_password.reset_pass)
 # configファイル設定
 app.config.from_pyfile('config.py')
 
@@ -57,12 +61,18 @@ def internal_server_error(e):
     return "Internal Server Error", 500
 
 if __name__ == '__main__':
-    is_upload=input("0:非公開,1:公開")
     
-    if is_upload =="0" :
-        app.run()
-    elif is_upload =="1":
+    is_upload=input("0:非公開,1:公開")
+    if is_upload=="-1":
+        app.run(debug=True)
+    elif is_upload =="0" :
         app.run(host='0.0.0.0')
+    elif is_upload =="1":
+        import ssl
+        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+        context.load_cert_chain('openssl/server.crt', 'openssl/server.key')
+        app.run(host='0.0.0.0',ssl_context=context)
+    
     else:
         print("設定されていません")
     

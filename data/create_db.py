@@ -1,10 +1,10 @@
 import sqlite3
+import config
 import os
-
 def main():
-    path = os.getcwd()
-    os.chdir(path+'/data')
-    con = sqlite3.connect('users.db')
+    if os.path.isfile(config.DATABASE):
+        os.remove(config.DATABASE)
+    con = sqlite3.connect(config.DATABASE)
     con.execute("DROP TABLE IF EXISTS USERS")
     con.execute("CREATE TABLE USERS (\
         USERNAME TEXT PRIMARY KEY UNIQUE NOT NULL, \
