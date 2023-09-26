@@ -1,0 +1,10 @@
+
+pip install flask
+pip install FER
+pip install tensorflow
+pip install diffusers
+pip install googletrans
+pip install pytrends
+pip install bs4
+pip install transformers==4.29.2
+pip3 install torch torchvision torchaudio
