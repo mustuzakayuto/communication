@@ -1,24 +1,27 @@
 from flask import Flask, render_template, request, jsonify,Blueprint ,session
 import requests
+import os
+import json
 url = "https://api-mebo.dev/api"
 headers = {'content-type': 'application/json'}
 # miiboの設定(api)
 # api_key = "api_key"
 # agent_id = "agent_id"
-import os
 
-path = os.getcwd()
-print(path.split("\\")[2])
-if (path.split("\\")[2]=="220063"):
-    tag = ".." 
-else :
+
+
+if os.path.isfile("../config.json"):
+    tag=".."
+else:
     tag="."
+tag="."
 # ITALKエージェントを設定
-with open(tag+'/agent.txt', 'r',encoding="utf-8") as f:
-    api_key = f.readline().strip()
-    agent_id = f.readline().strip()
-    
 
+
+json_open = open(tag+"/config.json","r")
+json_load = json.load(json_open)
+api_key = json_load["agent"]["key"]
+agent_id = json_load["agent"]["id"]
 # インスタンス化 (変数名と文字列は同じに)
 aichat = Blueprint("aichat",__name__)
 

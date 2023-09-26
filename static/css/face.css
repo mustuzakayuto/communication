@@ -4,7 +4,7 @@ video {
     transform: scaleX(-1);
 }
 h1{
-    width: 200px;
+    width: 250px;
     background-color: white;
 }
 .result{
@@ -30,4 +30,8 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100%;
+}
+#average h3{
+    background-color: white;
+    width: fit-content
 }

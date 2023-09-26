@@ -1,12 +1,33 @@
 const createimage = document.getElementById('PROMPT');
 const Result3 = document.getElementById("imgcreateresult")
-
+const showMODEL = document.getElementById('show_MODEL_ID');
+var MODEL_ID = "normal"
+console.log(MODEL_ID)
+setMODEL()
+function nomal(){
+    MODEL_ID= "normal"
+    console.log(MODEL_ID)
+    setMODEL()
+}
+function anima(){
+    MODEL_ID ="Anime_style"
+    console.log(MODEL_ID)
+    setMODEL()
+}
+function real(){
+    MODEL_ID ="real"
+    console.log(MODEL_ID)
+    setMODEL()
+}
+function setMODEL(){
+    showMODEL.innerHTML = MODEL_ID
+}
 function startcreateimagefunction(){
     // const searchdata = {"search":search.value}
     fetch('/image', {
         method: 'POST',
         
-        body: JSON.stringify({"PROMPT":createimage.value}),
+        body: JSON.stringify({"array":{"PROMPT":createimage.value,"MODEL_ID":MODEL_ID}}),
         headers: {
             'Content-Type': 'application/json'
         }

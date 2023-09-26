@@ -1,28 +1,28 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>顔の感情解析</title>
-    <!-- staticフォルダーのfilenameがcssフォルダー内のface.css -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/face.css') }}">
-</head>
-<body>
-    <h1>顔の感情解析</h1>
-    <div class="data">
-      <video id="video" autoplay></video>
-      <canvas id="canvas" style="display: none;"></canvas>
-      <div class="result">
-          <p id="angry">怒り: 0%</p>
-          <p id="fear">恐怖: 0%</p>
-          <p id="happy">幸せ: 0%</p>
-          <p id="sad">悲しみ: 0%</p>
-          <p id="surprise">驚き: 0%</p>
-          <p id="neutral">無感情: 0%</p>
-      </div>
+{% extends "base2.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/face.css') }}">
+{% endblock %}
+{% block content %}
+
+
+<h1>顔の感情解析</h1>
+<h2>ログインしてから使ってください</h2>
+<div class="data">
+    <video id="video" autoplay></video>
+    <canvas id="canvas" style="display: none;"></canvas>
+    <div class="result">
+        <p id="angry">怒り: 0%</p>
+        <p id="fear">恐怖: 0%</p>
+        <p id="happy">幸せ: 0%</p>
+        <p id="sad">悲しみ: 0%</p>
+        <p id="surprise">驚き: 0%</p>
+        <p id="neutral">無感情: 0%</p>
     </div>
-    <button id="startButton">感情解析を開始</button>
-    <button id="endButton">感情解析を修了</button>
-    <script src="{{ url_for('static', filename='js/face.js') }}"></script>
-</body>
-</html>
+</div>
+<button id="startButton">感情解析を開始</button>
+<button id="endButton">感情解析を修了</button>
+<div id="average">
+
+</div>
+<script src="{{ url_for('static', filename='js/face.js') }}"></script>
+{% endblock %}

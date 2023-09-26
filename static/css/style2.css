@@ -1,0 +1,31 @@
+.menu {
+    display: flex;
+    margin: 0 10px;
+    /* width: 50%; */
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.menu a{
+    display: block;
+    font-size: 20px;
+    width: 200px;
+    text-align: center;
+    padding: 5px 5px;
+    margin: 0 10px;
+}
+
+
+
+.menu p:hover{
+    background-color: #A4C520;
+    border-radius: 10px;
+    transition: all .3s;
+    
+}
+
+
+
+.menu p a,h1{
+    color: blue;
+}

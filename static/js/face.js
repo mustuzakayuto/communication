@@ -22,7 +22,27 @@ function setEmotionValues(emotionValues) {
     surprise.innerHTML = `驚き: ${(emotionValues.surprise * 100).toFixed()}%`;
     neutral.innerHTML = `無感情: ${(emotionValues.neutral * 100).toFixed()}%`;
 }
+function facechange(facedata){
+    if(facedata=="angry"){
+        message="怒り"
+   }else if(facedata=="disgust"){
+        message ="嫌悪"
+   }else if(facedata=="fear"){
+        message="恐怖"
+   }else if(facedata=="happy"){
+        message="幸せ"
+   }else if(facedata=="sad"){
+        message="悲しみ"
+   }else if(facedata=="surprise"){
+        message="驚き"
+   }else if(facedata=="neutral"){
+        message="無感情"
+   }
+   return message
 
+
+}
+var average = document.getElementById("average")
 function endEmotionDetection() {
     activeVideo = false;
     stream.getTracks().forEach(track => {
@@ -38,9 +58,44 @@ function endEmotionDetection() {
         surprise: 0,
         neutral: 0,
     });
+    fetch('/average', {
+        method: 'POST',
+        body: JSON.stringify({ "None":"None" }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
+        var message
+        console.log(result)
+       if(result.expression=="angry"){
+            message="全体的に怒っている印象を受けます"
+       }else if(result.expression=="disgust"){
+            message ="全体的に嫌悪を感じている印象を受けます"
+       }else if(result.expression=="fear"){
+            message="全体的に恐怖を感じている印象を受けます"
+       }else if(result.expression=="happy"){
+            message="全体的に幸せを感じている印象を受けます"
+       }else if(result.expression=="sad"){
+            message="全体的に悲しんで印象を受けます"
+       }else if(result.expression=="surprise"){
+            message="全体的に驚いている印象を受けます"
+       }else if(result.expression=="neutral"){
+            message="全体的に無感情な印象を受けます"
+       }
+       average.innerHTML="<h3>"+message+"</h3>"
+       average.innerHTML+="<h3>"+"最大の"+facechange(result.expression)+"は"+(result.maxface*100).toFixed()+"%"+"</h3>"
+        // average.innerHTML = "average: "+"fear"+result.fear+"happy"+result.happy+"sad"+result.sad+"surprise"+result.surprise+"neutral"+result.neutral
+        // average.innerHTML = "<h3>average:"+"怒り"+(result.angry*100).toFixed() +"%"+"嫌悪"+(result.disgust*100).toFixed() +"%"+"恐怖"+(result.fear*100).toFixed()+"%"+"幸せ"+(result.happy*100).toFixed()+"%"+"悲しみ"+(result.sad*100).toFixed()+"%"+"驚き"+(result.surprise*100).toFixed()+"%"+"無"+(result.neutral*100).toFixed()+"%"+"</h3>"
+    })
+    .catch(error => {
+        console.error(error);
+    });
 }
 
 async function startEmotionDetection() {
+    average.innerHTML = ""
     try {
         stream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = stream;
