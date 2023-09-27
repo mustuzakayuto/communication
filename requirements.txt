@@ -12,3 +12,4 @@ gunicorn
 flask
 idna==2
 Flask-WTF
+email-validator
