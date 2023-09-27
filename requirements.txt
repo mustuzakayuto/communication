@@ -10,3 +10,4 @@ torchvision
 torchaudio
 gunicorn
 flask
+idna==2
