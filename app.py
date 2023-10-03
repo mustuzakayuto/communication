@@ -33,17 +33,25 @@ def index():
     
     return render_template('index.html')
 
-import トピック取得
+@app.route('/sessionusername' ,methods=['POST'])
+def sessionusername():
+    username="None"
+    for i in session:
+        if i == "username":
+            username=session["username"]
+    sessions = {"sessionusername":username}
+    return jsonify(sessions)
+import get_topic
 
 @app.route('/search' ,methods=['POST'])
 def search():
-    result = {"arr":トピック取得.main(request.json['search'])}
+    result = {"arr":get_topic.main(request.json['search'])}
     return jsonify(result)
 
-import 検索
+import search
 @app.route("/search_Results_Page",methods=["POST"])
 def search_Results_Page():
-    result = 検索.main(request.json['search'])
+    result = search.main(request.json['search'])
     print(result)
     return jsonify(result)
 
@@ -51,7 +59,7 @@ def search_Results_Page():
 @app.route('/Ranking' ,methods=['POST'])
 def Ranking():
     
-    result = {"arr":トピック取得.main()}
+    result = {"arr":get_topic.main()}
     # print(result)
     return jsonify(result)
 
@@ -61,18 +69,18 @@ def internal_server_error(e):
     return "Internal Server Error", 500
 
 if __name__ == '__main__':
+    app.run()
+    # is_upload=input("-1:デバック,0:公開,1:https公開")
+    # if is_upload=="-1":
+    #     app.run(debug=True)
+    # elif is_upload =="0" :
+    #     app.run(host='0.0.0.0')
+    # elif is_upload =="1":
+    #     import ssl
+    #     context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    #     context.load_cert_chain('openssl/server.crt', 'openssl/server.key')
+    #     app.run(host='0.0.0.0',ssl_context=context)
     
-    is_upload=input("0:非公開,1:公開")
-    if is_upload=="-1":
-        app.run(debug=True)
-    elif is_upload =="0" :
-        app.run(host='0.0.0.0')
-    elif is_upload =="1":
-        import ssl
-        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-        context.load_cert_chain('openssl/server.crt', 'openssl/server.key')
-        app.run(host='0.0.0.0',ssl_context=context)
-    
-    else:
-        print("設定されていません")
+    # else:
+    #     print("設定されていません")
     
