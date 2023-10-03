@@ -6,7 +6,7 @@ from wtforms import validators
 from itsdangerous.url_safe import URLSafeTimedSerializer
 from werkzeug.security import generate_password_hash
 import mail
-from data import データ取得
+
 import config
 import sqlite3
 import re

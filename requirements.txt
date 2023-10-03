@@ -1,15 +1,11 @@
-fer
+flask
+FER
 tensorflow
 diffusers
 googletrans
 pytrends
 bs4
-transformers
-torch
-torchvision
-torchaudio
-gunicorn
-flask
-idna==2
-Flask-WTF
-email-validator
+transformers==4.29.2
+torch torchvision torchaudio
+flask_wtf
+email_validator

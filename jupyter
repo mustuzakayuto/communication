@@ -1,0 +1,7 @@
+https://www.kabuku.co.jp/developers/run_google_colaboratory_notebooks_on_local_machine
+
+pip install jupyter
+pip install jupyter_http_over_ws
+jupyter serverextension enable --py jupyter_http_over_ws
+jupyter notebook --NotebookApp.allow_origin='https://colab.research.google.com' --port=8888
+

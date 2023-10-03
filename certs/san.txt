@@ -1,1 +1,0 @@
-subjectAltName =DNS:igg24, IP:172.16.23.24

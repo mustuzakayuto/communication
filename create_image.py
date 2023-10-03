@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify,Blueprint
-import 画像生成3
-import 翻訳
+import create_image3
+import google_translation
 # インスタンス化
 create_imgae = Blueprint("create_imgae",__name__)
 
@@ -17,12 +17,12 @@ def internal_server_error(e):
 @create_imgae.route('/image' ,methods=['POST'])
 def image():
     
-    result = {"img":画像生成3.main(request.json["array"]['PROMPT'],MODEL_ID=request.json["array"]["MODEL_ID"])}
+    result = {"img":create_image3.main(request.json["array"]['PROMPT'],MODEL_ID=request.json["array"]["MODEL_ID"])}
     return jsonify(result)
 
 
 @create_imgae.route('/translation' ,methods=['POST'])
 def translation():
-    result = {"txt":翻訳.main(request.json['txt'])}
+    result = {"txt":google_translation.main(request.json['txt'])}
     return jsonify(result)
 

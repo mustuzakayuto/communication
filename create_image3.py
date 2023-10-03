@@ -43,7 +43,7 @@ def main(PROMPT,MODEL_ID="",init_img=None):
     SCALE = 7.5
     # ネガティブプロンプトリスト型で設定
     negative_prompt= [
-        "text"," signature"," watermark"," username"," artist name"," stamp"," title"," subtitle"," date"," footer"," header ",
+        "text","logo"," signature"," watermark"," username"," artist name"," stamp"," title"," subtitle"," date"," footer"," header ",
         "bad hands","bad finger","bad face","bad Facial Structure","bad Mouth","bad nose","bad Arm structure","extra legs","extra arms",
         "worst quality","Deformation","Distortion","Skin Exposure",
         "malformed_face","malformed_hands","malformed_eye","Worst image quality"," out of focus","heavy ",

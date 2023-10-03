@@ -9,8 +9,10 @@
     pip install pytrends
     pip install bs4
     pip install transformers==4.29.2
-    pip3 install torch torchvision torchaudio
-    pip install email-validator
+    pip install torch torchvision torchaudio
+    pip install flask_wtf
+    pip install email_validator
+    
 
 2:ウェブ起動
     python app.py

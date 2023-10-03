@@ -20,8 +20,9 @@ def main(data_base,table):
     # データベース接続を閉じる
     conn.close()
 if __name__=="__main__":
-    main("chattest.db","user")
-    main("chattest.db","chat")
-    main("chattest.db","chatmess")  
-    main("emotions.db","emotions")
-    main("users.db","USERS")
+    main("data/chattest.db","user")
+    main("data/chattest.db","chat")
+    main("data/chattest.db","chatmess")  
+    main("data/emotions.db","emotions")
+    main("data/users.db","USERS")
+    main("data/emotionaverage.db","average")
