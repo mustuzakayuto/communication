@@ -10,18 +10,18 @@
         <div id="logoin-menu">登録</div>
         <form action="{{ url_for('user.auth') }}" method="post">
             <div>
-            <label for="user">乗車券</label><br>
+            <label for="user" class="collarwhite ">乗車券</label><br>
             <input type="text" name="username" id="user" required>
             </div>
             <div>
-            <label for="pass">パスワード</label><br>
+            <label for="pass" class="collarwhite ">パスワード</label><br>
             <input type='password' name="password" id="pass" required minlength="4">
             </div>
             <button>発車GO</button>
             
         </form>
         <a href="{{ url_for('user.sign_up') }}"><button>新規</button></a><br>
-        <a href="{{ url_for('reset_pass.resetpass')}}">パスワードを忘れてしまった</a>
+        <a href="{{ url_for('reset_pass.resetpass')}}" class="collarblue backwhite">パスワードを忘れてしまった</a>
         
         
 

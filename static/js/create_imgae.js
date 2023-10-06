@@ -23,6 +23,7 @@ function setMODEL(){
     showMODEL.innerHTML = MODEL_ID
 }
 function startcreateimagefunction(){
+    Result3.innerHTML="<h3>順番に生成しているのでお待ちください</h3>"
     // const searchdata = {"search":search.value}
     fetch('/image', {
         method: 'POST',
@@ -62,7 +63,7 @@ function starttranslationfunction(){
     .then(result => {
         console.log(result);
 
-        Result.innerHTML = "<h2>"+result.txt+'</h2>'
+        Result.textContent = result.txt
         // Result.value=result.arr;
         
     })
@@ -73,3 +74,21 @@ function starttranslationfunction(){
 
 const starttranslation = document.getElementById('starttranslation');
 starttranslation.addEventListener('click', starttranslationfunction);
+
+
+const copybutton = getElementById("copy")
+
+copybutton.addEventListener('click', () => {
+  if (!navigator.clipboard) {
+    alert("このブラウザは対応していません");
+    return;
+  }
+
+  navigator.clipboard.writeText(Result.textContent).then(
+    () => {
+      alert('文章をコピーしました。');
+    },
+    () => {
+      alert('コピーに失敗しました。');
+    });
+});

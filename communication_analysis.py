@@ -1,5 +1,5 @@
 from textblob import TextBlob
-import 翻訳
+import google_translation
 
 def main2():
     # テキストデータを入力
@@ -26,7 +26,7 @@ def main2():
         if txt !="":
             
             # print(txt)
-            text= 翻訳.main(txt)
+            text= google_translation.main(txt)
             # print(text)
             # sentences[i]=text
             翻訳語list.append(text)
@@ -75,7 +75,7 @@ def main2():
     else:
         print("ネガティブな文は見つかりませんでした。")
 def main(TXT):
-    txt = 翻訳.main(TXT)
+    txt = google_translation.main(TXT)
     Is_positive = False
 
     if txt:

@@ -5,7 +5,7 @@ import datetime
 import dateutil.relativedelta as relativedelta
 import re
 import random
-def main(keyword="None"):
+def main(keyword="None",ego="JP",pn="japan",hl="jp"):
     dt_now = datetime.datetime.now()
     current_day = date.today()
 
@@ -16,17 +16,17 @@ def main(keyword="None"):
 
     # googleトレンドに接続するための設定
     # hlは host language、tzはtime zoneの設定
-    pytrends = TrendReq(hl = "ja-JP",tz =-540, timeout=(10, 25))
+    pytrends = TrendReq(hl = hl+"-"+ego,tz =-540, timeout=(10, 25))
     # keyword = "None"
     is_key = True
     kw_list = [keyword]
 
-    pytrends.build_payload(kw_list,timeframe =timeframe,geo="JP")
-    Rapidly_Rising_Keywords =pytrends.trending_searches(pn="japan")
+    pytrends.build_payload(kw_list,timeframe =timeframe,geo=ego)
+    Rapidly_Rising_Keywords =pytrends.trending_searches(pn=pn)
 
 
     #データの取得
-    pytrends.build_payload(kw_list,timeframe =timeframe,geo="JP")
+    pytrends.build_payload(kw_list,timeframe =timeframe,geo=ego)
 
     
     
@@ -46,7 +46,7 @@ def main(keyword="None"):
             
             data.append(newstring.strip())
     else:
-        Rapidly_Rising_Keywords =pytrends.trending_searches(pn="japan")
+        Rapidly_Rising_Keywords =pytrends.trending_searches(pn=pn)
 
         print("急上昇キーワード")
         data=[]
@@ -60,4 +60,5 @@ def main(keyword="None"):
     # print(data)
     return data
 if __name__ =="__main__":
-    print(main("Null"))
+    print(main("None","en","","us"))
+    

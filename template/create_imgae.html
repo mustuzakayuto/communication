@@ -5,7 +5,7 @@
 {% block content %}
 <div class="body">
     <main class="container">
-        <a href="{{ url_for('index') }}">最初の画面</a>
+        <h2><a href="/imagelog" class="left box1">履歴</a></h2>
         <div class="row">
             <div class="account col-6">
                 <h2>画像生成</h2>
@@ -30,6 +30,7 @@
                 <div id="translationresult">
 
                 </div>
+                <button id="copy">copy</button>
                 <h2>使い方・遊び方</h2>
                 <h4>英語でプロンプトを設定して作成ボタンをクリック</h4>
                 <h4>画像を見せてもらって同じようなものを作成するや</h4>

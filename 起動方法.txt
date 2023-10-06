@@ -1,16 +1,10 @@
-1:インストール系統        
-    python のインストール
-
-    pip install flask
-    pip install FER
-    pip install tensorflow
-    pip install diffusers
-    pip install googletrans
-    pip install pytrends
-    pip install bs4
-    pip install transformers==4.29.2
-    pip3 install torch torchvision torchaudio
-    pip install email-validator
+1:事前準備
+    1:インストール
+        python のインストール
+            https://www.python.jp/install/windows/install.html
+        pip install -r requirements.txt
+    2:ngrok設定
+        https://www.mgo-tec.com/blog-entry-ngrok-install.html
 
 2:ウェブ起動
     python app.py

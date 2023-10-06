@@ -42,3 +42,15 @@ input{
     padding: 5px;
     box-sizing: border-box;
 }
+.collarwhite{
+    color: white;
+}
+.collarblue{
+    color: blue;
+}
+.collarblack{
+    color: black;
+}
+.backwhite{
+    background-color: white;
+}

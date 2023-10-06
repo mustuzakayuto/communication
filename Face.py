@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, jsonify,Blueprint,session
+from flask import Flask, render_template, request, jsonify,Blueprint,session,redirect
 from fer import FER
 import pandas as pd
 import sqlite3
-import face保存
-import face平均取得
+import face_preservation
+import face_average
 import config
 # インスタンス化
 face = Blueprint("face",__name__)
@@ -23,7 +23,10 @@ except UnicodeDecodeError as e:
 @face.route('/face_emotion')
 def face_emotion():
     
-    return render_template('face.html')
+    if "username" in session:
+        return render_template('face.html')
+    else :
+        redirect("/")
 
 # エラー対策
 @face.errorhandler(500)
@@ -44,7 +47,7 @@ def upload():
         detected_faces = detected_faces[0]["emotions"]
         
         
-        face保存.main(detected_faces["angry"],detected_faces["disgust"],detected_faces["fear"],detected_faces["happy"],detected_faces["sad"],detected_faces["surprise"],detected_faces["neutral"],session['username'],emotions_data_base)
+        face_preservation.main(detected_faces["angry"],detected_faces["disgust"],detected_faces["fear"],detected_faces["happy"],detected_faces["sad"],detected_faces["surprise"],detected_faces["neutral"],session['username'],emotions_data_base)
     
         
         
@@ -63,7 +66,7 @@ def average():
     name = session['username']  # ここに検索したいnameを指定
     
     
-    column_means = face平均取得.main(emotions_data_base,name)
+    column_means = face_average.main(emotions_data_base,name)
     maxface=0
     expression =""
     for face,averagedata in column_means.items():
@@ -87,7 +90,7 @@ def average():
             "expression":expression,
             "maxface":maxface
                 }  
-              
+    face_preservation.main2(result["angry"],result["disgust"],result["fear"],result["happy"],result["sad"],result["surprise"],result["neutral"],"data/emotionaverage.db",name)
     print(result)
     # データ削除
     # import face初期化
