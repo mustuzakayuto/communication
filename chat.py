@@ -72,6 +72,12 @@ def chatroom_get():
         c.execute(
             "select id, room from chat where user_id1 = ? or user_id2 = ?", (my_id, my_id))
         chat_list = c.fetchall()
+        
+        c.execute(
+            "select id, room from chat where user_id1 = ? or user_id2 = ?", (0, 0))
+        for chat in c.fetchall():
+            chat_list.append(chat)
+        print(chat_list)
         return render_template("/chatroom2.html", tpl_chat_list=chat_list)
     else:
         return redirect("/login2")

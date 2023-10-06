@@ -1,0 +1,67 @@
+html{
+    height: 100%;
+}
+body{
+    
+    background-image: url("../images/sky_image.png");
+    background-size:cover;
+    /* background-repeat: no-repeat; */
+    min-height: 100%;
+
+    
+}
+#search{
+    width: 100px;
+}
+#search_Results_Page{
+    width: 150px;
+}
+
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.box1{
+    padding-left: 15px;
+    height: 70;
+}
+
+#PROMPT{
+    width: 45%;
+}
+
+#inputdata{
+    width: 45%;
+}
+.create_image{
+    width: 450px;
+    height: 450px;
+}
+#translationresult{
+    /* height: 200px; */
+    height: 150px;
+}
+
+#startcreate{
+    width: 10%;
+    height: 15%;
+}
+.resulttxt{
+    font-size: 20px;
+    background-color: white;
+    width: 450px;
+}
+.chip{
+    width: 200px;
+    -webkit-flex-wrap: wrap;          /* Safari etc. */
+    -ms-flex-wrap    : wrap;          /* IE10        */
+    flex-wrap        : wrap;
+    
+    
+}
+#imgcreateresult{
+    height: 100%;
+    /* display : flex; */
+}

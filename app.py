@@ -1,6 +1,21 @@
 from flask import Flask, render_template, request, jsonify ,session
 import secrets
-import sys
+from pyngrok import ngrok, conf
+import subprocess 
+
+
+from login import user
+import Face
+import AIchat 
+import create_image
+import chat
+import re_set_password
+
+import get_topic
+import search
+import ngrok_setup
+
+
 
 # メインのFlaskをインスタンス化
 app = Flask(__name__)
@@ -10,13 +25,7 @@ app.secret_key = secrets.token_hex(16)  # 16バイトのランダムなバイト
 app.template_folder = 'template'
 # staticフォルダー設定
 app.static_folder = 'static'
-from login import user
 
-import Face
-import AIchat 
-import create_image
-import chat
-import re_set_password
 # 他のインスタンス化したものを追加
 app.register_blueprint(user.bp)
 app.register_blueprint(Face.face)
@@ -41,14 +50,14 @@ def sessionusername():
             username=session["username"]
     sessions = {"sessionusername":username}
     return jsonify(sessions)
-import get_topic
+
 
 @app.route('/search' ,methods=['POST'])
-def search():
+def searchs():
     result = {"arr":get_topic.main(request.json['search'])}
     return jsonify(result)
 
-import search
+
 @app.route("/search_Results_Page",methods=["POST"])
 def search_Results_Page():
     result = search.main(request.json['search'])
@@ -68,19 +77,28 @@ def Ranking():
 def internal_server_error(e):
     return "Internal Server Error", 500
 
+    
+
+
+def startserver(port):
+    print("Do you want to set the DOMAIN")
+    select=input("y,n")
+    if select =="y" or select=="Y":
+        ngrok_setup.setup(port)
+    else:
+        ngrok_setup.portset(port)
+    
+    # ngrokを起動するコマンド
+    ngrok_command = "ngrok start myapp"
+
+    # ngrokを起動
+    ngrok_process = subprocess.Popen(ngrok_command, shell=True)
+    
+    try:
+        app.run(port=port)
+    except Exception as e:
+        print(e)
+        ngrok_process.terminate()
 if __name__ == '__main__':
-    app.run()
-    # is_upload=input("-1:デバック,0:公開,1:https公開")
-    # if is_upload=="-1":
-    #     app.run(debug=True)
-    # elif is_upload =="0" :
-    #     app.run(host='0.0.0.0')
-    # elif is_upload =="1":
-    #     import ssl
-    #     context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-    #     context.load_cert_chain('openssl/server.crt', 'openssl/server.key')
-    #     app.run(host='0.0.0.0',ssl_context=context)
     
-    # else:
-    #     print("設定されていません")
-    
+    startserver(5000)

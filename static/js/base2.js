@@ -20,6 +20,7 @@ function getusername(){
         if (username!= "None") {
         // セッションにusernameが存在する場合の処理
         menu.innerHTML+='<p><a href="/face_emotion" class="left box1">表情感情分析</a></p>'
+        menu.innerHTML+='<p><a href="/create_image_index" class="left box1">画像生成</a></p>'
         //   console.log('セッションにusernameが存在します:', username);
         } else {
         // セッションにusernameが存在しない場合の処理

@@ -5,7 +5,10 @@ diffusers
 googletrans
 pytrends
 bs4
-transformers==4.29.2
-torch torchvision torchaudio
+transformers
+torch 
+torchvision 
+torchaudio
 flask_wtf
 email_validator
+ngrok

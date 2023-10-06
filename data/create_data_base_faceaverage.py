@@ -20,7 +20,8 @@ def main():
             happy REAL,
             sad REAL,
             surprise REAL,
-            neutral REAL
+            neutral REAL,
+            user_name TEXT
             
         )
     ''')

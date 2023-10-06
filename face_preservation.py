@@ -16,7 +16,7 @@ def main(angry, disgust, fear, happy, sad, surprise, neutral, user_name,file_pat
 
     # 接続を閉じる
     conn.close()
-def main2(angry, disgust, fear, happy, sad, surprise, neutral,file_path):
+def main2(angry, disgust, fear, happy, sad, surprise, neutral,file_path,user_name):
     # データベースファイル名と接続
     conn = sqlite3.connect(file_path)
 
@@ -24,9 +24,9 @@ def main2(angry, disgust, fear, happy, sad, surprise, neutral,file_path):
     cursor = conn.cursor()
 
     # data入れる
-    cursor.execute(f'''INSERT INTO average (angry, disgust, fear, happy, sad, surprise, neutral)
-    VALUES (?, ?, ?, ?, ?, ?, ?);
-    ''', (angry, disgust, fear, happy, sad, surprise, neutral))  # プレースホルダーを使って値を挿入
+    cursor.execute(f'''INSERT INTO average (angry, disgust, fear, happy, sad, surprise, neutral,user_name)
+    VALUES (?, ?, ?, ?, ?, ?, ?,?);
+    ''', (angry, disgust, fear, happy, sad, surprise, neutral,user_name))  # プレースホルダーを使って値を挿入
     # 変更をコミット
     conn.commit()
 

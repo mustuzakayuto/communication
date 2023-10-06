@@ -1,5 +1,6 @@
 import sqlite3
-def main(data_base,table):
+def get(data_base,table):
+    print()
     print("_____"+data_base,table+"________")
     # データベースに接続
     conn = sqlite3.connect(data_base)
@@ -19,10 +20,3 @@ def main(data_base,table):
 
     # データベース接続を閉じる
     conn.close()
-if __name__=="__main__":
-    main("data/chattest.db","user")
-    main("data/chattest.db","chat")
-    main("data/chattest.db","chatmess")  
-    main("data/emotions.db","emotions")
-    main("data/users.db","USERS")
-    main("data/emotionaverage.db","average")

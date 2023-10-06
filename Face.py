@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, jsonify,Blueprint,session
+from flask import Flask, render_template, request, jsonify,Blueprint,session,redirect
 from fer import FER
 import pandas as pd
 import sqlite3
@@ -23,7 +23,10 @@ except UnicodeDecodeError as e:
 @face.route('/face_emotion')
 def face_emotion():
     
-    return render_template('face.html')
+    if "username" in session:
+        return render_template('face.html')
+    else :
+        redirect("/")
 
 # エラー対策
 @face.errorhandler(500)
@@ -87,7 +90,7 @@ def average():
             "expression":expression,
             "maxface":maxface
                 }  
-    face_preservation.main2(result["angry"],result["disgust"],result["fear"],result["happy"],result["sad"],result["surprise"],result["neutral"],"data/emotionaverage.db")
+    face_preservation.main2(result["angry"],result["disgust"],result["fear"],result["happy"],result["sad"],result["surprise"],result["neutral"],"data/emotionaverage.db",name)
     print(result)
     # データ削除
     # import face初期化
