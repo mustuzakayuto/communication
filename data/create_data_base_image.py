@@ -16,7 +16,8 @@ def main():
             id INTEGER PRIMARY KEY,
             image_name TEXT,
             user_name TEXT,
-            prompt TEXT
+            prompt TEXT,
+            time TEXT
         )
     ''')
 

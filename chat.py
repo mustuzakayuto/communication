@@ -2,8 +2,39 @@ from flask import *   # Flaskのなかみを全部持ってくる
 import sqlite3  # sqliteつかいます
 import config
 import hashlib
+import google_translation
+import datetime
+import os
+import re
+
+country=["None","en","ja","es","pt","de","fr",
+    "it","ru","ar","tr","ko",
+    "zh-CN","zh-TW",
+    "hi","bn","uk","el","nl","cs",
+    "pl","th","sv","ro","fi","no",
+    "da","hr","id","tl","vi"]
+
 chat=Blueprint("chat",__name__)
 chat_data_base = config.CHATDATABASE
+
+
+conn = sqlite3.connect(chat_data_base)
+c = conn.cursor()
+# ここにチャットルーム一覧をDBからとって、表示するプログラム
+c.execute(
+    "select id, room from chat")
+chat_list=[[0,None]]
+# print(c.fetchall())
+
+for id,room in (c.fetchall()):
+
+    chat_list.append([[id,room]])
+
+
+c.execute(
+    "select chat_id,message from chatmess")
+for chat_id,message in (c.fetchall()):
+    chat_list[chat_id].append(message)
 
 def cash(password):
     password = hashlib.sha256(password.encode("utf-8")).hexdigest()
@@ -39,7 +70,7 @@ def chatroom_post(other_id):
 
         print(chat_id)
         # とってきたidの中身で判定。idがNoneであれば作成、それ以外(数字が入っていれば)スルー
-        if chat_id == None:
+        if chat_id == None and my_id != other_id:
 
             c.execute("select name from user where id = ?", (my_id,))
             myname = c.fetchone()[0]
@@ -81,8 +112,92 @@ def chatroom_get():
         return render_template("/chatroom2.html", tpl_chat_list=chat_list)
     else:
         return redirect("/login2")
+    
 
+@chat.route("/get_session", methods=['POST'])
+def get_session():
+    print(session)
+    if "country" in session:
+        countrydata=session["country"]
+        result={"country":countrydata}
+    else:
+        result={"country":"None"}
+    return jsonify(result)
+@chat.route("/session", methods=['POST'])
+def set_session():
+    
+    if request.json["country"] in country:
+        session["country"]=request.json["country"]
+        status={"status":"201"}
+        print(session["country"])
+    else:
+        status={"status":"409"}
+    
+    print(status)
+    return jsonify(status)
+@chat.route("/translation/chat/<int:chatid>", methods=['POST'])
+def translation(chatid):
+    message=request.json["data"]["txt"]
+    chatdata=getchat(request.json["data"]["id"],chatid)
+    if not "country" in session :
+        session["country"]="None"
+    if session["country"]!="None" and str(chatdata).strip()!="" :
+    
+        message=google_translation.translation(chatdata,session["country"])
+    elif session["country"]=="None":
+        message=chatdata
+        
+    result={"txt":message}
+    return jsonify(result)
+def getchat(index,chatid):
+    conn = sqlite3.connect(chat_data_base)
+    c = conn.cursor()
+    c.execute(
+        "select chatmess.to_user, chatmess.from_user, chatmess.message, user.name from chatmess inner join user on chatmess.from_user = user.id where chat_id = ?", (chatid,))
+    chat_fetch = c.fetchall()
+   
+    return chat_fetch[int(index)][2]
 
+@chat.route("/get_chat_list/chat/<int:chatid>", methods=['POST'])
+def get_chat_list(chatid):
+    
+    if "user_id" in session:
+        session["chatid"]=chatid
+        my_id = session["user_id"]
+        if not "country" in session :
+            session["country"]="None"
+        print(session["country"])
+        # ここにチャットをDBからとって、表示するプログラム
+        conn = sqlite3.connect(chat_data_base)
+        c = conn.cursor()
+        c.execute(
+            "select chatmess.to_user, chatmess.from_user, chatmess.message, user.name ,chatmess.time,chatmess.type from chatmess inner join user on chatmess.from_user = user.id where chat_id = ?", (chatid,))
+        chat_fetch = c.fetchall()
+        chat_info = []
+        for chat in chat_fetch:
+            message=chat[2]
+            if request.json["is_road"]=="true":
+                
+                if session["country"]!="None" and str(chat[2]).strip()!="":
+                    message=google_translation.translation(chat[2],session["country"])
+            chat_info.append(
+                {"to": chat[0], "from": chat[1], "message": message, "fromname": chat[3],"time":chat[4],"type":chat[5]}
+                )
+
+        c.execute("select room from chat where id = ?", (chatid,))
+        room_name = c.fetchone()[0]
+        c.close()
+        result={"data":{"chat_list":chat_info,"my_id":my_id,"type":session["country"],"len":len(chat_info)}}
+        return jsonify(result)
+
+@chat.route("/update/chat/<int:chatid>", methods=['POST'])
+def update(chatid):
+    
+    lengs=len(chat_list[chatid])-1
+    result={"len":lengs}
+    return jsonify(result)
+
+    
 # チャットルーム表示
 @chat.route("/chat/<int:chatid>")
 def chat_get(chatid):
@@ -91,6 +206,11 @@ def chat_get(chatid):
         # ここにチャットをDBからとって、表示するプログラム
         conn = sqlite3.connect(chat_data_base)
         c = conn.cursor()
+        c.execute("select user_id1, user_id2 from chat where id = ?", (chatid,))
+        userids = c.fetchall()[0]
+        if not my_id in userids:
+            return redirect("/userlist2")
+        
         c.execute(
             "select chatmess.to_user, chatmess.from_user, chatmess.message, user.name from chatmess inner join user on chatmess.from_user = user.id where chat_id = ?", (chatid,))
         chat_fetch = c.fetchall()
@@ -113,7 +233,11 @@ def chat_post(chatid):
     if "user_id" in session:
         # ここにチャットの送信ボタンが押されたときにDBに格納するプログラム
         my_id = session["user_id"]
+        current_time = datetime.datetime.now()
+        time= current_time.strftime("%m/%d,%I:%M %p")
+
         chat_message = request.form.get("input_message")
+        
         conn = sqlite3.connect(chat_data_base)
         c = conn.cursor()
         c.execute(
@@ -125,11 +249,13 @@ def chat_post(chatid):
         else:
             to_id = chat_user[1]
         print(to_id)
-        c.execute("insert into chatmess values(null,?,?,?,?)",
-                  (chatid, to_id, my_id, chat_message))
+        if str(chat_message).strip()=="":
+            return redirect("/chat/{}".format(chatid))
+        c.execute("insert into chatmess values(null,?,?,?,?,?,?)",
+                  (chatid, to_id, my_id, chat_message,time,"text"))
         conn.commit()
         c.close()
-
+        chat_list[chatid].append(chat_message)
         return redirect("/chat/{}".format(chatid))
     else:
         return redirect("/login2")
@@ -163,7 +289,7 @@ def login():
         session['user_id'] = user_id[0]
         return redirect("/userlist2")
 
-import re
+
 # アカウント作成(新規ユーザー登録)プログラム
 @chat.route("/regist", methods=["POST"])
 def regist():
@@ -171,7 +297,7 @@ def regist():
     password = request.form.get("password")
     if name==""or password=="":
         return render_template("login2.html")
-    special_characters_pattern = r'[!@#$%^&*()_+{}\[\]:;<>,.?~\\|/-]'
+    special_characters_pattern = r'[!@#$%^&*()_+{\[\]:;<>,.?~\\|/-]'
     if re.search(special_characters_pattern, name) or re.search(special_characters_pattern, password):
         return render_template("login2.html")
     password = cash(password)
@@ -197,5 +323,42 @@ def logout():
     session.pop('user_id', None)
     return redirect("/login2")
 
+import uuid
 
+@chat.route('/chat/<int:chatid>/imgupload', methods=["POST"])
+def imgupload(chatid):
+    # URLでhttp://127.0.0.1:5000/uploadを指定したときはGETリクエストとなるのでこっち
+    
+    # formでsubmitボタンが押されるとPOSTリクエストとなるのでこっち
+    
+    file = request.files['example']
+    
+    filename= str(hashlib.sha256(str(file.filename).encode("utf-8")).hexdigest())+str(uuid.uuid4())+file.filename
+    
+   
+    print(filename)
+    file.save(os.path.join('./static/images/chat', filename))
+    chat_message="../static/images/chat/"+filename
+    if  "png" in file.filename or "jpg" in file.filename or "gif" in file.filename:
+        datatype="img"
+    else:
+        datatype="text"
+    current_time = datetime.datetime.now()
+    time= current_time.strftime("%m/%d,%I:%M %p")
 
+    my_id = session["user_id"]
+    conn = sqlite3.connect(chat_data_base)
+    c = conn.cursor()
+    c.execute(
+            "select user_id1, user_id2 from chat where id = ?", (chatid,))
+    chat_user = c.fetchone()
+    if my_id != chat_user[0]:
+        to_id = chat_user[0]
+    else:
+        to_id = chat_user[1]
+        
+    c.execute("insert into chatmess values(null,?,?,?,?,?,?)",
+                  (chatid, to_id, my_id, chat_message,time,datatype))
+    conn.commit()
+    chat_list[chatid].append(chat_message)
+    return redirect("/chat/{}".format(chatid))

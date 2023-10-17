@@ -83,14 +83,15 @@ def main(PROMPT,MODEL_ID="",init_img=None):
             ).images[0]
         # 現在の時刻
         dt_now = datetime.datetime.now() 
-        now = dt_now.strftime("%Y%m%d%H%M%S") 
+        now = dt_now.strftime("%Y%m%d%H%M%S")
+        timedata=dt_now.strftime("%m/%d,%I:%M %p ")
         # ファイル名 
         file_path = "./static/images/create/"+str(SEED) + "_" + str(now) + ".png"
         # ファイル保存 
         image.save(file_path) 
         
     torch.cuda.empty_cache()
-    return file_path    
+    return file_path,timedata
 
 
     

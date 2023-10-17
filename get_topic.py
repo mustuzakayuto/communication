@@ -60,5 +60,5 @@ def main(keyword="None",ego="JP",pn="japan",hl="jp"):
     # print(data)
     return data
 if __name__ =="__main__":
-    print(main("None","en","","us"))
+    print(main("None"))
     

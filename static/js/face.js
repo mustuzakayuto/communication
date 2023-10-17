@@ -67,7 +67,7 @@ function endEmotionDetection() {
     })
     .then(response => response.json())
     .then(result => {
-        var message
+        var message=""
         console.log(result)
        if(result.expression=="angry"){
             message="全体的に怒っている印象を受けます"
@@ -84,8 +84,16 @@ function endEmotionDetection() {
        }else if(result.expression=="neutral"){
             message="全体的に無感情な印象を受けます"
        }
-       average.innerHTML="<h3>"+message+"</h3>"
-       average.innerHTML+="<h3>"+"最大の"+facechange(result.expression)+"は"+(result.maxface*100).toFixed()+"%"+"</h3>"
+       if (message!=""){
+            var messageelement=document.createElement("h3")
+            var maxelement =document.createElement("h3")
+            messageelement.innerText=message
+            maxelement.innerText="最大の"+facechange(result.expression)+"は"+(result.maxface*100).toFixed()+"%"
+            average.appendChild(messageelement)
+            average.appendChild(maxelement)
+            // average.innerHTML="<h3>"+message+"</h3>"
+            // average.innerHTML+="<h3>"+"最大の"+facechange(result.expression)+"は"+(result.maxface*100).toFixed()+"%"+"</h3>"
+       }
         // average.innerHTML = "average: "+"fear"+result.fear+"happy"+result.happy+"sad"+result.sad+"surprise"+result.surprise+"neutral"+result.neutral
         // average.innerHTML = "<h3>average:"+"怒り"+(result.angry*100).toFixed() +"%"+"嫌悪"+(result.disgust*100).toFixed() +"%"+"恐怖"+(result.fear*100).toFixed()+"%"+"幸せ"+(result.happy*100).toFixed()+"%"+"悲しみ"+(result.sad*100).toFixed()+"%"+"驚き"+(result.surprise*100).toFixed()+"%"+"無"+(result.neutral*100).toFixed()+"%"+"</h3>"
     })

@@ -42,6 +42,9 @@ def index():
     
     return render_template('index.html')
 
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('favicon.ico')
 @app.route('/sessionusername' ,methods=['POST'])
 def sessionusername():
     username="None"
@@ -78,7 +81,6 @@ def internal_server_error(e):
     return "Internal Server Error", 500
 
     
-
 
 def startserver(port):
     print("Do you want to set the DOMAIN")

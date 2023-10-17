@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify,Blueprint, session, redirect
+from flask import Flask, render_template, request, jsonify,Blueprint, session, redirect,send_file
 import create_image3
 import google_translation
 
@@ -6,15 +6,27 @@ import time
 import config
 import sqlite3
 import time_change
+import uuid
+
 # インスタンス化
 create_imgae = Blueprint("create_imgae",__name__)
 joblist=[]
+class Job:
+    def __init__(self) :
+        self.setid()
+    def setid(self):
+        self.id=uuid.uuid4()
+        while self.id in joblist:
+            self.id=uuid.uuid4()
+        joblist.append(self.id)
+
 @create_imgae.route('/create_image_index')
 def create_image_index():
     if "username" in session:
         return render_template('create_imgae.html')
     else :
-        redirect("/")
+        redirect("/login")
+
     
 @create_imgae.errorhandler(500)
 def internal_server_error(e):
@@ -27,24 +39,27 @@ def imagelogindex():
 def imagelog():
     username = session['username']
     imgs=get(username,"img")
-    times=[]
-    for img in imgs:
-        times.append(time_change.time_change(img.split("create/")[1].split(".")[0].split("_")[1]))
+    times=get(username,"time")
+    # for img in imgs:
+    #     times.append(time_change.time_change(img.split("create/")[1].split(".")[0].split("_")[1]))
     prompts=get(username,"prompt")
     
     
     result={"arr":{"img_list":imgs,"times":times,"prompt":prompts}}
     return jsonify(result)
 
-import uuid
-class Job:
-    def __init__(self) :
-        self.setid()
-    def setid(self):
-        self.id=uuid.uuid4()
-        while self.id in joblist:
-            self.id=uuid.uuid4()
-        joblist.append(self.id)
+@create_imgae.route('/download_img' ,methods=['POST'])
+def download_img():
+    downloadFileName = request.json['imgname']
+    png_file_path = 'static\\images\\create\\'+downloadFileName
+
+    
+    # send_file(png_file_path, as_attachment=True, download_name=filename)
+    # send_file関数を使用してPNGファイルを送信します
+    return send_file(png_file_path, as_attachment = True, \
+        attachment_filename=downloadFileName, \
+        mimetype = "image/png")
+
         
 @create_imgae.route('/image' ,methods=['POST'])
 def image():
@@ -57,10 +72,10 @@ def image():
     job = Job()
     while joblist[0]!=job.id:
         time.sleep(1)
-    imagepath=create_image3.main(request.json["array"]['PROMPT'],MODEL_ID=request.json["array"]["MODEL_ID"])
+    imagepath,timedata=create_image3.main(request.json["array"]['PROMPT'],MODEL_ID=request.json["array"]["MODEL_ID"])
     username = session['username']
     result = {"img":imagepath}
-    addimage(imagepath,username,prompt)
+    addimage(imagepath,username,prompt,timedata)
     joblist.pop(0)
     return jsonify(result)
 @create_imgae.route('/job_status')
@@ -69,21 +84,21 @@ def get_job_status():
     print(joblist)
     return jsonify({"joblist":joblist})
 
-@create_imgae.route('/translation' ,methods=['POST'])
-def translation():
+@create_imgae.route('/entranslation' ,methods=['POST'])
+def entranslation():
     result = {"txt":google_translation.main(request.json['txt'])}
     return jsonify(result)
 
-def addimage(image_name,user_name,prompt):
+def addimage(image_name,user_name,prompt,timedata):
     conn = sqlite3.connect(config.IMAGEDATABASE)
 
     # カーソルを取得
     cursor = conn.cursor()
 
     # data入れる
-    cursor.execute(f'''INSERT INTO images (image_name, user_name,prompt)
-    VALUES (?, ?,?);
-    ''', (image_name,user_name,prompt))  # プレースホルダーを使って値を挿入
+    cursor.execute(f'''INSERT INTO images (image_name, user_name,prompt,time)
+    VALUES (?, ?,?,?);
+    ''', (image_name,user_name,prompt,timedata))  # プレースホルダーを使って値を挿入
     # 変更をコミット
     conn.commit()
 
@@ -94,6 +109,8 @@ def get(user_name,gettype):
         gettype=1
     elif gettype=="prompt":
         gettype=3
+    elif gettype=="time":
+        gettype=4
     # データベースに接続
     conn = sqlite3.connect(config.IMAGEDATABASE)
 

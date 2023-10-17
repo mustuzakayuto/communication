@@ -26,7 +26,7 @@ def face_emotion():
     if "username" in session:
         return render_template('face.html')
     else :
-        redirect("/")
+        redirect("/login")
 
 # エラー対策
 @face.errorhandler(500)
@@ -90,7 +90,8 @@ def average():
             "expression":expression,
             "maxface":maxface
                 }  
-    face_preservation.main2(result["angry"],result["disgust"],result["fear"],result["happy"],result["sad"],result["surprise"],result["neutral"],"data/emotionaverage.db",name)
+    if maxface != 0:
+        face_preservation.main2(result["angry"],result["disgust"],result["fear"],result["happy"],result["sad"],result["surprise"],result["neutral"],"data/emotionaverage.db",name)
     print(result)
     # データ削除
     # import face初期化
