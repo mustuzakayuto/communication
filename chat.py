@@ -27,15 +27,18 @@ chat_list=[[0,None]]
 # print(c.fetchall())
 
 for id,room in (c.fetchall()):
-
+    
     chat_list.append([[id,room]])
-
+    print([[id,room]])
+print(chat_list)
 
 c.execute(
     "select chat_id,message from chatmess")
+print(len(chat_list))
 for chat_id,message in (c.fetchall()):
+    print(chat_id)
     chat_list[chat_id].append(message)
-
+print(len(chat_list[1])-1)
 def cash(password):
     password = hashlib.sha256(password.encode("utf-8")).hexdigest()
     return password
@@ -47,12 +50,18 @@ def jump():
 # ユーザーを全て表示
 @chat.route("/userlist2")
 def userlist():
-    conn = sqlite3.connect(chat_data_base)
-    c = conn.cursor()
-    c.execute("select id, name from user")
-    user_info = c.fetchall()
-    conn.close()
-    return render_template("userlist2.html", tpl_user_info=user_info)
+    users=[]
+    if "user_id" in session:
+        my_id = session["user_id"]
+        conn = sqlite3.connect(chat_data_base)
+        c = conn.cursor()
+        c.execute("SELECT id, name FROM user WHERE id != ?", (my_id,))
+        user_info = c.fetchall()
+        
+        conn.close()
+        
+        return render_template("userlist2.html", tpl_user_info=user_info)
+    return redirect("/login2")
 
 
 # /userlist2で「チャットする」ボタンを押したときに動くプログラム。チャットルームがなければ(まだチャットしたことのない相手であれば)新規作成。
@@ -101,13 +110,17 @@ def chatroom_get():
         c = conn.cursor()
         # ここにチャットルーム一覧をDBからとって、表示するプログラム
         c.execute(
-            "select id, room from chat where user_id1 = ? or user_id2 = ?", (my_id, my_id))
-        chat_list = c.fetchall()
-        
-        c.execute(
             "select id, room from chat where user_id1 = ? or user_id2 = ?", (0, 0))
+        chat_list=c.fetchall()
+            
+            
+        c.execute(
+            "select id, room from chat where user_id1 = ? or user_id2 = ?", (my_id, my_id))
         for chat in c.fetchall():
             chat_list.append(chat)
+        
+        
+        
         print(chat_list)
         return render_template("/chatroom2.html", tpl_chat_list=chat_list)
     else:
@@ -192,7 +205,8 @@ def get_chat_list(chatid):
 
 @chat.route("/update/chat/<int:chatid>", methods=['POST'])
 def update(chatid):
-    
+    print(chatid)
+    print(chat_list[chatid])
     lengs=len(chat_list[chatid])-1
     result={"len":lengs}
     return jsonify(result)
@@ -208,7 +222,7 @@ def chat_get(chatid):
         c = conn.cursor()
         c.execute("select user_id1, user_id2 from chat where id = ?", (chatid,))
         userids = c.fetchall()[0]
-        if not my_id in userids:
+        if not my_id in userids and not 0 in userids:
             return redirect("/userlist2")
         
         c.execute(
@@ -328,37 +342,48 @@ import uuid
 @chat.route('/chat/<int:chatid>/imgupload', methods=["POST"])
 def imgupload(chatid):
     # URLでhttp://127.0.0.1:5000/uploadを指定したときはGETリクエストとなるのでこっち
-    
+    imagelist=['png', 'jpg',"jpeg", 'gif']
     # formでsubmitボタンが押されるとPOSTリクエストとなるのでこっち
-    
+    allowed_extensions = set(['png', 'jpg', 'gif','mp4'])  # 許可する拡張子のリスト
     file = request.files['example']
-    
-    filename= str(hashlib.sha256(str(file.filename).encode("utf-8")).hexdigest())+str(uuid.uuid4())+file.filename
-    
-   
-    print(filename)
-    file.save(os.path.join('./static/images/chat', filename))
-    chat_message="../static/images/chat/"+filename
-    if  "png" in file.filename or "jpg" in file.filename or "gif" in file.filename:
-        datatype="img"
-    else:
-        datatype="text"
-    current_time = datetime.datetime.now()
-    time= current_time.strftime("%m/%d,%I:%M %p")
 
-    my_id = session["user_id"]
-    conn = sqlite3.connect(chat_data_base)
-    c = conn.cursor()
-    c.execute(
-            "select user_id1, user_id2 from chat where id = ?", (chatid,))
-    chat_user = c.fetchone()
-    if my_id != chat_user[0]:
-        to_id = chat_user[0]
+    if file:
+        file_extension = file.filename.split('.')[-1]
+        if file_extension in allowed_extensions:
+            if file_extension  in imagelist:
+                datatype="img"
+            elif "mp4" == file_extension:
+                datatype="video"
+            
+            hashfilename=str(hashlib.sha256(str(file.filename).encode("utf-8")).hexdigest())
+            filename= hashfilename+str(uuid.uuid4())+file.filename
+            while os.path.isfile("./static/images/chat/"+filename):
+                filename= hashfilename+str(uuid.uuid4())+file.filename
+            file.save(os.path.join('./static/images/chat', filename))
+            chat_message="../static/images/chat/"+filename
+            current_time = datetime.datetime.now()
+            time= current_time.strftime("%m/%d,%I:%M %p")
+
+            my_id = session["user_id"]
+            conn = sqlite3.connect(chat_data_base)
+            c = conn.cursor()
+            c.execute(
+                    "select user_id1, user_id2 from chat where id = ?", (chatid,))
+            chat_user = c.fetchone()
+            if my_id != chat_user[0]:
+                to_id = chat_user[0]
+            else:
+                to_id = chat_user[1]
+                
+            c.execute("insert into chatmess values(null,?,?,?,?,?,?)",
+                        (chatid, to_id, my_id, chat_message,time,datatype))
+            conn.commit()
+            chat_list[chatid].append(chat_message)
+            return redirect("/chat/{}".format(chatid))
+            
+        else:
+            return redirect("/chat/{}".format(chatid))
     else:
-        to_id = chat_user[1]
-        
-    c.execute("insert into chatmess values(null,?,?,?,?,?,?)",
-                  (chatid, to_id, my_id, chat_message,time,datatype))
-    conn.commit()
-    chat_list[chatid].append(chat_message)
-    return redirect("/chat/{}".format(chatid))
+        return redirect("/chat/{}".format(chatid))
+    
+    

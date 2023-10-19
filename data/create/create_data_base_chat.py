@@ -23,9 +23,8 @@ def main():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id1 INTEGER,
             user_id2 INTEGER,
-            room TEXT,
-            time TEXT,
-            type TEXT
+            room TEXT
+            
         )
     ''')
 
@@ -37,7 +36,8 @@ def main():
             to_user INTEGER,
             from_user INTEGER,
             message TEXT,
-            time TEXT
+            time TEXT,
+            type TEXT
         )
     ''')
 

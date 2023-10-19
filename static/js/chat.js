@@ -127,17 +127,37 @@ function displayChatList(chatList,tpl_my_id) {
             
             
             maindata.appendChild(imgdata)
+        }else if(chat.type=="video"){
+            
+            var maindata = document.createElement("span");
+            var video = document.createElement("video")
+            maindata.innerHTML = chat.fromname+"  :"
+            video.width=
+            video.src=chat.message
+            video.id=i
+            video.className="show-video"
+            
+            video.controls = true;  // 'controls'属性を追加
+            video.muted = true;     // 'muted'属性を追加
+            video.autoplay = true;  // 'autoplay'属性を追加
+            video.playsInline = true;  // 'playsinline'属性を追加
+            video.loop = true;      // 'loop'属性を追加
+            
+            maindata.appendChild(video)
+
+
         }
         
         
-        time.innerText=chat.time
+        time.innerText="  "+chat.time+"  "
+        time.className="time"
         if (chat.from==tpl_my_id){
             chatElement.className="fromText"
             
         }else{
             chatElement.className="toText"
         }
-        time.className="time"
+        
         
         
         

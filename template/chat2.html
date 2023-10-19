@@ -21,6 +21,10 @@
             <input type="text" name="input_message" placeholder="メッセージを送信" id="ChatText">
             <input type="submit" value="送信">
         </form>
+        <form action="/chat/{{link_chatid}}/imgupload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="example" accept="image/png, image/jpeg, image/gif, video/mp4">
+            <input type="submit" value="アップロード">
+        </form>
         <div id="Language-box">
             <select name="country-name" id="country-selector">
                 <option value="None">デフォルト</option>
@@ -57,10 +61,7 @@
             </select>
 
         </div>
-        <form action="/chat/{{link_chatid}}/imgupload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="example" accept="image/png, image/jpeg, image/gif">
-            <input type="submit" value="アップロード">
-        </form>
+        
         <button onclick="display_switching()">翻訳</button><br>
         <button id="scroll-button" onclick="scrollToTop()">一番上まで</button>
         <button id="scroll-button" onclick="scrollToBottom()">一番下まで</button>
