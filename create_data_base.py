@@ -1,8 +1,8 @@
-from data import create_data_base_chat
-from data import create_data_base_face
-from data import create_db
-from data import create_data_base_faceaverage
-from data import setchat
+from data.create import create_data_base_chat
+from data.create import create_data_base_face
+from data.create import create_db
+from data.create import create_data_base_faceaverage
+from data.create import setchat
 
 create_data_base_chat.main()
 create_data_base_face.main()

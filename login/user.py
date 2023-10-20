@@ -142,3 +142,9 @@ def register():
         return render_template('test02.html')
 
     return redirect(url_for('index'))
+@bp.route('/getuser', methods=('GET', 'POST'))
+def getuser():
+    if 'username' in session:
+        return jsonify({"username":session['username']})
+    return jsonify({'username':"None"})
+    

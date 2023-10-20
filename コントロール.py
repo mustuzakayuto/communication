@@ -60,6 +60,15 @@ def main():
                     if data_base=="chat":
                         data_base=config.CHATDATABASE
                         table=input("(user,chat,chatmess)")
+                        if table=="chatmess":
+                            select=input("all?[y:n]: ")
+                            if select=="y":
+                                start=input("start position:")
+                                end=input("end position")
+                                
+                                for i in range(int(start),int(end)+1):
+                                    idrm(data_base,table,str(i))
+                                continue
                     elif data_base == "emo":
                         table=tables[data_base]
                         data_base=config.EMOTIONDATABASE
@@ -107,7 +116,17 @@ def idrm(data_base,table,id):
 
 
     # ユーザー名が一致する行を削除するSQLクエリを実行
-    cursor.execute(f"DELETE FROM {table} WHERE id=?", (id))
+    cursor.execute(f"DELETE FROM {table} WHERE id=?", (id,))
+
+    # 変更をコミット
+    conn.commit()
+
+    # データベース接続を閉じる
+    conn.close()
+def column(data_base,table,column,typedata):
+    conn = sqlite3.connect(data_base)
+    cursor = conn.cursor()
+    cursor.execute(f'ALTER TABLE {table} ADD {column} {typedata} FIRST;')
 
     # 変更をコミット
     conn.commit()
@@ -135,5 +154,5 @@ def get_data(data_base,table,column,intid):
 
     # データベース接続を閉じる
     conn.close()
-    
+# column(config.IMAGEDATABASE,"images","time","TEXT")
 main()

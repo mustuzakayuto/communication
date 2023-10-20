@@ -23,8 +23,8 @@ h1{
 }
 
 .container{
-    width: 200px;
-    height: 200px;    
+    width: 300px;
+    height: 500px;    
     padding: 10px;
     position: absolute;
     top: 76%;
@@ -43,7 +43,8 @@ input{
     box-sizing: border-box;
 }
 .collarwhite{
-    color: white;
+    color: black;
+    background-color: white;
 }
 .collarblue{
     color: blue;

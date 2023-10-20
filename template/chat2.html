@@ -1,23 +1,72 @@
 {% extends "base.html" %}
+{% block css %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat2.css') }}">
+{% endblock %}
 {% block content %}
 <div class="chatTemp">
-
     <h2>{{tpl_room_name}}</h2>
-
+    
     <div class="chatBox">
-        <div class="chatMessage">
-            {% for chat in chat_list%}
+        <div class="chatMessage" id="chatMessage">
+            <!-- {% for chat in chat_list%}
             {% if tpl_my_id == chat["from"] %}
             <p class="fromText"><span>{{chat["fromname"]}}:{{chat["message"]}}</span></p>
             {% else %}
             <p class="toText"><span>{{chat["fromname"]}}:{{chat["message"]}}</span></p>
             {% endif %}
-            {% endfor %}
+            {% endfor %} -->
         </div>
         <form action="/chat/{{link_chatid}}" method="POST">
             <input type="text" name="input_message" placeholder="メッセージを送信" id="ChatText">
             <input type="submit" value="送信">
         </form>
+        <form action="/chat/{{link_chatid}}/imgupload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="example" accept="image/png, image/jpeg, image/gif, video/mp4">
+            <input type="submit" value="アップロード">
+        </form>
+        <div id="Language-box">
+            <select name="country-name" id="country-selector">
+                <option value="None">デフォルト</option>
+                <option value="en">英語</option>
+                <option value="ja">日本</option>
+                <option value="es">スペイン</option>
+                <option value="pt">ポルトガル</option>
+                <option value="de">ドイツ</option>
+                <option value="fr">フランス</option>
+                <option value="it">イタリア</option>
+                <option value="ru">ロシア</option>
+                <option value="ar">アラビア</option>
+                <option value="tr">トルコ</option>
+                <option value="ko">韓国</option>
+                <option value="zh-CN">中国（簡体字）</option>
+                <option value="zh-TW">中国（繁体字）</option>
+                <option value="hi">ヒンディー語</option>
+                <option value="bn">ベンガル</option>
+                <option value="uk">ウクライナ</option>
+                <option value="el">ギリシャ</option>
+                <option value="nl">オランダ</option>
+                <option value="cs">チェコ</option>
+                <option value="pl">ポーランド</option>
+                <option value="th">タイ</option>
+                <option value="sv">スウェーデン</option>
+                <option value="ro">ルーマニア語</option>
+                <option value="fi">フィンランド</option>
+                <option value="no">ノルウェー</option>
+                <option value="da">デンマーク</option>
+                <option value="hr">クロアチア</option>
+                <option value="id">インドネシア</option>
+                <option value="ti">フィリピン</option>
+                <option value="vi">ベトナム</option>
+            </select>
+
+        </div>
+        
+        <button onclick="display_switching()">翻訳</button><br>
+        <button id="scroll-button" onclick="scrollToTop()">一番上まで</button>
+        <button id="scroll-button" onclick="scrollToBottom()">一番下まで</button>
+        
+
     </div>
     <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 </div>

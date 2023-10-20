@@ -36,8 +36,8 @@ body{
     width: 45%;
 }
 .create_image{
-    width: 450px;
-    height: 450px;
+    width: 250px;
+    height: 250px;
 }
 #translationresult{
     /* height: 200px; */
@@ -49,19 +49,30 @@ body{
     height: 15%;
 }
 .resulttxt{
-    font-size: 20px;
+    font-size: 15px;
+    
+    width: 250px;
+    margin: 0;
+}
+.back-white{
     background-color: white;
-    width: 450px;
+}
+.time{
+    background-color: black;
+    color: white;
+    
 }
 .chip{
-    width: 200px;
-    -webkit-flex-wrap: wrap;          /* Safari etc. */
-    -ms-flex-wrap    : wrap;          /* IE10        */
-    flex-wrap        : wrap;
+    width: 300px;
+    padding: 30px;
+    /* -webkit-flex-wrap: wrap;  
+    -ms-flex-wrap    : wrap;          
+    flex-wrap        : wrap; */
     
     
 }
 #imgcreateresult{
     height: 100%;
-    /* display : flex; */
+    display : flex;
+    flex-wrap: wrap;
 }

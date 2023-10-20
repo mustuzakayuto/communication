@@ -36,12 +36,12 @@ def createdbpy():
     datalist.append("    conn.commit()")
     datalist.append("    # 接続を閉じる")
     datalist.append("    conn.close()")
-    with open("data/"+filename+".py","w",encoding='utf-8') as f:
+    with open("data/create/"+filename+".py","w",encoding='utf-8') as f:
         for txt in datalist:
             f.write(txt+"\n")
     with open("config.py","a",encoding='utf-8') as f:
         f.write(configname+" = "+'"data/'+filename+'.db"\n')
-    cdb=["from data import "+filename+"\n"]
+    cdb=["from data.create import "+filename+"\n"]
     with open("create_data_base.py","r",encoding='utf-8') as f:
         cdb+=f.readlines()
     cdb.append(filename+".main()\n")

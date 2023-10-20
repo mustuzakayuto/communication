@@ -52,7 +52,7 @@ const txtdata = document.getElementById('inputdata');
 const Result = document.getElementById("translationresult")
 function starttranslationfunction(){
     // const searchdata = {"search":search.value}
-    fetch('/translation', {
+    fetch('/entranslation', {
         method: 'POST',
         
         body: JSON.stringify({"txt":txtdata.value}),
@@ -76,7 +76,7 @@ const starttranslation = document.getElementById('starttranslation');
 starttranslation.addEventListener('click', starttranslationfunction);
 
 
-const copybutton = getElementById("copy")
+const copybutton = document.getElementById("copy")
 
 copybutton.addEventListener('click', () => {
   if (!navigator.clipboard) {
