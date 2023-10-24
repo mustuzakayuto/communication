@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/test02.css') }}">
 {% endblock %}
 {% block content %}
+<h4>{{error}}</h4>
 <h1>新規作成</h1>
 <form action="{{ url_for('user.register') }}" method="post">
     

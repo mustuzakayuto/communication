@@ -1,5 +1,5 @@
-DATABASE = 'data/users.db'
-CHATDATABASE = "data/chattest.db"
-EMOTIONDATABASE = "data/emotions.db"
-EMOTIONAVERAGEDATABASE = "data/emotionaverage.db"
-IMAGEDATABASE = "data/images.db"
+DATABASE = 'data/data_base/users.db'
+CHATDATABASE = "data/data_base/chattest.db"
+EMOTIONDATABASE = "data/data_base/emotions.db"
+EMOTIONAVERAGEDATABASE = "data/data_base/emotionaverage.db"
+IMAGEDATABASE = "data/data_base/images.db"

@@ -18,6 +18,8 @@ def sign_up():
 # (ipアドレス:5000)/loginと入力で表示
 @bp.route('/login')
 def log_in():
+    if "username" in session:
+        return redirect(url_for('user.member'))
     return render_template('login.html')
 
 
@@ -115,7 +117,7 @@ def register():
         # 特殊文字を含む正規表現パターン
         special_characters_pattern = r'[!@#$%^&*()_+{}\[\]:;<>,.?~\\|/-]'
         if re.search(special_characters_pattern, username) or re.search(special_characters_pattern, password):
-            return redirect(url_for('user.sign_up'))
+            return render_template('test03.html',error="特殊文字を入力しないでください")
         # SHA-256でハッシュ化
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
         db = database.get_db()
@@ -128,10 +130,10 @@ def register():
         print(email,user)
         if user:
             print(f'ユーザー「{username}」はすでに存在しています')
-            return redirect(url_for('user.sign_up'))
+            return render_template('test03.html',error=f'ユーザー「{username}」はすでに存在しています')
         if email:
             print(f'ユーザー「{useremail}」はすでに存在しています')
-            return redirect(url_for('user.sign_up'))
+            return render_template('test03.html',error=f'ユーザー「{useremail}」はすでに存在しています')
         db.execute(
             "INSERT INTO USERS (USERNAME, PASSWORD, USEREMAIL) VALUES (?, ?, ?)",
             (username, generate_password_hash(password), useremail)

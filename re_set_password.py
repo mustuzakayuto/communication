@@ -7,7 +7,7 @@ import re
 import hashlib
 import sqlite3
 
-import mail
+from modules import mail
 import config
 
 

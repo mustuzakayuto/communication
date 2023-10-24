@@ -115,6 +115,7 @@ function displayChatList(chatList,tpl_my_id) {
             var maindata = document.createElement("span");
             maindata.innerText=`${chat.fromname}: ${chat.message}`;
             maindata.id=i
+            maindata.className=chat.type
             
         }else if(chat.type=="img"){
             var imgdata = document.createElement("img");
@@ -125,7 +126,7 @@ function displayChatList(chatList,tpl_my_id) {
             imgdata.id=i
             imgdata.className="show-img"
             
-            
+            maindata.className=chat.type
             maindata.appendChild(imgdata)
         }else if(chat.type=="video"){
             
@@ -142,7 +143,7 @@ function displayChatList(chatList,tpl_my_id) {
             video.autoplay = true;  // 'autoplay'属性を追加
             video.playsInline = true;  // 'playsinline'属性を追加
             video.loop = true;      // 'loop'属性を追加
-            
+            maindata.className=chat.type
             maindata.appendChild(video)
 
 

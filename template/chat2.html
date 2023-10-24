@@ -4,8 +4,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/chat2.css') }}">
 {% endblock %}
 {% block content %}
+<h4>{{error}}</h4>
 <div class="chatTemp">
-    <h2>{{tpl_room_name}}</h2>
+    
     
     <div class="chatBox">
         <div class="chatMessage" id="chatMessage">

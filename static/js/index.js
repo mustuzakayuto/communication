@@ -141,13 +141,13 @@ function startsearchfunction(){
 
 const startsearch = document.getElementById('startsearch');
 startsearch.addEventListener('click', startsearchfunction);
-
+const search_Results_Page = document.getElementById("search_Results_Page")
 const pageresult = document.getElementById('pageresult');
 function Results_Page(){
     fetch('/search_Results_Page', {
         method: 'POST',
         
-        body: JSON.stringify({"search":search.value}),
+        body: JSON.stringify({"search":search_Results_Page.value}),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -173,7 +173,7 @@ function Results_Page(){
 }
 
 
-const search_Results_Page = document.getElementById("search_Results_Page")
-search_Results_Page.addEventListener("click",Results_Page)
+const getsearch_Results_Page = document.getElementById("getsearch_Results_Page")
+getsearch_Results_Page.addEventListener("click",Results_Page)
 startEmotionDetection()
 rerod()

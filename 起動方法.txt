@@ -2,8 +2,10 @@
     1:インストール
         python のインストール
             https://www.python.jp/install/windows/install.html
-        pip install -r requirements.txt
-    2:ngrok設定
+    2:ライブラリインストール
+        pip install -r requirements.txt   
+        pip install torch==2.0.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
+    3:ngrok設定
         https://www.mgo-tec.com/blog-entry-ngrok-install.html
 
 2:ウェブ起動
@@ -33,3 +35,10 @@
         https://laboratory.kazuuu.net/obtain-an-api-token-access-token-for-hugging-face/
         
         {create_image}の{token}にHugging Faceで作成した{token}を入れる
+        
+仮想環境
+    cd virtual_environment
+    python -m venv ITalk_ve
+    ITalk_ve/Scripts/Activate.ps1
+    cd ../
+    pip install -r requirements.txt   

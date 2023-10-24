@@ -1,11 +1,10 @@
-from data.get_data import get 
-from data.rm_db import rm 
-
 import config
 import sqlite3
 
 import subprocess
-from createdb import createdbpy
+from modules.createdb import createdbpy
+from data.control.get_data import get 
+from data.control.rm_db import rm 
 tables={"emo":"emotions","user":"USERS","emave":"average","img":"images"}
 def main():
     select = input('(db,start_server:start,createdbpy:cdbpy,flask):')

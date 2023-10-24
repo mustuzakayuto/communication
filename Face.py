@@ -4,20 +4,23 @@ from flask import Flask, render_template, request, jsonify,Blueprint,session,red
 from fer import FER
 import pandas as pd
 import sqlite3
-import face_preservation
-import face_average
+
+
+from modules import face_preservation
+from modules import face_average
 import config
 # インスタンス化
 face = Blueprint("face",__name__)
 emotions_data_base=config.EMOTIONDATABASE
 # モデル設定
-try:
+emotion_detector = FER(mtcnn=True)
+# try:
     
-    emotion_detector = FER(mtcnn=True)
+    # emotion_detector = FER(mtcnn=True)
     
     # Load the model here
-except UnicodeDecodeError as e:
-    print("UnicodeDecodeError:", e)
+# except UnicodeDecodeError as e:
+    # print("UnicodeDecodeError:", e)
 
 # (ipアドレス:5000)/face_emotionと入力で表示
 @face.route('/face_emotion')
@@ -44,8 +47,10 @@ def upload():
     # 何か入っていれば
     if detected_faces !=[]:
         # 1つめのfaceを取得(辞書型)
+        box=detected_faces[0]['box']
         detected_faces = detected_faces[0]["emotions"]
-        
+        detected_faces["box"]=box
+        print(detected_faces)
         
         face_preservation.main(detected_faces["angry"],detected_faces["disgust"],detected_faces["fear"],detected_faces["happy"],detected_faces["sad"],detected_faces["surprise"],detected_faces["neutral"],session['username'],emotions_data_base)
     
@@ -91,7 +96,7 @@ def average():
             "maxface":maxface
                 }  
     if maxface != 0:
-        face_preservation.main2(result["angry"],result["disgust"],result["fear"],result["happy"],result["sad"],result["surprise"],result["neutral"],"data/emotionaverage.db",name)
+        face_preservation.main2(result["angry"],result["disgust"],result["fear"],result["happy"],result["sad"],result["surprise"],result["neutral"],config.EMOTIONAVERAGEDATABASE,name)
     print(result)
     # データ削除
     # import face初期化
