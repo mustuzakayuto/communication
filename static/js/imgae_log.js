@@ -60,6 +60,7 @@ function dl_img(event){
     
     var imagename=event.target.value
     var imagenamelist=imagename.split("/")
+    console.log(imagename)
     imagename=imagenamelist[imagenamelist.length-1]
     console.log(imagename)
     fetch('/download_img', {

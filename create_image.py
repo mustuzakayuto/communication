@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, jsonify,Blueprint, session, redirect,send_file
-import create_image3
-import google_translation
+from modules import create_image3
+from modules import google_translation
+from modules import time_change
 
 import time
 import config
 import sqlite3
-import time_change
 import uuid
 
 # インスタンス化
@@ -51,14 +51,10 @@ def imagelog():
 @create_imgae.route('/download_img' ,methods=['POST'])
 def download_img():
     downloadFileName = request.json['imgname']
-    png_file_path = 'static\\images\\create\\'+downloadFileName
-
+    png_file_path = 'static/images/create/' + downloadFileName
     
-    # send_file(png_file_path, as_attachment=True, download_name=filename)
-    # send_file関数を使用してPNGファイルを送信します
-    return send_file(png_file_path, as_attachment = True, \
-        attachment_filename=downloadFileName, \
-        mimetype = "image/png")
+    # ファイルをダウンロードとして提供
+    return send_file(png_file_path, as_attachment=True)
 
         
 @create_imgae.route('/image' ,methods=['POST'])

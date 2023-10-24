@@ -45,6 +45,8 @@ function facechange(facedata){
 var average = document.getElementById("average")
 function endEmotionDetection() {
     activeVideo = false;
+    var context = canvas.getContext('2d');
+    context.clearRect(0, 0, 10000, 10000);
     stream.getTracks().forEach(track => {
         track.stop();
     });
@@ -113,10 +115,11 @@ async function startEmotionDetection() {
         function captureFrame() {
             if (frameTime % frameRate === 0) {
                 console.log(frameTime)
-                const context = canvas.getContext('2d');
+                var context = canvas.getContext('2d');
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
                 const frame = canvas.toDataURL('image/png');
-
+                
                 fetch('/upload', {
                     method: 'POST',
                     body: JSON.stringify({ frame }),

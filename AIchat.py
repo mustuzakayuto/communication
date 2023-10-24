@@ -1,47 +1,50 @@
-from flask import Flask, render_template, request, jsonify,Blueprint ,session
+# 必要なライブラリのインポート
+from flask import Flask, render_template, request, jsonify, Blueprint, session, redirect
 import requests
 import os
 import json
+
+# APIエンドポイントのURLとヘッダー設定
 url = "https://api-mebo.dev/api"
 headers = {'content-type': 'application/json'}
-# miiboの設定(api)
-# api_key = "api_key"
-# agent_id = "agent_id"
 
-
-
+# config.json ファイルのパスを設定
 if os.path.isfile("../config.json"):
-    tag=".."
+    config_path = ".."
 else:
-    tag="."
-tag="."
-# ITALKエージェントを設定
+    config_path = "."
 
+# ITALKエージェントの設定 (config.json ファイルから取得)
+config_file = open(config_path + "/config.json", "r")
+config_data = json.load(config_file)
+api_key = config_data["agent"]["key"]
+agent_id = config_data["agent"]["id"]
 
-json_open = open(tag+"/config.json","r")
-json_load = json.load(json_open)
-api_key = json_load["agent"]["key"]
-agent_id = json_load["agent"]["id"]
-# インスタンス化 (変数名と文字列は同じに)
-aichat = Blueprint("aichat",__name__)
+# ブループリント（Blueprint）のインスタンス化
+aichat = Blueprint("aichat", __name__)
 
-# 関数と文字列の名前は同じに
+# チャット画面表示用のルート
 @aichat.route('/chat_index')
 def chat_index():
-    return render_template('ai_chat.html')
+    # セッションにユーザーが存在するか確認
+    if "username" in session:
+        return render_template('ai_chat.html')
+    else:
+        # ユーザーがログインしていない場合はログインページにリダイレクト
+        return redirect("/login")
 
-# エラー対策
+# エラーハンドラー
 @aichat.errorhandler(500)
 def internal_server_error(e):
     return "Internal Server Error", 500
 
-# フォームからの関数
+# チャットフォームからのリクエストを処理
 @aichat.route('/chat', methods=('GET', 'POST'))
 def chat():
     if request.method == 'POST':
         inputdata = request.json['inputdata']
-        if inputdata =="":
-            return jsonify({"result":"質問に文字を入れてください"})
+        if inputdata == "":
+            return jsonify({"result": "質問に文字を入れてください"})
         
         item_data = {
             "api_key": api_key,
@@ -49,11 +52,13 @@ def chat():
             "utterance": inputdata,
             "uid": "ユーザ識別子"
         }
-        print(item_data)
-        r = requests.post(url,json=item_data,headers=headers)
-        print(r)
-        print(agent_id,api_key)
-        result = "回答: "+r.json()["bestResponse"]["utterance"]
-        return jsonify({"result":result})
+
+        # チャットボットAPIにリクエストを送信
+        r = requests.post(url, json=item_data, headers=headers)
+        
+        # レスポンスを取得し、回答を抽出
+        result = "回答: " + r.json()["bestResponse"]["utterance"]
+        return jsonify({"result": result})
+    
     elif request.method == 'GET':
-        return "getを受け取りました"
+        return "GETリクエストを受け取りました"

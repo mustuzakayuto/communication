@@ -1,44 +1,45 @@
 {% extends "base2.html" %}
-{% block content %}
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
-<main class="container">
-  
-  
-  <div class="row">
-    <div class="account col-2">
-        <h2>キーワード検索</h2>
-        <input type="text" id="search_Results_Page">
-        <button id="getsearch_Results_Page">検索</button><br>
-        <div id="pageresult">
+{% block content %}
 
-        </div>
-    </div>
+  <div class="container">
     
     
-    <div class="col-4">
-      <div class="h-25">
-        <h2>話題生成</h2>
-        <h5 id="topic"></h5>
-      </div>
-      <button id="startButton">start</button>
-    </div>
-    <div class="col-3">
-      <div class="h-25">
-        <h2>関連検索</h2>
-        <input type="text" id="search">
-        <button id="startsearch">検索</button>
-        <div id="result">
+    <div class="row">
+      <div class="account col-2">
+          <h2>キーワード検索</h2>
+          <input type="text" id="search_Results_Page">
+          <button id="getsearch_Results_Page">検索</button><br>
+          <div id="pageresult">
 
-        </div>
+          </div>
       </div>
       
-    </div>
       
-    
-    <div id="content" class="col-3"></div>
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+      <div class="col-4">
+        <div class="h-25">
+          <h2>話題生成</h2>
+          <h5 id="topic"></h5>
+        </div>
+        <button id="startButton">start</button>
+      </div>
+      <div class="col-3">
+        <div class="h-25">
+          <h2>関連検索</h2>
+          <input type="text" id="search">
+          <button id="startsearch">検索</button>
+          <div id="result">
+
+          </div>
+        </div>
+        
+      </div>
+        
+      
+      <div id="content" class="col-3"></div>
+      <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    </div>
   </div>
-</main>
 {% endblock %}
