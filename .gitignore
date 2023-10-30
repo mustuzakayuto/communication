@@ -10,4 +10,5 @@ cache/
 news.py
 create.py
 
-virtual_environment/
+ITalk_ve/
+ITalk_ve.zip

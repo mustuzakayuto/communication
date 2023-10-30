@@ -7,6 +7,10 @@
             pip install -r requirements.txt   
             pip install torch==2.0.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
         b:仮想環境
+            Google Drive からダウンロード
+                https://drive.google.com/u/4/uc?id=1KMGSwsZmKglvaKUkZSCqCRQkdGQglaL1&export=download
+            virtual_environmentフォルダーにダウンロードしたものを入れる
+            
             python unzip_ve.py 
             virtual_environment/ITalk_ve/Scripts/Activate.ps1
 
