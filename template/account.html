@@ -5,6 +5,7 @@
 {% block content %}
 
 <h1>アカウント情報</h1>
+<a href="/logout">ログアウト</a>
 <div class="half">
     <p class="tag">ユーザーネーム</p>
     <p id="name"></p>
@@ -13,7 +14,7 @@
     <p class="tag">ユーザーメールアドレス</p>
     <p id="mail"></p>
 </div>
-<form action="{{ url_for('user.delete_user') }}" method="post">
+<form action="/delete_user" method="post">
     <label for="">パスワード</label>
     <input type="password" name="password" id="">
     <button id="remove">アカウント削除</button>

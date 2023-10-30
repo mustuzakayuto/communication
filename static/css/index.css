@@ -5,15 +5,15 @@ body{
     
     background-image: url("../images/sky_image.png");
     background-size:cover;
-    background-repeat: no-repeat;
-    min-height: 100%;
+    /* background-repeat: no-repeat; */
+    
     
 }
 #search{
-    width: 100px;
+    width: 80%;
 }
 #search_Results_Page{
-    width: 150px;
+    width: 80%;
 }
 
 .left{
@@ -30,4 +30,23 @@ body{
     
     overflow: scroll;
     height: 500px;
+}
+@media (max-width:1000px){
+    .Feature{
+        width: 50%;
+    }
+}
+@media  (max-width:500px) {
+    .Feature{
+        width: 100%;
+    }
+    #pageresult{
+        height: 200px;
+    }
+    #search_Results_Page{
+        width: 50%;
+    }
+    #search{
+        width: 50%;
+    }
 }

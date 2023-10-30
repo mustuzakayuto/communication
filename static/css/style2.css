@@ -1,11 +1,13 @@
 .menu {
     display: flex;
     margin: 0 10px;
-    /* width: 50%; */
+    width: 50%;
     margin: 0 auto;
-    max-width: 800px;
 }
-
+.menu p{
+    padding: 0 5px;
+    margin: 10px 0;
+}
 .menu a{
     display: block;
     font-size: 20px;
@@ -14,8 +16,38 @@
     padding: 5px 5px;
     margin: 0 10px;
 }
+@media  (max-width:1000px) {
+    .menu{
+        width: 75%;
+    }
+    
 
+}
+@media  (max-width:600px) {
+    .menu{
+        width: 100%;
+    }
+    .menu a{
+        font-size: 15px;
+    }
+    
 
+}
+@media  (max-width:480px) {
+    .menu{
+        width: 100%;
+    }
+    .menu a{
+        padding: 2px 0px;
+        margin: 0 0px;
+        font-size: 12px;
+    }
+    .menu p{
+        padding: 0;
+        width: 20%;
+    }
+
+}
 
 .menu p:hover{
     background-color: #A4C520;

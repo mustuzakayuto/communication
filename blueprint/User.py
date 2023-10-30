@@ -2,10 +2,12 @@ from flask import (
     Blueprint, flash, redirect, render_template, request, session, url_for,jsonify
 )
 from werkzeug.security import check_password_hash, generate_password_hash
+import re
 
-from . import database
+from modules import database
 import hashlib
-import chat
+from . import Chat
+import config
 # インスタンス化
 bp = Blueprint('user', __name__)
 
@@ -32,7 +34,7 @@ def auth():
         
         # SHA-256でハッシュ化 (暗号化)
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
-        db = database.get_db()
+        db = database.get_db(config.DATABASE)
 
         user = db.execute(
             "SELECT * FROM USERS WHERE USERNAME = ?", (username, )
@@ -82,8 +84,8 @@ def delete_user():
         password = request.form['password']
         # SHA-256でハッシュ化 (暗号化)
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
-        db = database.get_db()
-
+        db = database.get_db(config.DATABASE)
+        
         user = db.execute(
             "SELECT * FROM USERS WHERE USERNAME = ?", (username, )
         ).fetchone()
@@ -95,9 +97,10 @@ def delete_user():
         else:
             if 'username' in session:
                 username = session['username']
-                db = database.get_db()
+                db = database.get_db(config.DATABASE)
                 db.execute("DELETE FROM USERS WHERE USERNAME = ?", (username,))
                 db.commit()
+                
                 session.clear()
                 flash(f'ユーザー「{username}」を削除しました')
     return redirect(url_for('index'))
@@ -105,11 +108,11 @@ def delete_user():
 
 
 
-import re
+
 # ユーザ登録
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
-    chat.regist()
+    Chat.regist()
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -120,7 +123,7 @@ def register():
             return render_template('test03.html',error="特殊文字を入力しないでください")
         # SHA-256でハッシュ化
         password = hashlib.sha256(password.encode("utf-8")).hexdigest()
-        db = database.get_db()
+        db = database.get_db(config.DATABASE)
         user = db.execute(
             "SELECT * FROM USERS WHERE USERNAME = ?", (username, )
         ).fetchone()

@@ -1,6 +1,6 @@
 .time{
     font-size: 0.8em;
-    margin-top: 100px;
+    
 }
 .show-img{
     width: 250px;
@@ -9,4 +9,61 @@
 .show-video{
     width: 250px;
     height: 250px;
+}
+@media  (max-width:2000px) {
+    
+}
+@media  (max-width:1000px) {
+    .chatMessage p span {
+        font-size: 15px;
+    }
+    .time{
+        font-size: 1em;
+    }
+    .show-img{
+        width: 125px;
+        height: 125px;
+    }
+    
+    
+}
+@media  (max-width:800px) {
+    .chatMessage p span {
+        font-size: 10px;
+    }
+    .time{
+        font-size: 0.5em;
+    }
+    .show-img{
+        width: 100px;
+        height: 100px;
+    }
+    
+    
+}    
+
+@media   (max-width:400px) {
+    .chatMessage p span {
+        font-size: 10px;
+    }
+    .time{
+        font-size: 0.5em;
+    }
+    .show-img{
+        width: 60px;
+        height: 60px;
+    }
+    .chatBox input[type="submit"]{
+        width: 70%;
+    }
+    .chatBox input[type="text"]{
+        width: 100%;
+    }
+    .translation{
+        font-size: 10px;
+
+    }
+    .time{
+        font-size: 8px;
+    }
 }

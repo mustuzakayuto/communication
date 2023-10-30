@@ -5,7 +5,7 @@ body{
     
     background-image: url("../images/sky_image.png");
     background-size:cover;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
     min-height: 100%;
     
 }
@@ -46,4 +46,10 @@ body{
 #startcreate{
     width: 200px;
     height: 50px;
+}
+@media  (max-width:500px) {
+    .Feature{
+        width: 100%;
+        padding-bottom: 100px;
+    }
 }

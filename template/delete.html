@@ -1,7 +1,7 @@
 {% extends "base2.html" %}
 {% block content %}
 <h1>削除</h1>
-<form action="{{ url_for('user.delete_user') }}" method="post">
+<form action="/delete_user" method="post">
     <div>
       <label for="user">ユーザーネーム</label><br>
       <input type="text" name="username" id="user" required>

@@ -2,30 +2,80 @@
 Flask
     app.py
         mainプログラム
+    Chat.py
+        ユーザー同士のchat
+    Create_Image.py
+        画像生成
+    Re_Set_Password.py
+        パスワード再発行
     Face.py
         顔の表情
-    user.py
+    User.py
         ユーザー設定
         login/user.py
     AIchat.py
+        AIと会話
     
 プログラム
-    config.py
-        データベースの場所などの登録
-    トピック収集.py
-    アカウント数.py
-    表情解析.py
-    create_db.py
-        初期化
-        data/create_db.py
+    ./
+        config.py
+            データベースの場所などの登録
+
+    ./modules/
+        get_topic.py
+            現在検索されているtopicを取得
+
+        google_translation.py
+            翻訳
+
+        mail.py
+            パスワード再発行用mail送信
+
+        face_average.py
+            平均情報を取得
+        face_preservation.py
+            data baseに書き込み
+
+    ./data/create/
+        create_db.py
+            data base作成
+        create_db.py
     
-    database.py
-        データベースの取得
+    
 
 
 data 
     config.json
         [api関連,token]の設定
-    user.db
-        データベースファイル
-        data/user.db
+        agent[key,id]
+        create_image[token]
+    data/database/
+        ファイルpath        ・テーブル名
+
+        user.db             ・USERS
+            データベースファイル
+            USERS{USERNAME,PASSWORD,USEREMAIL}
+            
+            
+        chattest.db         ・user・chat・chatmess
+            chat関連データベースファイル
+
+            user{id,name,password,nickname}
+
+            chat{id,user_id1,user_id2,room,is_group}
+
+            chatmess{id,chat_id,to_user,from_user,message,time,type}
+
+        emotions.db         ・emotions
+            face情報一時保存
+
+            emotions{id,angry,disgust,fear,happy,sad,surprise,neutral,user_name}
+
+        emotionaverage.db   ・average
+            faceの平均を保存
+
+            average{id,angry,disgust,fear,happy,sad,surprise,neutral,user_name}
+        images.db           ・images
+            画像生成用のデータベースファイル
+
+            images{id,image_name,user_name,prompt,time}        
