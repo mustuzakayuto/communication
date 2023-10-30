@@ -1,12 +1,15 @@
+.Feature{
+    width: 50%;
+}
 video {
-    width: 40%;
+    width: 100%;
     height: auto;
     transform: scaleX(-1);
-    
+    /* display: none; */
 }
 #canvas{
-    width: 40%;
-    height: 100%;
+    width: 100%;
+    height: auto;
     transform: scaleX(-1);
     display: none;
 }
@@ -14,9 +17,7 @@ h1{
     width: 250px;
     background-color: white;
 }
-.result{
-    padding-left: 250px;
-}
+
 .result p {
     background-color: white;
     font-size: 170%;
@@ -41,4 +42,24 @@ body{
 #average h3{
     background-color: white;
     width: fit-content
+}
+@media  (max-width:500px) {
+    
+    .Feature{
+        height: 100%;
+        width: 50%;
+        margin-bottom: 20px;
+        
+    }
+    .result p{
+        font-size:15px;
+        width: 65%;
+        display: inline-block;
+        
+    }
+    
+    h3{
+        font-size: 25px;
+    }
+    
 }

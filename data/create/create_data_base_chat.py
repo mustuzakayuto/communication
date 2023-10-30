@@ -13,7 +13,8 @@ def main():
         CREATE TABLE IF NOT EXISTS user (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
-            password TEXT
+            password TEXT,
+            nickname TEXT
         )
     ''')
 

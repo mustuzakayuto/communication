@@ -7,7 +7,7 @@ import datetime
 import os
 import re
 import uuid
-
+from modules import database
 from modules import google_translation
 
 # サポートする国のリスト
@@ -18,37 +18,43 @@ country = ["None", "en", "ja", "es", "pt", "de", "fr", "it", "ru", "ar", "tr", "
 # ブループリント（Blueprint）のインスタンス化
 chat = Blueprint("chat", __name__)
 chat_data_base = config.CHATDATABASE
-
-# チャット情報をデータベースから取得してリストに格納
-conn = sqlite3.connect(chat_data_base)
-c = conn.cursor()
-
-# チャットルーム一覧を取得
-c.execute("select id, room from chat")
 chat_list = [[0, None]]
+def setup():
+    global chat_list
+    # チャット情報をデータベースから取得してリストに格納
+    conn = sqlite3.connect(chat_data_base)
+    
+    c = conn.cursor()
 
-for id, room in c.fetchall():
-    chat_list.append([[id, room]])
-    print([[id, room]])
-print(chat_list)
+    # チャットルーム一覧を取得
+    c.execute("select id, room from chat")
+    
 
-# チャットメッセージを取得
-c.execute("select chat_id, message from chatmess")
+    for id, room in c.fetchall():
+        chat_list.append([[id, room]])
+        print([[id, room]])
+    print(chat_list)
 
-for chat_id, message in c.fetchall():
-    print(chat_id)
-    chat_list[chat_id].append(message)
-print(len(chat_list[1]) - 1)
+    # チャットメッセージを取得
+    c.execute("select chat_id, message from chatmess")
 
+    for chat_id, message in c.fetchall():
+        print(chat_id)
+        chat_list[chat_id].append(message)
+    print(len(chat_list) - 1)
+    c.close()
+setup()
 # パスワードをハッシュ化する関数
 def cash(password):
     password = hashlib.sha256(password.encode("utf-8")).hexdigest()
     return password
 
-# ログイン画面を表示
-@chat.route("/celchat")
-def jump():
-    return redirect("/login2")
+# ログイン画面表示
+@chat.route("/login2")
+def login_get():
+    if "user_id" in session:
+        return render_template("set_nickname.html",username=session["user_name"])
+    return render_template("login2.html")
 
 # ユーザーリストを表示
 @chat.route("/userlist2")
@@ -59,9 +65,9 @@ def userlist():
         my_id = session["user_id"]
         conn = sqlite3.connect(chat_data_base)
         c = conn.cursor()
-        c.execute("SELECT id, name FROM user WHERE id != ?", (my_id,))
+        c.execute("SELECT id, nickname FROM user WHERE id != ?", (my_id,))
         user_info = c.fetchall()
-        conn.close()
+        
 
         return render_template("userlist2.html", tpl_user_info=user_info)
     return redirect("/login2")
@@ -79,9 +85,9 @@ def chatroom_post(other_id):
         print(chat_id)
 
         if chat_id == None and my_id != other_id:
-            c.execute("select name from user where id = ?", (my_id,))
+            c.execute("select nickname from user where id = ?", (my_id,))
             myname = c.fetchone()[0]
-            c.execute("select name from user where id = ?", (other_id,))
+            c.execute("select nickname from user where id = ?", (other_id,))
             othername = c.fetchone()[0]
 
             room = myname + "と" + othername + "のチャット"
@@ -90,7 +96,7 @@ def chatroom_post(other_id):
             c.execute("select id from chat where (user_id1 = ? and user_id2 = ?) or (user_id1 = ? and user_id2 = ?)", (my_id, other_id, other_id, my_id))
             chat_id = c.fetchone()
 
-        conn.close()
+        
         print(chat_id)
         return redirect("/chat/{}".format(chat_id[0]))
         
@@ -153,6 +159,14 @@ def translation(chatid):
     result = {"txt": message}
     return jsonify(result)
 
+def getchat(index,chatid):
+    conn = sqlite3.connect(chat_data_base)
+    c = conn.cursor()
+    c.execute(
+        "select chatmess.to_user, chatmess.from_user, chatmess.message, user.name from chatmess inner join user on chatmess.from_user = user.id where chat_id = ?", (chatid,))
+    chat_fetch = c.fetchall()
+   
+    return chat_fetch[int(index)][2]
 # チャットリスト取得
 @chat.route("/get_chat_list/chat/<int:chatid>", methods=['POST'])
 def get_chat_list(chatid):
@@ -182,7 +196,7 @@ def get_chat_list(chatid):
 
         c.execute("select room from chat where id = ?", (chatid,))
         room_name = c.fetchone()[0]
-        c.close()
+        
         result={"data":{"chat_list":chat_info,"my_id":my_id,"type":session["country"],"len":len(chat_info)}}
         return jsonify(result)
 # チャットの更新情報を取得
@@ -218,7 +232,7 @@ def chat_get(chatid):
 
         c.execute("select room from chat where id = ?", (chatid,))
         room_name = c.fetchone()[0]
-        c.close()
+        
         return render_template("chat2.html", chat_list=chat_info, link_chatid=chatid, tpl_room_name=room_name, tpl_my_id=my_id)
     else:
         return redirect("/login2")
@@ -251,17 +265,14 @@ def chat_post(chatid):
         c.execute("insert into chatmess values(null,?,?,?,?,?,?)",
                   (chatid, to_id, my_id, chat_message,time,"text",))
         conn.commit()
-        c.close()
+        
         chat_list[chatid].append(chat_message)
         return redirect("/chat/{}".format(chatid))
     else:
         return redirect("/login2")
 
 
-# ログイン画面表示
-@chat.route("/login2")
-def login_get():
-    return render_template("login2.html")
+
 
 
 # ログインするプログラム。
@@ -276,22 +287,45 @@ def login():
     conn = sqlite3.connect(chat_data_base)
     c = conn.cursor()
     c.execute(
-        "select id from user where name = ? and password = ?", (name, password,))
+        "select id,nickname from user where name = ? and password = ?", (name, password,))
     user_id = c.fetchone()
-    conn.close()
-    print(type(user_id))
+    print(user_id[1])
+    
     if user_id is None:
         return render_template("login2.html",error="アカウントが存在しません")
     else:
         session['user_id'] = user_id[0]
+        session["user_name"]=user_id[1]
         return redirect("/userlist2")
-
+    
+    
+# ニックネーム変更プログラム。
+@chat.route("/set_nickname", methods=["POST"])
+def set_nickname():
+    if "user_id" in session:
+        nickname= request.form.get("nickname")
+        userid=session['user_id']
+        if nickname=="":
+            return render_template("set_nickname.html",username=session["user_name"],error="文字列を入力してください")
+        special_characters_pattern = r'[!@#$%^&*()_+{\[\]:;<>,.?~\\|/-]'
+        if re.search(special_characters_pattern,nickname):
+            return render_template("set_nickname.html",username=session["user_name"],error="特殊文字を入力しないでください")
+        
+        conn = sqlite3.connect(chat_data_base)
+        c = conn.cursor()
+        c.execute("UPDATE user SET nickname = ? WHERE id = ?", (nickname,userid, ))
+        conn.commit()
+        session["user_name"]=nickname
+    else:
+         return render_template("set_nickname.html",error="ログインしてください")
+    return render_template("set_nickname.html",username=session["user_name"])
 
 # アカウント作成(新規ユーザー登録)プログラム
 @chat.route("/regist", methods=["POST"])
 def regist():
     name = request.form.get("username")
     password = request.form.get("password")
+    useremail = request.form.get("email")
     if name==""or password=="":
         return render_template("login2.html",error="文字列を入力してください")
     special_characters_pattern = r'[!@#$%^&*()_+{\[\]:;<>,.?~\\|/-]'
@@ -303,22 +337,27 @@ def regist():
     # 同じ名前のユーザーが既に存在するか確認
     c.execute("SELECT id FROM user WHERE name = ?", (name,))
     existing_user = c.fetchone()
+    
 
     # 既存のユーザーが存在する場合
     if existing_user:
-        print("同じ名前のユーザーが既に存在します。登録できません。")
+        return render_template("login2.html",error="アカウントが存在します")
+    
     else:
-        c.execute("insert into user values(null,?,?)", (name, password))
+        c.execute("insert into user values(null,?,?,?)", (name, password,name))
         conn.commit()
-    conn.close()
+    
     return redirect("/login2")
-
 
 # ログアウト
 @chat.route("/logout2")
 def logout():
-    session.pop('user_id', None)
+    if "user_id" in session:
+        session.pop("user_id", None)
+        return redirect("/login2")
+    
     return redirect("/login2")
+        
 
 
 # 画像アップロード処理

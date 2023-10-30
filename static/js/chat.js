@@ -111,6 +111,7 @@ function displayChatList(chatList,tpl_my_id) {
             translation.addEventListener('click', translationtxt);
             translation.innerText="翻訳"
             translation.value=chat.message
+            translation.className="translation"
             
             var maindata = document.createElement("span");
             maindata.innerText=`${chat.fromname}: ${chat.message}`;
@@ -206,7 +207,7 @@ function translationtxt(event){
     var txt = innerText.split(":")[1]
     var id = target.querySelector('span').getAttribute('id')
     console.log(id)
-    
+    console.log(location.pathname)
     fetch('/translation'+location.pathname, 
         {
             method: 'POST',

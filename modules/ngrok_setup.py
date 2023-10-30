@@ -12,11 +12,22 @@ def setup(port):
         ngrok_yml_contents = ngrok_yml_file.readlines()
 
     # ngrok_yml_contentsにファイルの内容が格納されます
-    print(ngrok_yml_contents)
+    domain=input("domain name:")
+    if not "tunnels" in ngrok_yml_contents:
+        
+        ngrok_yml_contents.append("tunnels:\n")
+        ngrok_yml_contents.append("  myapp:\n")
+        ngrok_yml_contents.append("    addr:\n")
+        ngrok_yml_contents.append("    proto: http\n")
+        ngrok_yml_contents.append("    hostname: \n")
+
+        
+        
+            
 
 
     with open(ngrok_yml_path, "w") as ngrok_yml_file:
-        domain=input("domain name:")
+        
         for txt in ngrok_yml_contents:
             if "addr" in txt:
                 txt = "    addr: "+str(port)+"\n"

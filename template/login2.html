@@ -24,6 +24,24 @@
 
 
 </div>
+<h1>ウィンドウの幅と高さ</h1>
+    <p id="outerWidth"></p>
+    <p id="outerHeight"></p>
+    
 
+    <script>
+    
+    var width = document.getElementById("outerWidth")
+    var Height = document.getElementById("outerHeight")
+    
+    function resizeWindow(){
+        width.innerText=window.outerWidth
+        Height.innerText=window.outerHeight
+    }
+    
+    window.onresize = resizeWindow;
+    resizeWindow()
+    
+    </script>
 
 {% endblock %}

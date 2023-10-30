@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="login">
+    <h2>{{error}}</h2>
+    <h2>{{username}}</h2>
+    <div class="loginForm">
+        <form action="/set_nickname" method="POST">
+            <p><input type="text" name="nickname" placeholder="nickname"></p>
+            <p><input type="submit" value="変更"></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

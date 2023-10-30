@@ -362,9 +362,13 @@ body {
 
 
 /* ヘッダー部分 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-header {
+.container {
     background-color: #CE579B;
-    border-bottom: solid 5px #555555;
+    
+}
+.menu {
+  background-color: #CE579B;
+
 }
 
 header h1 {
@@ -629,4 +633,96 @@ header h1 {
 }
 #ChatText{
     padding-left: 10px;
+}
+@media  (max-width:1300px) {
+  .menu a{
+    font-size: 15px;
+    padding: 20px 5px;
+    width: 100px;
+  }
+  .roomCard{
+    width: 50%;
+  }
+  .roomCard .roomName{
+    font-size: 20px;
+  }
+  .roomCard input{
+    font-size: 12px;
+  }
+  .userCard{
+    width: 50%;
+  }
+  .userCard .roomName{
+    font-size: 20px;
+  }
+  .userCard input{
+    font-size: 12px;
+  }
+}
+@media  (max-width:800px) {
+  main{
+    margin: 0;
+  }
+  .loginForm{
+    margin: 30px;
+  }
+  .loginForm input[type="text"]{
+    width: 100%;
+  }
+  .loginForm input[type="password"]{
+    width: 100%;
+  }
+  .menu a{
+    font-size: 10px;
+    padding: 20px 5px;
+    width: 50px;
+  }
+  .login{
+    display:block ;
+    width: 100%;
+  }
+}
+@media  (max-width:500px) {
+  main{
+    margin: 0;
+  }
+  .loginForm{
+    margin: 30px;
+  }
+  .login{
+    display:block ;
+    width: 100%;
+  }
+  .menu a{
+    font-size: 10px;
+    padding: 20px 5px;
+    width: 50px;
+  }
+  .roomCard{
+    width: 100%;
+  }
+  .roomCard .roomName{
+    font-size: 20px;
+  }
+  .roomCard input{
+    font-size: 12px;
+  }
+  .userCard{
+    width: 100%;
+  }
+  .userCard .roomName{
+    font-size: 20px;
+  }
+  .userCard input{
+    font-size: 12px;
+  }
+  .chatBox{
+    height: 100%;
+  }
+  .chatMessage{
+    height: 350px;
+  }
+  .dataupload{
+    width: 200px;
+  }
 }

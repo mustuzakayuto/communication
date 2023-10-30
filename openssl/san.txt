@@ -1,1 +1,0 @@
-subjectAltName = DNS:mytest.example.com, IP:172.16.23.24

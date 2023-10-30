@@ -1,0 +1,6 @@
+{% extends "base2.html" %}
+{% block content %}
+{% for path in paths %}
+    <a href={{path}}>{{path}}</a><br>
+{% endfor %}
+{% endblock %}
