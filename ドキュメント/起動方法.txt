@@ -7,24 +7,16 @@
             pip install -r requirements.txt   
             pip install torch==2.0.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
         b:仮想環境
+            Google Drive からダウンロード
+                https://drive.google.com/u/4/uc?id=1KMGSwsZmKglvaKUkZSCqCRQkdGQglaL1&export=download
+            virtual_environmentフォルダーにダウンロードしたものを入れる
+
             python unzip_ve.py 
             virtual_environment/ITalk_ve/Scripts/Activate.ps1
 
     3:ngrok設定
         https://www.mgo-tec.com/blog-entry-ngrok-install.html
-
-2:ウェブ起動
-    python app.py
-    起動すると(Do you want to set the DOMAIN)と聞かれさらに(y:n)を聞かれてyを入力するとドメイン名を指定portはappのstartserver関数の1番目で変更可能
-    説明{
-        非公開
-            app.run()は本人のみ
-        公開
-            app.run(host='0.0.0.0', port=5000)は同じWi-Fiにいる人もアクセス可能
-                (表情解析は実行できない{httpsではないためセキュルティー上ロックがかかる})
-    }
-
-3:API_key&API_id設定
+2:API_key&API_id設定
     現在のフォルダーのconfig.jsonの設定
     AIと会話
         https://qiita.com/maKunugi/items/14f1b82a2c0b6fa5c202
@@ -40,6 +32,12 @@
         https://laboratory.kazuuu.net/obtain-an-api-token-access-token-for-hugging-face/
         
         {create_image}の{token}にHugging Faceで作成した{token}を入れる
+3:ウェブ起動
+    python app.py
+    起動すると(Do you want to set the DOMAIN)と聞かれさらに(y:n)を聞かれてyを入力するとドメイン名を指定portはappのstartserver関数の1番目で変更可能
+    
+
+
         
 仮想環境
     cd virtual_environment
