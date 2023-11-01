@@ -7,7 +7,7 @@ from logging import FileHandler, WARNING
 
 # 他のカスタムモジュールのインポート
 from blueprint import User
-from blueprint import Face
+from blueprint import Face2
 from blueprint import AIchat
 from blueprint import Create_Image
 from blueprint import Chat
@@ -16,7 +16,6 @@ from blueprint import Re_Set_Password
 # 他のPythonプログラムのインポート
 from modules import get_topic
 from modules import search
-from modules import ngrok_setup
 
 # Flaskアプリケーションのインスタンス化
 app = Flask(__name__)
@@ -26,7 +25,7 @@ app.static_folder = 'static'  # 静的ファイル（CSS、JavaScriptなど）�
 
 # カスタムモジュールとBlueprintの登録
 app.register_blueprint(User.bp)
-app.register_blueprint(Face.face)
+app.register_blueprint(Face2.face)
 app.register_blueprint(AIchat.aichat)
 app.register_blueprint(Create_Image.create_imgae)
 app.register_blueprint(Chat.chat)
@@ -94,16 +93,17 @@ def show_url_paths():
     for rule in app.url_map.iter_rules():
         output.append(str(rule))
     return output
-
+import sys
 # サーバーの起動
 def startserver(port):
-    import sys
-    conf.get_default().auth_token = sys.argv[1]
     
-    public_url = ngrok.connect(port)
+    conf.get_default().auth_token = sys.argv[2]
+    
+    public_url = ngrok.connect(port,hostname=sys.argv[3])
     print(f"ngrok URL: {public_url}")
     app.run(port=port)
     
 
 if __name__ == '__main__':
-    startserver(5000)
+    # app2.py port token hostname
+    startserver(sys.argv[1])
