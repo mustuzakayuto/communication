@@ -42,6 +42,9 @@ app.logger.addHandler(F_H)
 @app.route('/')
 def index():
     return render_template('index.html')
+@app.route('/ocr')
+def ocr():
+    return render_template('ocr.html')
 
 # ファビコンの表示
 @app.route('/favicon.ico')
