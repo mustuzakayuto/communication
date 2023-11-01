@@ -43,6 +43,7 @@
 }    
 
 @media   (max-width:400px) {
+    
     .chatMessage p span {
         font-size: 10px;
     }
@@ -54,16 +55,27 @@
         height: 60px;
     }
     .chatBox input[type="submit"]{
-        width: 70%;
+        width: 100%;
     }
     .chatBox input[type="text"]{
         width: 100%;
+    }
+    .chatBox input[type="file"]{
+        height: 50px;
+    }
+    #country-selector{
+        height: 50px;
+        width: 50%;
     }
     .translation{
         font-size: 10px;
 
     }
+    
     .time{
         font-size: 8px;
+    }
+    .chatBox{
+        width: 100%;
     }
 }
