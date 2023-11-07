@@ -1,6 +1,10 @@
 const createimage = document.getElementById('PROMPT');
 const Result3 = document.getElementById("imgcreateresult")
 const showMODEL = document.getElementById('show_MODEL_ID');
+const nomal_element = document.getElementById("normal")
+const anima_element = document.getElementById("anima")
+const real_element = document.getElementById("real")
+
 var MODEL_ID = "normal"
 console.log(MODEL_ID)
 setMODEL()
@@ -20,7 +24,18 @@ function real(){
     setMODEL()
 }
 function setMODEL(){
-    showMODEL.innerHTML = MODEL_ID
+    nomal_element.style.backgroundColor="#ffffff"
+    anima_element.style.backgroundColor="#ffffff"
+    real_element.style.backgroundColor="#ffffff"
+    if(MODEL_ID=="normal"){
+        nomal_element.style.backgroundColor="#00ffff"
+    }
+    else if(MODEL_ID=="Anime_style"){
+        anima_element.style.backgroundColor="#00ffff"
+    }else if(MODEL_ID=="real"){
+        real_element.style.backgroundColor="#00ffff"
+    }
+    
 }
 function startcreateimagefunction(){
     Result3.innerHTML="<h3>順番に生成しているのでお待ちください</h3>"

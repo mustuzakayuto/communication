@@ -4,7 +4,9 @@ import secrets
 from pyngrok import ngrok, conf
 import subprocess
 from logging import FileHandler, WARNING
-
+import base64
+import os
+import uuid
 # 他のカスタムモジュールのインポート
 from blueprint import User
 from blueprint import Face
@@ -17,6 +19,7 @@ from blueprint import Re_Set_Password
 from modules import get_topic
 from modules import search
 from modules import ngrok_setup
+from modules import ocr_program
 
 # Flaskアプリケーションのインスタンス化
 app = Flask(__name__)
@@ -43,8 +46,29 @@ app.logger.addHandler(F_H)
 def index():
     return render_template('index.html')
 @app.route('/ocr')
-def ocr():
+def ocrindex():
     return render_template('ocr.html')
+@app.route('/ocr', methods=['POST'])
+def ocr():
+    try:
+        data = request.get_json()
+        image_data = data['image_data']
+        
+        # データURLから画像データを取得
+        _, image_data = image_data.split(',', 1)
+        image_binary = base64.b64decode(image_data)
+        
+        # 画像を保存
+        path="static/images/ocr/"+str(uuid.uuid4())+".png"
+        while os.path.isfile(path):
+            path="static/images/ocr/"+str(uuid.uuid4())+".png"
+        
+        with open(path, 'wb') as f:
+            f.write(image_binary)
+        text=ocr_program.main(path)
+        return jsonify({"data":{'success': True,"text":text}})
+    except Exception as e:
+        return jsonify({"data":{'success': False, 'error': str(e)}})
 
 # ファビコンの表示
 @app.route('/favicon.ico')

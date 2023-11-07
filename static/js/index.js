@@ -110,8 +110,8 @@ function startEmotionDetection(){
     
 }
 
-const startButton = document.getElementById('startButton');
-startButton.addEventListener('click', startEmotionDetection);
+// const startButton = document.getElementById('startButton');
+// startButton.addEventListener('click', startEmotionDetection);
 
 const search = document.getElementById('search');
 const Result = document.getElementById("result")
@@ -175,5 +175,5 @@ function Results_Page(){
 
 const getsearch_Results_Page = document.getElementById("getsearch_Results_Page")
 getsearch_Results_Page.addEventListener("click",Results_Page)
-startEmotionDetection()
+// startEmotionDetection()
 rerod()

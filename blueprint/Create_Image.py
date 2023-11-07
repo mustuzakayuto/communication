@@ -25,7 +25,7 @@ def create_image_index():
     if "username" in session:
         return render_template('create_imgae.html')
     else :
-        redirect("/login")
+        return redirect("/login")
 
     
 @create_imgae.errorhandler(500)
