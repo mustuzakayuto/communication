@@ -50,11 +50,12 @@ def main(PROMPT,MODEL_ID="",init_img=None):
         "Make it look ugly with bad anatomy",
         " make it irrelevant to the topic","low quality",
         "Noise", "mosaic"
+        "nsfw", "nipples", "pubic hair"
         ]
     
     negative = ""
     for textdata in negative_prompt:
-        negative+=textdata
+        negative+=textdata+","
     negative_prompt = negative
     print(negative_prompt)
     
@@ -95,8 +96,11 @@ def main(PROMPT,MODEL_ID="",init_img=None):
 
 
     
-    
-if __name__ == "__main__":
 
+if __name__ == "__main__":
+    
     # main2("Beautiful idol",init_img="./static/images/create/512_20230914102037.png")
-    main("dog and rabbit")
+    print(main("rabbit","Anime_style"))
+    
+    # for modelid in model_paths:
+    #     print(model_paths[modelid])

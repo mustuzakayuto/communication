@@ -16,7 +16,7 @@ function startcreateimagefunction(){
         console.log(result);
         
         
-        for(var int=0;int<result.arr.img_list.length;int++) {
+        for(var int=result.arr.img_list.length-1;int>=0;int--) {
             var div = document.createElement("div")
             var img =  document.createElement("img")
             var time =  document.createElement("p")

@@ -112,7 +112,7 @@ def delete_user():
 # ユーザ登録
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
-    Chat.regist()
+    
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']

@@ -15,9 +15,9 @@
                 <h3>prompt(英語で入力)</h3>
                 <input type="text" id="PROMPT"><br>
                 <h3 id="show_MODEL_ID"></h3>
-                <button onclick="nomal()">ノーマル</button>
-                <button onclick="anima()">アニメ</button>
-                <button onclick="real()">リアリティ</button><br>
+                <button onclick="nomal()" id="normal">ノーマル</button>
+                <button onclick="anima()" id="anima">アニメ</button>
+                <button onclick="real()"  id="real">リアリティ</button><br>
                 <button id="startcreate">作成</button>
                 
                 
@@ -28,7 +28,7 @@
             </div>
             <div class="translation col-6 Feature">
                 <h2>翻訳</h2>
-                <input type="text" id="inputdata">
+                <input type="text" id="inputdata"  placeholder="翻訳したい文字列">
                 <button id="starttranslation">翻訳</button>
                 <div id="translationresult">
 
@@ -36,9 +36,7 @@
                 <button id="copy">copy</button>
                 <h2>使い方・遊び方</h2>
                 <h4>英語でプロンプトを設定して作成ボタンをクリック</h4>
-                <h4>画像を見せてもらって同じようなものを作成するや</h4>
-                <h4>例：アイス →アイスという言葉を使わずに絵をかいてもらい、<br>
-                    どれだけ近い絵が生成されるか。などの使い方</h4>
+                <h4>英語がわからない人は右側の翻訳機能を使ってください</h4>
             </div>
         </div>
     </main>

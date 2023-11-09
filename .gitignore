@@ -1,5 +1,6 @@
 static/images/create/
 static/images/chat/
+static/images/ocr/
 __pycache__/
 nginx-1.24.0/
 ngrok/
@@ -12,3 +13,4 @@ create.py
 
 ITalk_ve/
 ITalk_ve.zip
+Tesseract-OCR/

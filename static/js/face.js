@@ -103,21 +103,30 @@ function endEmotionDetection() {
         console.error(error);
     });
 }
+function getvideosize(){
+    canvas.width = video.videoWidth ;
+    canvas.height = video.videoHeight ;
+    
+}
 
 async function startEmotionDetection() {
     average.innerHTML = ""
     try {
+        
         stream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = stream;
         activeVideo = true;
         frameTime = 0;
-
+        canvas.width=180
+        canvas.height=180
+        
         function captureFrame() {
             if (frameTime % frameRate === 0) {
+                getvideosize()
                 console.log(frameTime)
                 var context = canvas.getContext('2d');
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                
+                console.log(video.width,video.height,canvas.width,canvas.height)
                 const frame = canvas.toDataURL('image/png');
                 
                 fetch('/upload', {

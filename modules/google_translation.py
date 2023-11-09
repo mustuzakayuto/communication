@@ -29,7 +29,7 @@ def translation(text,dest):
             translated = translator.translate(text, src=detected_lang, dest=dest).text
             print("検出言語: " + detected_lang_name)
             
-            print("英語語訳: " + translated)
+            print(dest+"語訳: " + translated)
             return translated
         except TypeError:
             return text

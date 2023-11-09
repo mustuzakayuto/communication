@@ -11,6 +11,7 @@
  html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
+    width: 100%;
   }
   
   /* Sections
@@ -372,7 +373,7 @@ body {
 }
 
 header h1 {
-    margin: 20px;
+    margin: 10px;
 }
 
 
@@ -672,9 +673,13 @@ header h1 {
   .loginForm input[type="password"]{
     width: 100%;
   }
-  .menu a{
+  .menu{
+    margin: 0 0;
+    
+  }
+  .menu p a{
     font-size: 10px;
-    padding: 20px 5px;
+    padding: 20px 8px;
     width: 50px;
   }
   .login{
@@ -708,7 +713,7 @@ header h1 {
     font-size: 12px;
   }
   .userCard{
-    width: 100%;
+    width: 150%;
   }
   .userCard .roomName{
     font-size: 20px;
