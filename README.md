@@ -1,1 +1,1 @@
-- [Google Colaboratory] (https://github.com/mustuzakayuto/communication/blob/communication/GoogleClab%E3%81%A7%E5%AE%9F%E8%A1%8C.ipynb)で簡単にお試しいただけるようになれますOpen in Clabのボタンから簡単に起動できます
+- [Google Colaboratory](https://github.com/mustuzakayuto/communication/blob/communication/GoogleClab%E3%81%A7%E5%AE%9F%E8%A1%8C.ipynb)で簡単にお試しいただけるようになれますOpen in Clabのボタンから簡単に起動できます
