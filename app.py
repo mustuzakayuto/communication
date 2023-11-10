@@ -1,5 +1,5 @@
 # ライブラリのインポート
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session,redirect
 import secrets
 from pyngrok import ngrok, conf
 import subprocess
@@ -20,7 +20,14 @@ from modules import get_topic
 from modules import search
 from modules import ngrok_setup
 from modules import ocr_program
-
+if not os.path.isdir("static/images/create"):
+    os.mkdir("static/images/create")
+if not os.path.isdir("static/images/chat"):
+    os.mkdir("static/images/chat")
+if not os.path.isdir("static/images/ocr"):
+    os.mkdir("static/images/ocr")
+if not os.path.isdir("static/images/streaming"):
+    os.mkdir("static/images/streaming")
 # Flaskアプリケーションのインスタンス化
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)  # ランダムなシークレットキーを生成
@@ -70,6 +77,33 @@ def ocr():
     except Exception as e:
         return jsonify({"data":{'success': False, 'error': str(e)}})
 
+@app.route('/myvideo')
+def myvideo():
+    if "user_id" in session:
+        return render_template('video.html',id=session["user_id"])
+    return redirect("/login2")
+    
+    
+@app.route('/myvideo', methods=['POST'])
+def video_write():
+    if "user_id" in session:
+        id = session["user_id"]
+        # リクエストからデータURI形式の画像データを取得
+        data_uri = request.json['frame']
+
+        with open(f"./static/images/streaming/{id}_captured_frame.txt","w") as f:
+            f.write(data_uri)
+        return jsonify({'message': 'Image saved successfully'})
+    return jsonify({'message': 'not lgoin'})
+
+@app.route('/video/<int:id>')
+def video_view(id):
+    return render_template('videoview.html')
+@app.route('/video/<int:id>', methods=['POST'])
+def video_get(id):
+    with open(f"./static/images/streaming/{id}_captured_frame.txt","r") as f:
+        data=f.readline()
+    return jsonify({"data":data})
 # ファビコンの表示
 @app.route('/favicon.ico')
 def favicon():

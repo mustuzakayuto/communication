@@ -366,7 +366,7 @@ def imgupload(chatid):
     # URLでhttp://127.0.0.1:5000/uploadを指定したときはGETリクエストとなるのでこっち
     imagelist=['png', 'jpg',"jpeg", 'gif']
     # formでsubmitボタンが押されるとPOSTリクエストとなるのでこっち
-    allowed_extensions = set(['png', 'jpg', 'gif','mp4'])  # 許可する拡張子のリスト
+    allowed_extensions = set(['png', 'jpg',"jpeg", 'gif','mp4'])  # 許可する拡張子のリスト
     file = request.files['example']
 
     if file:
