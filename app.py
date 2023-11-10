@@ -28,6 +28,8 @@ if not os.path.isdir("static/images/ocr"):
     os.mkdir("static/images/ocr")
 if not os.path.isdir("static/images/streaming"):
     os.mkdir("static/images/streaming")
+
+
 # Flaskアプリケーションのインスタンス化
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)  # ランダムなシークレットキーを生成
