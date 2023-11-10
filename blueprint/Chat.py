@@ -289,7 +289,7 @@ def login():
     c.execute(
         "select id,nickname from user where name = ? and password = ?", (name, password,))
     user_id = c.fetchone()
-    print(user_id[1])
+    
     
     if user_id is None:
         return render_template("login2.html",error="アカウントが存在しません")
@@ -366,7 +366,7 @@ def imgupload(chatid):
     # URLでhttp://127.0.0.1:5000/uploadを指定したときはGETリクエストとなるのでこっち
     imagelist=['png', 'jpg',"jpeg", 'gif']
     # formでsubmitボタンが押されるとPOSTリクエストとなるのでこっち
-    allowed_extensions = set(['png', 'jpg', 'gif','mp4'])  # 許可する拡張子のリスト
+    allowed_extensions = set(['png', 'jpg',"jpeg", 'gif','mp4'])  # 許可する拡張子のリスト
     file = request.files['example']
 
     if file:
@@ -381,6 +381,7 @@ def imgupload(chatid):
             filename= hashfilename+str(uuid.uuid4())+file.filename
             while os.path.isfile("./static/images/chat/"+filename):
                 filename= hashfilename+str(uuid.uuid4())+file.filename
+            print("filename: "+filename)
             file.save(os.path.join('./static/images/chat', filename))
             chat_message="../static/images/chat/"+filename
             current_time = datetime.datetime.now()
