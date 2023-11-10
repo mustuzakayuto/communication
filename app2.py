@@ -4,6 +4,7 @@ import secrets
 from pyngrok import ngrok, conf
 import subprocess
 from logging import FileHandler, WARNING
+import os
 
 # 他のカスタムモジュールのインポート
 from blueprint import User
@@ -16,6 +17,15 @@ from blueprint import Re_Set_Password
 # 他のPythonプログラムのインポート
 from modules import get_topic
 from modules import search
+
+if not os.path.isdir("static/images/create"):
+    os.mkdir("static/images/create")
+if not os.path.isdir("static/images/chat"):
+    os.mkdir("static/images/chat")
+if not os.path.isdir("static/images/ocr"):
+    os.mkdir("static/images/ocr")
+    
+
 
 # Flaskアプリケーションのインスタンス化
 app = Flask(__name__)

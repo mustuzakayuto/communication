@@ -20,7 +20,12 @@ from modules import get_topic
 from modules import search
 from modules import ngrok_setup
 from modules import ocr_program
-
+if not os.path.isdir("static/images/create"):
+    os.mkdir("static/images/create")
+if not os.path.isdir("static/images/chat"):
+    os.mkdir("static/images/chat")
+if not os.path.isdir("static/images/ocr"):
+    os.mkdir("static/images/ocr")
 # Flaskアプリケーションのインスタンス化
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)  # ランダムなシークレットキーを生成
