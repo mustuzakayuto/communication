@@ -80,7 +80,7 @@ def chatroom_post(other_id):
         print(my_id)
         conn = sqlite3.connect(chat_data_base)
         c = conn.cursor()
-        c.execute("select id from chat where (user_id1 = ? and user_id2 = ?) or (user_id1 = ? and user_id2 = ?)", (my_id, other_id, other_id, my_id))
+        c.execute("select id from chat where (user_id1 = ? and user_id2 = ?) or (user_id1 = ? and user_id2 = ?)", (my_id, other_id, other_id, my_id,))
         chat_id = c.fetchone()
         print(chat_id)
 
@@ -91,9 +91,9 @@ def chatroom_post(other_id):
             othername = c.fetchone()[0]
 
             room = myname + "と" + othername + "のチャット"
-            c.execute("insert into chat values(null,?,?,?,0)", (my_id, other_id, room))
+            c.execute("insert into chat values(null,?,?,?,0)", (my_id, other_id, room,))
             conn.commit()
-            c.execute("select id from chat where (user_id1 = ? and user_id2 = ?) or (user_id1 = ? and user_id2 = ?)", (my_id, other_id, other_id, my_id))
+            c.execute("select id from chat where (user_id1 = ? and user_id2 = ?) or (user_id1 = ? and user_id2 = ?)", (my_id, other_id, other_id, my_id,))
             chat_id = c.fetchone()
 
         
@@ -110,7 +110,7 @@ def chatroom_get():
         my_id = session["user_id"]
         conn = sqlite3.connect(chat_data_base)
         c = conn.cursor()
-        c.execute("select id, room from chat where user_id1 = ? or user_id2 = ? or user_id1 = ? or user_id2 = ?", (my_id, my_id, 0, 0))
+        c.execute("select id, room from chat where user_id1 = ? or user_id2 = ? or user_id1 = ? or user_id2 = ?", (my_id, my_id, 0, 0,))
         chat_list = c.fetchall()
         print(chat_list)
         return render_template("/chatroom2.html", tpl_chat_list=chat_list)
@@ -344,7 +344,7 @@ def regist():
         return render_template("login2.html",error="アカウントが存在します")
     
     else:
-        c.execute("insert into user values(null,?,?,?)", (name, password,name))
+        c.execute("insert into user values(null,?,?,?)", (name, password,name,))
         conn.commit()
     
     return redirect("/login2")

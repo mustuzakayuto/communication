@@ -374,7 +374,7 @@ def regist():
         return render_template("login2.html",error="アカウントが存在します")
     
     else:
-        c.execute("insert into user values(null,?,?,?)", (name, password,name))
+        c.execute("insert into user values(null,?,?,?)", (name, password,name,))
         conn.commit()
     
     return redirect("/login2")
