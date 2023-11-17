@@ -1,0 +1,21 @@
+#image{
+    width: 80%;
+    height: 100%;
+
+}
+@media (max-width:2000px){
+    #image{
+        width: 50%;
+    }
+}
+@media (max-width:1000px){
+    #image{
+        width: 80%;
+    }
+}
+@media  (max-width:500px) {
+    #image{
+        width: 100%;
+    }
+    
+}

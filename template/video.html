@@ -3,13 +3,18 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/video.css') }}">
 {% endblock %}
 {% block content %}
-    <h1>{{id}}</h1>
+    <h2 id="id">{{id}}</h2>
 
     <p>This example shows you the contents of the selected part of your display.
         Click the Start Capture button to begin.</p>
     <p><button id="start">Start Capture</button>&nbsp;<button id="stop">Stop Capture</button></p>
     <video id="video" autoplay></video>
+    <h3 id="viewnum"></h3>
+    <input type="password" name="" id="password">
+    <button id="setpass">password</button>
     <br>
     <canvas id="canvas" ></canvas>
+    
     <script src="{{ url_for('static', filename='js/video.js') }}"></script>
+    
 {% endblock %}
