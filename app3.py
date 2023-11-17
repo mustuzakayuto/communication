@@ -1,5 +1,7 @@
 # ライブラリのインポート
 from flask import Flask, render_template, request, jsonify, session,redirect
+from flask_cors import CORS
+from flask_socketio import emit, SocketIO, join_room,leave_room
 import secrets
 from pyngrok import ngrok, conf
 import subprocess
@@ -7,19 +9,29 @@ from logging import FileHandler, WARNING
 import base64
 import os
 import uuid
+# Flaskアプリケーションのインスタンス化
+app = Flask(__name__)
+CORS(app, resources={r"/socket.io/*": {"origins": "*"}})
+
+app.secret_key = secrets.token_hex(16)  # ランダムなシークレットキーを生成
+app.template_folder = 'template'  # HTMLテンプレートのフォルダ設定
+app.static_folder = 'static'  # 静的ファイル（CSS、JavaScriptなど）のフォルダ設定
+sio  = SocketIO(app)
+# 他のPythonプログラムのインポート
+from modules import get_topic
+from modules import search
+from modules import ngrok_setup
+from modules import globaldata
+globaldata.Global.SocketIO=sio
 # 他のカスタムモジュールのインポート
 from blueprint import User
 from blueprint import Face
 from blueprint import AIchat
 from blueprint import Create_Image
-from blueprint import Chat
+from blueprint import Chat_ve
 from blueprint import Re_Set_Password
+sio=globaldata.Global.SocketIO
 
-# 他のPythonプログラムのインポート
-from modules import get_topic
-from modules import search
-from modules import ngrok_setup
-from modules import ocr_program
 if not os.path.isdir("static/images/create"):
     os.mkdir("static/images/create")
 if not os.path.isdir("static/images/chat"):
@@ -28,18 +40,14 @@ if not os.path.isdir("static/images/streaming"):
     os.mkdir("static/images/streaming")
 
 
-# Flaskアプリケーションのインスタンス化
-app = Flask(__name__)
-app.secret_key = secrets.token_hex(16)  # ランダムなシークレットキーを生成
-app.template_folder = 'template'  # HTMLテンプレートのフォルダ設定
-app.static_folder = 'static'  # 静的ファイル（CSS、JavaScriptなど）のフォルダ設定
+
 
 # カスタムモジュールとBlueprintの登録
 app.register_blueprint(User.bp)
 app.register_blueprint(Face.face)
 app.register_blueprint(AIchat.aichat)
 app.register_blueprint(Create_Image.create_imgae)
-app.register_blueprint(Chat.chat)
+app.register_blueprint(Chat_ve.chat)
 app.register_blueprint(Re_Set_Password.reset_pass)
 
 # 設定ファイルの読み込み
@@ -52,6 +60,53 @@ app.logger.addHandler(F_H)
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/myvideo')
+def myvideo():
+    if "user_id" in session:
+        return render_template('video.html',id=session["user_id"])
+    return redirect("/login2")
+    
+    
+@sio.on('stopvideo')
+def stopvideo(data):
+    if "user_id" in session:
+        id = session["user_id"]
+        # リクエストからデータURI形式の画像データを取得
+        
+        data_uri = data_uri = "../static/images/road_image.jpg"
+        
+        url = "stopvideo"+str(id)
+        
+        emit(url,data_uri,broadcast=True)
+@sio.on('video')
+def video(data):
+    
+    if "user_id" in session:
+        id = session["user_id"]
+        # リクエストからデータURI形式の画像データを取得
+        
+        data_uri = data['frame']
+        
+        if data["password"]=="null":
+            url = "videoid"+str(id)
+        else:
+            url = "videoid"+str(id)+"pass"+data["password"]
+        emit(url,data_uri,broadcast=True)
+@sio.on('viewstart')
+def viewstart(data):
+    
+    emit("viewstart"+str(data["id"]),"",broadcast=True)
+@sio.on('viewend')
+def viewend(data):
+    
+    emit("viewend"+str(data["id"]),"",broadcast=True)
+@sio.event
+def disconnect(sid):
+    print(f"Client disconnected: {sid}")
+@app.route('/video/<int:id>')
+def video_view(id):
+    return render_template('videoview.html',id=id)
 
 # ファビコンの表示
 @app.route('/favicon.ico')
@@ -111,7 +166,8 @@ def startserver(port,is_debug):
     # print(show_url_paths())
     
     if is_debug:
-        app.run(port=port,debug=True)
+        
+        sio.run(app,port=port,debug=True)
     else:
         print("Do you want to set the DOMAIN")
         select = input("y, n")
@@ -126,11 +182,20 @@ def startserver(port,is_debug):
         # ngrokを起動
         ngrok_process = subprocess.Popen(ngrok_command, shell=True)
         try:
-            app.run(port=port)
+            sio.run(app,port=port)
+            
                 
         except Exception as e:
             print(e)
             ngrok_process.terminate()
+def start():
+    port = int(input("port:"))
+    conf.get_default().auth_token = input("token:")
+    
+    public_url = ngrok.connect(port,hostname=input("hostname:"))
+    print(f"ngrok URL: {public_url}")
+    sio.run(app,port=port)
+
 
 if __name__ == '__main__':
     isdebug=False

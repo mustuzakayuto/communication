@@ -1,9 +1,13 @@
-
+const id = document.getElementById("id")
 const videoElem = document.getElementById("video");
 const startElem = document.getElementById("start");
 const stopElem = document.getElementById("stop");
 const canvasElem = document.getElementById("canvas")
+
+var password="null";
 var is_video = false;
+var socket = io(`https://witty-presently-hermit.ngrok-free.app/`);
+
 // Options for getDisplayMedia()
 var displayMediaOptions = {
     video: {
@@ -36,57 +40,42 @@ function stopCapture(evt) {
 
     tracks.forEach(track => track.stop());
     videoElem.srcObject = null;
+    socket.emit('stopvideo', {"id":id.innerText});
 }
+
 function uprode(){
     canvasElem.width = videoElem.videoWidth;
     canvasElem.height = videoElem.videoHeight;
     var context = canvas.getContext('2d');
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    context.drawImage(videoElem, 0, 0, canvas.width, canvas.height);
     const frame = canvas.toDataURL('image/png');
-    fetch(location.pathname, {
-        method: 'POST',
-        body: JSON.stringify({ "frame":frame }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(result => {
-        console.log(result);
-        
-    })
-    .catch(error => {
-        console.error(error);
-    });
+    socket.emit('video', {frame,"id":id.innerText,password});
 }
-
-function sleep(waitSec, callbackFunc) {
-
-    var spanedSec = 0;
-  
-    var waitFunc = function () {
-  
-        spanedSec++;
-  
-        if (spanedSec >= waitSec) {
-            if (callbackFunc) callbackFunc();
-            return;
-        }
-  
-        clearTimeout(id);
-        id = setTimeout(waitFunc, 1000);
+const passbotn = document.getElementById("setpass")
+const passwordelement = document.getElementById("password")
+function setpassfunction(){
+    password=passwordelement.value
+    passwordelement.value=""
     
-    };
-  
-    var id = setTimeout(waitFunc, 1000);
-  
 }
-function loop(){
-    sleep(3, function() {
-        if (is_video){
-            uprode();
-        }
-        loop();
-    });
-}
-loop()
+passbotn.addEventListener("click",setpassfunction)
+const viewelment = document.getElementById("viewnum")
+var viewnum=0
+viewelment.innerText=viewnum
+
+socket.on("viewstart"+id.innerText, function(data){
+    viewnum++
+    viewelment.innerText=viewnum
+});
+socket.on("viewend"+id.innerText, function(data){
+    viewnum--
+    viewelment.innerText=viewnum
+});
+const FPS = 60;
+
+
+
+setInterval(() => {
+    if (is_video)uprode()
+    
+}, 10000/FPS)

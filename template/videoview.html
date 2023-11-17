@@ -1,7 +1,12 @@
 {% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/videoview.css') }}">
+{% endblock %}
 {% block content %}
-<div id="result">
-
-</div>
+<h2 id="id">{{id}}</h2>
+<h3 id="viewnum"></h3>
+<img src="../static/images/road_image.jpg" id="image">
+<input type="password" name="" id="password">
+<button id="setpass">password</button>
 <script src="{{ url_for('static', filename='js/videoview.js') }}"></script>
 {% endblock %}

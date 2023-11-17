@@ -22,8 +22,7 @@ if not os.path.isdir("static/images/create"):
     os.mkdir("static/images/create")
 if not os.path.isdir("static/images/chat"):
     os.mkdir("static/images/chat")
-if not os.path.isdir("static/images/ocr"):
-    os.mkdir("static/images/ocr")
+
     
 
 
@@ -51,9 +50,7 @@ app.logger.addHandler(F_H)
 @app.route('/')
 def index():
     return render_template('index.html')
-@app.route('/ocr')
-def ocr():
-    return render_template('ocr.html')
+
 # ファビコンの表示
 @app.route('/favicon.ico')
 def favicon():
