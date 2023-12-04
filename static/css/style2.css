@@ -1,4 +1,12 @@
+header{
+    /* background-color: #1e90ff; */
+    background-color:#faf0e6
+}
+.main{
+    background-color: aqua;
+}
 .menu {
+
     display: flex;
     margin: 0 10px;
     width: 50%;

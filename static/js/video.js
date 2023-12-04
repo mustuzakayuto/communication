@@ -71,10 +71,31 @@ socket.on("viewend"+id.innerText, function(data){
     viewnum--
     viewelment.innerText=viewnum
 });
+let stream
+async function startEmotionDetection() {
+    
+    
+        
+    stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    videoElem.srcObject = stream;
+    activeVideo = true;
+    frameTime = 0;
+    is_video=true
+        
+        
+}
+function endEmotionDetection() {
+    stream.getTracks().forEach(track => {
+        track.stop();
+    });
+    video.srcObject = null;
+    socket.emit('stopvideo', {"id":id.innerText});
+}
+const startButton = document.getElementById('startButton');
+const endButton = document.getElementById('endButton');
+startButton.addEventListener('click', startEmotionDetection);
+endButton.addEventListener('click', endEmotionDetection);
 const FPS = 60;
-
-
-
 setInterval(() => {
     if (is_video)uprode()
     

@@ -1,6 +1,7 @@
 static/images/create/
 static/images/chat/
 static/images/ocr/
+static/images/streaming
 __pycache__/
 nginx-1.24.0/
 ngrok/

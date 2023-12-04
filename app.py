@@ -121,7 +121,7 @@ def startserver(port,is_debug):
             ngrok_setup.portset(port)
 
         # ngrokを起動するコマンド
-        ngrok_command = "ngrok start myapp"
+        ngrok_command = "ngrok start ITalk"
         
         # ngrokを起動
         ngrok_process = subprocess.Popen(ngrok_command, shell=True)

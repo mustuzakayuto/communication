@@ -1,19 +1,30 @@
 html{
     height: 100%;
 }
+
+main{
+    /* background: linear-gradient(#1999de, hsl(171, 40%, 91%)); */
+    height: 100%;
+    background:#add8e6 ;
+
+}
+
 body{
+    /* background: linear-gradient(#1999de, hsl(171, 40%, 91%)); */
     
-    background-image: url("../images/sky_image.png");
-    background-size:cover;
+    /* background-image: url("../images/sky_image.png"); */
+    /* background-size:cover; */
+    /* background-color: aqua; */
     /* background-repeat: no-repeat; */
     
+    /* background-image:  url("../images/cloud.png") */
     
 }
 #search{
-    width: 80%;
+    width: 50%;
 }
 #search_Results_Page{
-    width: 80%;
+    width: 50%;
 }
 
 .left{
@@ -29,16 +40,19 @@ body{
 #pageresult{
     
     overflow: scroll;
-    height: 500px;
+    height: 790px;
 }
 @media (max-width:1000px){
     .Feature{
         width: 50%;
     }
+    #pageresult{
+        height: 500px;
+    }
 }
 @media  (max-width:500px) {
     .Feature{
-        width: 100%;
+        /* width: 100%; */
     }
     #pageresult{
         height: 200px;

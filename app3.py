@@ -177,7 +177,7 @@ def startserver(port,is_debug):
             ngrok_setup.portset(port)
 
         # ngrokを起動するコマンド
-        ngrok_command = "ngrok start myapp"
+        ngrok_command = "ngrok start ITalk"
         
         # ngrokを起動
         ngrok_process = subprocess.Popen(ngrok_command, shell=True)
@@ -188,16 +188,17 @@ def startserver(port,is_debug):
         except Exception as e:
             print(e)
             ngrok_process.terminate()
-def start():
-    port = int(input("port:"))
-    conf.get_default().auth_token = input("token:")
+import sys
+# サーバーの起動
+def start(port):
     
-    public_url = ngrok.connect(port,hostname=input("hostname:"))
+    conf.get_default().auth_token = sys.argv[2]
+    
+    public_url = ngrok.connect(port,hostname=sys.argv[3])
     print(f"ngrok URL: {public_url}")
     sio.run(app,port=port)
-
-
 if __name__ == '__main__':
+    start(sys.argv[1])
     isdebug=False
     if input("debug-mode:(y・n):")=="y":
         isdebug=True

@@ -1,30 +1,33 @@
-html{
+
+main{
     height: 100%;
 }
 body{
     /* background-image: url(image/pexels-nubia-navarro-\(nubikini\)-385997.jpg); */
-    background-image: url("../images/pexels-nubia-navarro-(nubikini)-385997.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color:#3cb371 ;
     min-height: 100%;
     
 }
 
-h1{
+#h1{
     font-family: cursive;
     font-size: 82px;
     text-align: center;
     color: coral;
 }
 #logoin-menu{
+    font-weight:bold; 
     font-size: 36px;
     text-align: center;
-    color: #00FFFF ;
+    color: coral ;
 }
-
+#user{
+    height: 50px;
+}
 .container{
     width: 300px;
-    height: 500px;    
+    /* height: 500px;     */
+    /* height: 100%; */
     padding: 10px;
     position: absolute;
     top: 76%;
@@ -42,16 +45,23 @@ input{
     padding: 5px;
     box-sizing: border-box;
 }
-.collarwhite{
-    color: black;
-    background-color: white;
+.username{
+    color:#ffffff;
+    font-size: 20px;
+    font-weight:bold; 
 }
-.collarblue{
-    color: blue;
+.password{
+    font-size: 20px;
+    color:#ffffff;
+    font-weight:bold; 
 }
-.collarblack{
-    color: black;
+#log_in{
+    font-size: 20px;
+    white-space: nowrap;
 }
-.backwhite{
-    background-color: white;
+#newuser{
+    font-size: 20px;
+}
+#lostpassword{
+    font-size: 20px;
 }

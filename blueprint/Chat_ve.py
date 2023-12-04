@@ -204,7 +204,7 @@ def chat_get(chatid):
         c.execute("select room from chat where id = ?", (chatid,))
         room_name = c.fetchone()[0]
         
-        return render_template("chat2.html", chat_list=chat_info, link_chatid=chatid, tpl_room_name=room_name, tpl_my_id=my_id)
+        return render_template("chat_ve.html", chat_list=chat_info, link_chatid=chatid, tpl_room_name=room_name, tpl_my_id=my_id)
     else:
         return redirect("/login2")
 
@@ -252,20 +252,19 @@ def chatupload(data):
     # Extract file extension from the data URL
     file_extension = file_data_url.split(';')[0].split('/')[1]
 
-    allowed_extensions = set(['png', 'jpg', 'jpeg', 'gif', 'mp4'])
-
+    allowed_extensions = ['png', 'jpg', 'jpeg', 'gif']
     if file_extension in allowed_extensions:
         if file_extension in imagelist:
             datatype = "img"
-        elif "mp4" == file_extension:
-            datatype = "video"
+        
 
         # Decode the base64 data URL to get the binary data
-        try:
-            file_data = base64.b64decode(file_data_url.split(',')[1])
-        except Exception as e:
-            print("Error decoding base64:", e)
-            return redirect("/chat/{}".format(chatid))
+        # try:
+        
+        file_data = base64.b64decode(file_data_url.split(',')[1])
+        # except Exception as e:
+        #     print("Error decoding base64:", e)
+        #     return redirect("/chat/{}".format(chatid))
 
         # Generate a unique filename
         hashfilename = str(hashlib.sha256(str(chatid).encode("utf-8")).hexdigest())
@@ -374,7 +373,7 @@ def regist():
         return render_template("login2.html",error="アカウントが存在します")
     
     else:
-        c.execute("insert into user values(null,?,?,?)", (name, password,name))
+        c.execute("insert into user values(null,?,?,?)", (name, password,name,))
         conn.commit()
     
     return redirect("/login2")

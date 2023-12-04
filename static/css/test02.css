@@ -1,9 +1,13 @@
 /* 添加样式来美化注册页面 */
+main{
+  margin-top: 100px;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     text-align: center;
-    padding-top: 100px;
+    
   }
   h1 {
     color: #333;
@@ -15,7 +19,7 @@ body {
     align-items: center;
   }
   label{
-    width: 200px;
+    width: 150px;
     text-align: right;
     margin-right: 10px;
   }

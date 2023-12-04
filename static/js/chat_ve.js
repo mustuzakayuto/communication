@@ -241,7 +241,7 @@ const imgupload = document.getElementById("imgupload")
 const fileInput = document.getElementById("file_input_button")
 var chatid =location.href.split("/").slice(-1)[0].split("?").slice(0)[0]
 var url = "updateid"+chatid
-var socket = io(`https://witty-presently-hermit.ngrok-free.app`);
+var socket = io(``);
 socket.on(url, function(img){
     is_road = false
     display_switching()
@@ -249,8 +249,11 @@ socket.on(url, function(img){
 function chatimgupload(){
     
     if (fileInput.files.length > 0) {
-        const file = fileInput.files[0];
         const reader = new FileReader();
+
+        
+        const file = fileInput.files[0];
+        // const reader = new FileReader();
 
         // Read the contents of the file as a data URL
         reader.readAsDataURL(file);
@@ -260,6 +263,7 @@ function chatimgupload(){
             // Get the data URL representing the file
             const fileDataUrl = event.target.result;
             console.log(fileDataUrl)
+            console.log(fileDataUrl.length)
             
             // Emit the file data through the socket
             socket.emit("chatimageupload", { "fileDataUrl": fileDataUrl, "chatid": chatid });
