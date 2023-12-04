@@ -64,7 +64,8 @@ def getaccount():
 @bp.route('/member')
 def member():
     if 'username' in session:
-        return render_template('test01.html')
+        # return render_template('test01.html')
+        return redirect(url_for('user.account'))
     else:
         flash('メンバーページにアクセスするにはログインしてください')
         return redirect(url_for('user.log_in'))

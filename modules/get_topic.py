@@ -26,7 +26,7 @@ def main(keyword="None",ego="JP",pn="japan",hl="jp"):
 
 
     #データの取得
-    pytrends.build_payload(kw_list,timeframe =timeframe,geo=ego)
+    
 
     
     
@@ -34,6 +34,8 @@ def main(keyword="None",ego="JP",pn="japan",hl="jp"):
     if(keyword!="None"):
         print("関連キーワード")
         data=[]
+        pytrends = TrendReq(hl = hl+"-"+ego,tz =-540, timeout=(10, 25),retries=1)
+        pytrends.build_payload(kw_list,timeframe =timeframe,geo=ego)
         p = pytrends.related_queries()
 
         # 急上昇関連キーワード
@@ -60,5 +62,5 @@ def main(keyword="None",ego="JP",pn="japan",hl="jp"):
     # print(data)
     return data
 if __name__ =="__main__":
-    print(main("None"))
+    print(main("ウサギ"))
     

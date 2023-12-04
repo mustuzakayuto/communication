@@ -1,0 +1,2 @@
+call virtual_environment\ITalk_ve\Scripts\activate
+python app3.py 8000 2W0YY8hsBa4o59B07BeStbtqaTW_2mNsE6xc3oyGKaZBzjqH2 witty-presently-hermit.ngrok-free.app

@@ -44,6 +44,14 @@ body{
     background-color: white;
     width: fit-content
 }
+#startButton{
+    height: 100px;
+    width: 150px;
+}
+#endButton{
+    height: 100px;
+    width: 150px;
+}
 @media  (max-width:500px) {
     
     .Feature{

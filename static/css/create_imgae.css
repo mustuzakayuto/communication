@@ -3,7 +3,8 @@ html{
 }
 body{
     
-    background-image: url("../images/sky_image.png");
+    /* background-image: url("../images/sky_image.png"); */
+    background:#add8e6 ;
     background-size:cover;
     /* background-repeat: no-repeat; */
     min-height: 100%;

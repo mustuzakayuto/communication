@@ -5,19 +5,19 @@
 {% endblock %} -->
 {% block content %}
 
-<form method="POST">
+<form  method="post">
     {% for message in get_flashed_messages() %}
       <p>{{ message }}</p>
     {% endfor %}
   
     {{ form.csrf_token }}
   
-    {% for error in form.mail.errors %}
+    <!-- {% for error in form.mail.errors %}
       <p style="color:red">{{ error }}</p>
-    {% endfor %}
+    {% endfor %} -->
     {{ form.mail.label }}
     {{ form.mail(placeholder="メールアドレス", size=20, id="mail") }}
   
     <button>送信</button>
-  </form>
+</form>
 {% endblock %}

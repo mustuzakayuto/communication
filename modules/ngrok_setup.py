@@ -13,28 +13,22 @@ def setup(port):
 
     # ngrok_yml_contentsにファイルの内容が格納されます
     domain=input("domain name:")
-    if not "tunnels" in ngrok_yml_contents:
-        
-        ngrok_yml_contents.append("tunnels:\n")
-        ngrok_yml_contents.append("  myapp:\n")
-        ngrok_yml_contents.append("    addr:\n")
-        ngrok_yml_contents.append("    proto: http\n")
-        ngrok_yml_contents.append("    hostname: \n")
-
-        
-        
-            
-
+    istunnels=False
+    for data in ngrok_yml_contents:
+        if "tunnels" in data:
+            istunnels=True
 
     with open(ngrok_yml_path, "w") as ngrok_yml_file:
         
         for txt in ngrok_yml_contents:
-            if "addr" in txt:
-                txt = "    addr: "+str(port)+"\n"
-            elif "hostname" in txt:
-                txt="    hostname: "+domain+"\n"
+            
             ngrok_yml_file.write(txt)
-        
+        if not istunnels:
+            ngrok_yml_file.write("tunnels:\n")
+        ngrok_yml_file.write("  ITalk:\n")
+        ngrok_yml_file.write("    addr: "+str(port)+"\n")
+        ngrok_yml_file.write("    proto: http\n")
+        ngrok_yml_file.write("    hostname: "+domain+"\n")
 def portset(port):
         # 現在のユーザー名を取得
     current_user = os.getlogin()
@@ -53,8 +47,12 @@ def portset(port):
 
     with open(ngrok_yml_path, "w") as ngrok_yml_file:
         
-        for txt in ngrok_yml_contents:
-            if "addr" in txt:
-                txt = "    addr: "+str(port)+"\n"
+        for index in range(len(ngrok_yml_contents)):
+            print(index,type(index))            
 
-            ngrok_yml_file.write(txt)
+            
+            if "ITalk" in ngrok_yml_contents[index]:
+                print(ngrok_yml_contents[index+1])
+                ngrok_yml_contents[index+1]=f"    addr: {port} \n"
+                
+            ngrok_yml_file.write(ngrok_yml_contents[index])
