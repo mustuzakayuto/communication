@@ -280,6 +280,7 @@ function chatudatapload(){
     
     console.log(chatid)
     socket.emit("chatupload",{"chattext":ChatText.value,"chatid":chatid})
+    ChatText.value=""
 }
 chatupload.addEventListener("click",chatudatapload);
 

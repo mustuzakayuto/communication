@@ -1,4 +1,4 @@
-var socket = io(`https://witty-presently-hermit.ngrok-free.app/`);
+var socket = io(``);
 const id = document.getElementById("id")
 var viewurl = "videoid"+id.innerText
 const image_id = document.getElementById("image")
