@@ -79,7 +79,12 @@ def get_job_status():
     
     print(joblist)
     return jsonify({"joblist":joblist})
-
+@create_imgae.route('/job_pop')
+def pop_job():
+    if joblist!=[]:
+        joblist.pop(0)
+    print(joblist)
+    return jsonify({"joblist":joblist})
 @create_imgae.route('/entranslation' ,methods=['POST'])
 def entranslation():
     result = {"txt":google_translation.main(request.json['txt'])}

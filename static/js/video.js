@@ -6,7 +6,7 @@ const canvasElem = document.getElementById("canvas")
 
 var password="null";
 var is_video = false;
-var socket = io(`https://witty-presently-hermit.ngrok-free.app/`);
+var socket = io(``);
 
 // Options for getDisplayMedia()
 var displayMediaOptions = {
@@ -41,6 +41,7 @@ function stopCapture(evt) {
     tracks.forEach(track => track.stop());
     videoElem.srcObject = null;
     socket.emit('stopvideo', {"id":id.innerText});
+    is_video=false;
 }
 
 function uprode(){

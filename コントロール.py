@@ -5,18 +5,20 @@ import subprocess
 from modules.createdb import createdbpy
 from data.control.get_data import get 
 from data.control.rm_db import rm 
+import create_data_base
+
 tables={"emo":"emotions","user":"USERS","emave":"average","img":"images"}
 def main():
-    select = input('(db,start_server:start,createdbpy:cdbpy,flask):')
-    if select=="start":
-        # ターミナルで実行するコマンド
-        command = "python app.py"
-        # 新しいターミナルウィンドウを開いてコマンドを実行
-        subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", command])
-    else:
+    
         while True:
-            
-            if select=="db":
+            select = input('(db,start_server:start,createdbpy:cdbpy,flask,end):')
+            # select = input('(db,createdbpy:cdbpy,flask,end):')
+            if select=="start" or select=="start_server":
+                # ターミナルで実行するコマンド
+                command = "python app.py"
+                # 新しいターミナルウィンドウを開いてコマンドを実行
+                subprocess.Popen(["cmd.exe", "/c", "start", "cmd.exe", "/k", command])
+            elif select=="db":
                 select = input("(get,rm,wpy): ")
                 if select=="get":
                     print("data base:")
@@ -90,6 +92,8 @@ def main():
                     rm(data_base,table,username,column)
                 elif select=="wpy":
                     createdbpy()
+            elif select=="createdbpy" or select=="cdbpy":
+               create_data_base.main() 
             elif select=="flask":
                 filename=input("file_name")
                 app_name=input("app_name:")
@@ -97,7 +101,7 @@ def main():
                 createflask(filename,app_name,index_html)
             elif select=="end":
                 break
-            select = input('(db,createdbpy:cdbpy,flask,end):')
+            
 def createflask(filename,app_name,index_html):
     with open("テンプレート.py","r",encoding='utf-8') as f:
         txts=f.readlines()
