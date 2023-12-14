@@ -143,6 +143,12 @@ const startsearch = document.getElementById('startsearch');
 startsearch.addEventListener('click', startsearchfunction);
 const search_Results_Page = document.getElementById("search_Results_Page")
 const pageresult = document.getElementById('pageresult');
+function google(){
+    var url = 'https://www.google.com/search?q='+search_Results_Page.value
+    window.location.href=url
+    
+    
+}
 function Results_Page(){
     fetch('/search_Results_Page', {
         method: 'POST',
@@ -174,6 +180,7 @@ function Results_Page(){
 
 
 const getsearch_Results_Page = document.getElementById("getsearch_Results_Page")
-getsearch_Results_Page.addEventListener("click",Results_Page)
+getsearch_Results_Page.addEventListener("click",google)
+// getsearch_Results_Page.addEventListener("click",Results_Page)
 // startEmotionDetection()
 rerod()
