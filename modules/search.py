@@ -65,6 +65,7 @@ def main(keyword="None"):
     
     return result
 def main2(query):
+    
 
 
     # Google検索のURLを構築
@@ -72,7 +73,7 @@ def main2(query):
     
     # HTTP GETリクエストを送信
     response = requests.get(url)
-    
+    time.sleep(3)
     # レスポンスが成功（ステータスコード200）の場合
     if response.status_code == 200:
         # BeautifulSoupを使ってHTMLを解析
