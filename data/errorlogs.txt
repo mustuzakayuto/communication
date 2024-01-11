@@ -1,0 +1,774 @@
+Exception on /search [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\connectionpool.py", line 894, in urlopen
+    return self.urlopen(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\connectionpool.py", line 884, in urlopen
+    retries = retries.increment(method, url, response=response, _pool=self)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\util\retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded with url: /trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22%3A+%7B%22geo%22%3A+%7B%22country%22%3A+%22JP%22%7D%2C+%22time%22%3A+%222023-11-12+2023-12-12%22%2C+%22originalTimeRangeForExploreUrl%22%3A+%222023-11-12+2023-12-12%22%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22%5Cu9b3c%5Cu6ec5%5Cu306e%5Cu5203%22%7D%5D%7D%7D%2C+%22keywordType%22%3A+%22QUERY%22%2C+%22metric%22%3A+%5B%22TOP%22%2C+%22RISING%22%5D%2C+%22trendinessSettings%22%3A+%7B%22compareTime%22%3A+%222023-10-12+2023-11-11%22%7D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22language%22%3A+%22en%22%2C+%22userCountryCode%22%3A+%22JP%22%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZXkYi9ffj59sTOq-osYqKZ0_Xu3ePqlu&tz=-540 (Caused by ResponseError('too many 429 error responses'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\app3.py", line 129, in searchs
+    result = {"arr": get_topic.main(request.json['search'])}
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\modules\get_topic.py", line 39, in main
+    p = pytrends.related_queries()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\pytrends\request.py", line 440, in related_queries
+    req_json = self._get_data(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\pytrends\request.py", line 140, in _get_data
+    response = s.get(url, timeout=self.timeout, cookies=self.cookies,
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\adapters.py", line 510, in send
+    raise RetryError(e, request=request)
+requests.exceptions.RetryError: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded with url: /trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22%3A+%7B%22geo%22%3A+%7B%22country%22%3A+%22JP%22%7D%2C+%22time%22%3A+%222023-11-12+2023-12-12%22%2C+%22originalTimeRangeForExploreUrl%22%3A+%222023-11-12+2023-12-12%22%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22%5Cu9b3c%5Cu6ec5%5Cu306e%5Cu5203%22%7D%5D%7D%7D%2C+%22keywordType%22%3A+%22QUERY%22%2C+%22metric%22%3A+%5B%22TOP%22%2C+%22RISING%22%5D%2C+%22trendinessSettings%22%3A+%7B%22compareTime%22%3A+%222023-10-12+2023-11-11%22%7D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22language%22%3A+%22en%22%2C+%22userCountryCode%22%3A+%22JP%22%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZXkYi9ffj59sTOq-osYqKZ0_Xu3ePqlu&tz=-540 (Caused by ResponseError('too many 429 error responses'))
+Exception on /search [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\connectionpool.py", line 894, in urlopen
+    return self.urlopen(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\connectionpool.py", line 884, in urlopen
+    retries = retries.increment(method, url, response=response, _pool=self)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\util\retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded with url: /trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22%3A+%7B%22geo%22%3A+%7B%22country%22%3A+%22JP%22%7D%2C+%22time%22%3A+%222023-11-12+2023-12-12%22%2C+%22originalTimeRangeForExploreUrl%22%3A+%222023-11-12+2023-12-12%22%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22%5Cu5c0f%5Cu6cc9%5Cu8cb4%5Cu88d5%22%7D%5D%7D%7D%2C+%22keywordType%22%3A+%22QUERY%22%2C+%22metric%22%3A+%5B%22TOP%22%2C+%22RISING%22%5D%2C+%22trendinessSettings%22%3A+%7B%22compareTime%22%3A+%222023-10-12+2023-11-11%22%7D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22language%22%3A+%22en%22%2C+%22userCountryCode%22%3A+%22JP%22%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZXkaCVdZJ58jReaFgDinn53xxKiENmbL&tz=-540 (Caused by ResponseError('too many 429 error responses'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\app3.py", line 129, in searchs
+    result = {"arr": get_topic.main(request.json['search'])}
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\modules\get_topic.py", line 39, in main
+    p = pytrends.related_queries()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\pytrends\request.py", line 440, in related_queries
+    req_json = self._get_data(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\pytrends\request.py", line 140, in _get_data
+    response = s.get(url, timeout=self.timeout, cookies=self.cookies,
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\adapters.py", line 510, in send
+    raise RetryError(e, request=request)
+requests.exceptions.RetryError: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded with url: /trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22%3A+%7B%22geo%22%3A+%7B%22country%22%3A+%22JP%22%7D%2C+%22time%22%3A+%222023-11-12+2023-12-12%22%2C+%22originalTimeRangeForExploreUrl%22%3A+%222023-11-12+2023-12-12%22%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22%5Cu5c0f%5Cu6cc9%5Cu8cb4%5Cu88d5%22%7D%5D%7D%7D%2C+%22keywordType%22%3A+%22QUERY%22%2C+%22metric%22%3A+%5B%22TOP%22%2C+%22RISING%22%5D%2C+%22trendinessSettings%22%3A+%7B%22compareTime%22%3A+%222023-10-12+2023-11-11%22%7D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22language%22%3A+%22en%22%2C+%22userCountryCode%22%3A+%22JP%22%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZXkaCVdZJ58jReaFgDinn53xxKiENmbL&tz=-540 (Caused by ResponseError('too many 429 error responses'))
+Exception on /search [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\connectionpool.py", line 894, in urlopen
+    return self.urlopen(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\connectionpool.py", line 884, in urlopen
+    retries = retries.increment(method, url, response=response, _pool=self)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\util\retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded with url: /trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22%3A+%7B%22geo%22%3A+%7B%22country%22%3A+%22JP%22%7D%2C+%22time%22%3A+%222023-11-12+2023-12-12%22%2C+%22originalTimeRangeForExploreUrl%22%3A+%222023-11-12+2023-12-12%22%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22%5Cu30d6%5Cu30e9%5Cu30c3%5Cu30af%5Cu30b5%5Cu30f3%5Cu30c0%5Cu30fc%22%7D%5D%7D%7D%2C+%22keywordType%22%3A+%22QUERY%22%2C+%22metric%22%3A+%5B%22TOP%22%2C+%22RISING%22%5D%2C+%22trendinessSettings%22%3A+%7B%22compareTime%22%3A+%222023-10-12+2023-11-11%22%7D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22language%22%3A+%22en%22%2C+%22userCountryCode%22%3A+%22JP%22%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZXkb0RzMCdReo_FhXke7S5gEBKHKeew2&tz=-540 (Caused by ResponseError('too many 429 error responses'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\app3.py", line 129, in searchs
+    result = {"arr": get_topic.main(request.json['search'])}
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\modules\get_topic.py", line 39, in main
+    p = pytrends.related_queries()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\pytrends\request.py", line 440, in related_queries
+    req_json = self._get_data(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\pytrends\request.py", line 140, in _get_data
+    response = s.get(url, timeout=self.timeout, cookies=self.cookies,
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\adapters.py", line 510, in send
+    raise RetryError(e, request=request)
+requests.exceptions.RetryError: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded with url: /trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22%3A+%7B%22geo%22%3A+%7B%22country%22%3A+%22JP%22%7D%2C+%22time%22%3A+%222023-11-12+2023-12-12%22%2C+%22originalTimeRangeForExploreUrl%22%3A+%222023-11-12+2023-12-12%22%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22%5Cu30d6%5Cu30e9%5Cu30c3%5Cu30af%5Cu30b5%5Cu30f3%5Cu30c0%5Cu30fc%22%7D%5D%7D%7D%2C+%22keywordType%22%3A+%22QUERY%22%2C+%22metric%22%3A+%5B%22TOP%22%2C+%22RISING%22%5D%2C+%22trendinessSettings%22%3A+%7B%22compareTime%22%3A+%222023-10-12+2023-11-11%22%7D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22language%22%3A+%22en%22%2C+%22userCountryCode%22%3A+%22JP%22%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZXkb0RzMCdReo_FhXke7S5gEBKHKeew2&tz=-540 (Caused by ResponseError('too many 429 error responses'))
+Exception on /upload [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Face.py", line 44, in upload
+    detected_faces = emotion_detector.detect_emotions(frame)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\fer.py", line 246, in detect_emotions
+    img = load_image(img)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\utils.py", line 73, in load_image
+    raise ValueError(f"Confirm that {img} exists")
+ValueError: Confirm that data:, exists
+Exception on /upload [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Face.py", line 44, in upload
+    detected_faces = emotion_detector.detect_emotions(frame)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\fer.py", line 246, in detect_emotions
+    img = load_image(img)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\utils.py", line 73, in load_image
+    raise ValueError(f"Confirm that {img} exists")
+ValueError: Confirm that data:, exists
+Exception on /login2 [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Chat_ve2.py", line 318, in login
+    c.execute(
+sqlite3.OperationalError: no such table: USERS
+Exception on /regist [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Chat_ve2.py", line 367, in regist
+    c.execute("SELECT id FROM USERS WHERE name = ?", (name,))
+sqlite3.OperationalError: no such table: USERS
+Exception on /regist [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Chat_ve2.py", line 367, in regist
+    c.execute("SELECT id FROM USERS WHERE name = ?", (name,))
+sqlite3.OperationalError: no such column: name
+Exception on /regist [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Chat_ve2.py", line 367, in regist
+    c.execute("SELECT id FROM USERS WHERE name = ?", (name,))
+sqlite3.OperationalError: no such column: name
+Exception on /regist [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Chat_ve2.py", line 376, in regist
+    c.execute("insert into USERS values(null,?,?,?)", (name, password,name,))
+sqlite3.OperationalError: table USERS has 5 columns but 4 values were supplied
+Exception on /login2 [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Chat_ve2.py", line 318, in login
+    c.execute(
+sqlite3.OperationalError: no such column: name
+Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\User.py", line 141, in register
+    db.execute(
+sqlite3.ProgrammingError: Incorrect number of bindings supplied. The current statement uses 4, and there are 3 supplied.
+Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\User2.py", line 141, in register
+    db.execute(
+sqlite3.OperationalError: near ",": syntax error
+Exception on /getaccount [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\User2.py", line 62, in getaccount
+    return jsonify({"name":session['username'],"mail":session["usermail"]})
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\sessions.py", line 84, in __getitem__
+    return super(SecureCookieSession, self).__getitem__(key)
+KeyError: 'usermail'
+Exception on /getaccount [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\User2.py", line 62, in getaccount
+    return jsonify({"name":session['username'],"mail":session["usermail"]})
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\sessions.py", line 84, in __getitem__
+    return super(SecureCookieSession, self).__getitem__(key)
+KeyError: 'usermail'
+Exception on /getaccount [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\User2.py", line 62, in getaccount
+    return jsonify({"name":session['username'],"mail":session["usermail"]})
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\sessions.py", line 84, in __getitem__
+    return super(SecureCookieSession, self).__getitem__(key)
+KeyError: 'usermail'
+Exception on /getaccount [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\User2.py", line 62, in getaccount
+    return jsonify({"name":session['username'],"mail":session["usermail"]})
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\sessions.py", line 84, in __getitem__
+    return super(SecureCookieSession, self).__getitem__(key)
+KeyError: 'usermail'
+Exception on /getaccount [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\User2.py", line 62, in getaccount
+    return jsonify({"name":session['username'],"mail":session["usermail"]})
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\sessions.py", line 84, in __getitem__
+    return super(SecureCookieSession, self).__getitem__(key)
+KeyError: 'usermail'
+Exception on /search [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\connectionpool.py", line 894, in urlopen
+    return self.urlopen(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\connectionpool.py", line 884, in urlopen
+    retries = retries.increment(method, url, response=response, _pool=self)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\util\retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded with url: /trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22%3A+%7B%22geo%22%3A+%7B%22country%22%3A+%22JP%22%7D%2C+%22time%22%3A+%222023-11-13+2023-12-13%22%2C+%22originalTimeRangeForExploreUrl%22%3A+%222023-11-13+2023-12-13%22%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22The+Day+Before%22%7D%5D%7D%7D%2C+%22keywordType%22%3A+%22QUERY%22%2C+%22metric%22%3A+%5B%22TOP%22%2C+%22RISING%22%5D%2C+%22trendinessSettings%22%3A+%7B%22compareTime%22%3A+%222023-10-13+2023-11-12%22%7D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22language%22%3A+%22en%22%2C+%22userCountryCode%22%3A+%22JP%22%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZXpePr6jIsJ6Ioy65vrttuyhHkp9CCc8&tz=-540 (Caused by ResponseError('too many 429 error responses'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\app4.py", line 129, in searchs
+    result = {"arr": get_topic.main(request.json['search'])}
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\modules\get_topic.py", line 39, in main
+    p = pytrends.related_queries()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\pytrends\request.py", line 440, in related_queries
+    req_json = self._get_data(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\pytrends\request.py", line 140, in _get_data
+    response = s.get(url, timeout=self.timeout, cookies=self.cookies,
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\adapters.py", line 510, in send
+    raise RetryError(e, request=request)
+requests.exceptions.RetryError: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded with url: /trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22%3A+%7B%22geo%22%3A+%7B%22country%22%3A+%22JP%22%7D%2C+%22time%22%3A+%222023-11-13+2023-12-13%22%2C+%22originalTimeRangeForExploreUrl%22%3A+%222023-11-13+2023-12-13%22%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22The+Day+Before%22%7D%5D%7D%7D%2C+%22keywordType%22%3A+%22QUERY%22%2C+%22metric%22%3A+%5B%22TOP%22%2C+%22RISING%22%5D%2C+%22trendinessSettings%22%3A+%7B%22compareTime%22%3A+%222023-10-13+2023-11-12%22%7D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22language%22%3A+%22en%22%2C+%22userCountryCode%22%3A+%22JP%22%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZXpePr6jIsJ6Ioy65vrttuyhHkp9CCc8&tz=-540 (Caused by ResponseError('too many 429 error responses'))
+Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\User.py", line 141, in register
+    db.execute(
+sqlite3.OperationalError: 4 values for 3 columns
+Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\User.py", line 141, in register
+    db.execute(
+sqlite3.OperationalError: 4 values for 3 columns
+Exception on /register [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\User.py", line 141, in register
+    db.execute(
+sqlite3.OperationalError: 4 values for 3 columns
+Exception on /upload [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Face.py", line 44, in upload
+    detected_faces = emotion_detector.detect_emotions(frame)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\fer.py", line 246, in detect_emotions
+    img = load_image(img)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\utils.py", line 73, in load_image
+    raise ValueError(f"Confirm that {img} exists")
+ValueError: Confirm that data:, exists
+Exception on /upload [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Face.py", line 44, in upload
+    detected_faces = emotion_detector.detect_emotions(frame)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\fer.py", line 246, in detect_emotions
+    img = load_image(img)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\utils.py", line 73, in load_image
+    raise ValueError(f"Confirm that {img} exists")
+ValueError: Confirm that data:, exists
+Exception on /upload [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Face.py", line 44, in upload
+    detected_faces = emotion_detector.detect_emotions(frame)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\fer.py", line 246, in detect_emotions
+    img = load_image(img)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\utils.py", line 73, in load_image
+    raise ValueError(f"Confirm that {img} exists")
+ValueError: Confirm that data:, exists
+Exception on /upload [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Face.py", line 44, in upload
+    detected_faces = emotion_detector.detect_emotions(frame)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\fer.py", line 246, in detect_emotions
+    img = load_image(img)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\utils.py", line 73, in load_image
+    raise ValueError(f"Confirm that {img} exists")
+ValueError: Confirm that data:, exists
+Exception on /upload [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Face.py", line 44, in upload
+    detected_faces = emotion_detector.detect_emotions(frame)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\fer.py", line 246, in detect_emotions
+    img = load_image(img)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\utils.py", line 73, in load_image
+    raise ValueError(f"Confirm that {img} exists")
+ValueError: Confirm that data:, exists
+Exception on /search [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\connectionpool.py", line 894, in urlopen
+    return self.urlopen(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\connectionpool.py", line 884, in urlopen
+    retries = retries.increment(method, url, response=response, _pool=self)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\urllib3\util\retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded with url: /trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22%3A+%7B%22geo%22%3A+%7B%22country%22%3A+%22JP%22%7D%2C+%22time%22%3A+%222023-11-14+2023-12-14%22%2C+%22originalTimeRangeForExploreUrl%22%3A+%222023-11-14+2023-12-14%22%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22%5Cu30de%5Cu30a4%5Cu30ca%5Cu30f3%5Cu30d0%5Cu30fc%5Cu30ab%5Cu30fc%5Cu30c9%22%7D%5D%7D%7D%2C+%22keywordType%22%3A+%22QUERY%22%2C+%22metric%22%3A+%5B%22TOP%22%2C+%22RISING%22%5D%2C+%22trendinessSettings%22%3A+%7B%22compareTime%22%3A+%222023-10-14+2023-11-13%22%7D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22language%22%3A+%22en%22%2C+%22userCountryCode%22%3A+%22JP%22%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZXvVRXK6geytQBLO7Xyl4VGpSkl2mOQr&tz=-540 (Caused by ResponseError('too many 429 error responses'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\app3.py", line 129, in searchs
+    result = {"arr": get_topic.main(request.json['search'])}
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\modules\get_topic.py", line 39, in main
+    p = pytrends.related_queries()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\pytrends\request.py", line 440, in related_queries
+    req_json = self._get_data(
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\pytrends\request.py", line 140, in _get_data
+    response = s.get(url, timeout=self.timeout, cookies=self.cookies,
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\requests\adapters.py", line 510, in send
+    raise RetryError(e, request=request)
+requests.exceptions.RetryError: HTTPSConnectionPool(host='trends.google.com', port=443): Max retries exceeded with url: /trends/api/widgetdata/relatedsearches?req=%7B%22restriction%22%3A+%7B%22geo%22%3A+%7B%22country%22%3A+%22JP%22%7D%2C+%22time%22%3A+%222023-11-14+2023-12-14%22%2C+%22originalTimeRangeForExploreUrl%22%3A+%222023-11-14+2023-12-14%22%2C+%22complexKeywordsRestriction%22%3A+%7B%22keyword%22%3A+%5B%7B%22type%22%3A+%22BROAD%22%2C+%22value%22%3A+%22%5Cu30de%5Cu30a4%5Cu30ca%5Cu30f3%5Cu30d0%5Cu30fc%5Cu30ab%5Cu30fc%5Cu30c9%22%7D%5D%7D%7D%2C+%22keywordType%22%3A+%22QUERY%22%2C+%22metric%22%3A+%5B%22TOP%22%2C+%22RISING%22%5D%2C+%22trendinessSettings%22%3A+%7B%22compareTime%22%3A+%222023-10-14+2023-11-13%22%7D%2C+%22requestOptions%22%3A+%7B%22property%22%3A+%22%22%2C+%22backend%22%3A+%22IZG%22%2C+%22category%22%3A+0%7D%2C+%22language%22%3A+%22en%22%2C+%22userCountryCode%22%3A+%22JP%22%2C+%22userConfig%22%3A+%7B%22userType%22%3A+%22USER_TYPE_SCRAPER%22%7D%7D&token=APP6_UEAAAAAZXvVRXK6geytQBLO7Xyl4VGpSkl2mOQr&tz=-540 (Caused by ResponseError('too many 429 error responses'))
+Exception on /upload [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Face.py", line 44, in upload
+    detected_faces = emotion_detector.detect_emotions(frame)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\fer.py", line 246, in detect_emotions
+    img = load_image(img)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\utils.py", line 73, in load_image
+    raise ValueError(f"Confirm that {img} exists")
+ValueError: Confirm that data:, exists
+Exception on /upload [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Face.py", line 44, in upload
+    detected_faces = emotion_detector.detect_emotions(frame)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\fer.py", line 246, in detect_emotions
+    img = load_image(img)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\utils.py", line 73, in load_image
+    raise ValueError(f"Confirm that {img} exists")
+ValueError: Confirm that data:, exists
+Exception on /upload [POST]
+Traceback (most recent call last):
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask_cors\extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\blueprint\Face.py", line 44, in upload
+    detected_faces = emotion_detector.detect_emotions(frame)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\fer.py", line 246, in detect_emotions
+    img = load_image(img)
+  File "C:\Users\220063\Desktop\松坂侑隼\ソフト\話題提供\communication\virtual_environment\ITalk_ve\lib\site-packages\fer\utils.py", line 73, in load_image
+    raise ValueError(f"Confirm that {img} exists")
+ValueError: Confirm that data:, exists

@@ -242,7 +242,7 @@ const fileInput = document.getElementById("file_input_button")
 var chatid =location.href.split("/").slice(-1)[0].split("?").slice(0)[0]
 var url = "updateid"+chatid
 var socket = io(``);
-socket.on(url, function(img){
+socket.on(url, function(data){
     is_road = false
     display_switching()
 });
