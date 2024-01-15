@@ -35,7 +35,8 @@ html{
     height: 100%;
 }
 body{
-    background-image: url("../images/pexels-nubia-navarro-(nubikini)-385997.jpg");
+    /* background-image: url("../images/pexels-nubia-navarro-(nubikini)-385997.jpg"); */
+    background:#add8e6 ;
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100%;

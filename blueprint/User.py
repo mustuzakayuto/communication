@@ -37,17 +37,18 @@ def auth():
         db = database.get_db(config.DATABASE)
 
         user = db.execute(
-            "SELECT * FROM USERS WHERE USERNAME = ?", (username, )
+            "SELECT * FROM USERS WHERE USERNAME = ?and PASSWORD = ?", (username, password,)
         ).fetchone()
         
         if user is None:
             flash('ユーザー名が間違っています')
-        elif not check_password_hash(user['PASSWORD'], password):
-            flash('パスワードが間違っています')
+    
+       
         else:
             session.pop('username', None)
             session['username'] = username
             session["usermail"] = user['USEREMAIL']
+            session['user_id'] = user["id"]
             return redirect(url_for('user.member'))
         return redirect(url_for('user.log_in'))
 
@@ -139,8 +140,8 @@ def register():
             print(f'ユーザー「{useremail}」はすでに存在しています')
             return render_template('test03.html',error=f'ユーザー「{useremail}」はすでに存在しています')
         db.execute(
-            "INSERT INTO USERS (USERNAME, PASSWORD, USEREMAIL) VALUES (?, ?, ?)",
-            (username, generate_password_hash(password), useremail)
+            "INSERT INTO USERS (nickname,USERNAME, PASSWORD, USEREMAIL) VALUES (?,?, ?, ?)",
+            (username,username,password, useremail)
         )
 
         db.commit()

@@ -198,7 +198,7 @@ def start(port):
     print(f"ngrok URL: {public_url}")
     sio.run(app,port=port)
 if __name__ == '__main__':
-    start(sys.argv[1])
+    # start(sys.argv[1])?
     isdebug=False
     if input("debug-mode:(y・n):")=="y":
         isdebug=True

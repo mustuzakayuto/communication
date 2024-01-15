@@ -38,6 +38,7 @@ function setMODEL(){
     
 }
 function startcreateimagefunction(){
+    if(createimage.value.trim()=="")return
     Result3.innerHTML="<h3>順番に生成しているのでお待ちください</h3>"
     // const searchdata = {"search":search.value}
     fetch('/image', {
@@ -89,6 +90,12 @@ function starttranslationfunction(){
 
 const starttranslation = document.getElementById('starttranslation');
 starttranslation.addEventListener('click', starttranslationfunction);
+const clear = document.getElementById("prompt_clear")
+clear.addEventListener("click",()=>{
+    createimage.value=""
+    createimage.select()
+
+})
 
 
 const copybutton = document.getElementById("copy")

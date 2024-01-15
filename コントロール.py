@@ -25,7 +25,7 @@ def main():
                     data_base=input("(chat,emo,user,emave,img,all):")
                     
                     if data_base== "all":
-                        get(config.CHATDATABASE,"user")
+                        get(config.CHATDATABASE,"USERS")
                         get(config.CHATDATABASE,"chat")
                         get(config.CHATDATABASE,"chatmess")  
                         get(config.EMOTIONDATABASE,"emotions")
