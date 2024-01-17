@@ -16,7 +16,7 @@ CORS(app, resources={r"/socket.io/*": {"origins": "*"}})
 app.secret_key = secrets.token_hex(16)  # ランダムなシークレットキーを生成
 app.template_folder = 'template'  # HTMLテンプレートのフォルダ設定
 app.static_folder = 'static'  # 静的ファイル（CSS、JavaScriptなど）のフォルダ設定
-sio  = SocketIO(app)
+sio  = SocketIO(app, async_mode='threading') 
 # 他のPythonプログラムのインポート
 from modules import get_topic
 from modules import search
