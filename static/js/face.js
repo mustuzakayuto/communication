@@ -139,7 +139,8 @@ async function startEmotionDetection() {
                 .then(response => response.json())
                 .then(result => {
                     console.log(result);
-                    if (result.len !== 0) {
+                    if (result.len != 0 & average.innerHTML=="") {
+                        
                         setEmotionValues(result.arr);
                     }
                 })
