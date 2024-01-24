@@ -390,16 +390,18 @@ header h1 {
 
 .menu {
     display: flex;
-    margin: 0 20px;
+    width: 100%;
+    /* margin: 0 20px; */
+    width: 20%;
 }
 
 .menu a{
     display: block;
     font-size: 20px;
-    width: 150px;
+    
     text-align: center;
     padding: 20px 10px;
-    margin: 0 10px;
+    margin: 0 ;
 }
 
 
@@ -425,7 +427,8 @@ header h1 {
 .login {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    /* padding: 20px; */
+    width: 100%;
 }
 
 .loginForm {
@@ -564,19 +567,21 @@ header h1 {
 
 .chatBox{
   position: relative;
-  padding: 30px;
+  /* padding: 30px; */
+  width: 100%;
   border: #CE579B 4px solid ;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   background-color: #eeeeee;
   
   
 }
 
 .chatMessage{
-  padding: 10px;
+  /* padding: 10px; */
   margin-bottom: 20px;
   overflow: auto;
   height: 600px;
+
 }
 
 
@@ -596,7 +601,8 @@ header h1 {
 }
 
 .chatBox input[type="submit"]{
-  margin-left: 10px;
+  /* margin-left: 10px; */
+  padding: 0;
   width: 20%;
   height: 50px;
   border-radius: 20px;
@@ -633,7 +639,7 @@ header h1 {
   color: white;
 }
 #ChatText{
-    padding-left: 10px;
+    /* padding-left: 10px; */
 }
 @media  (max-width:1300px) {
   .menu a{
