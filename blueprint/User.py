@@ -146,7 +146,7 @@ def register():
 
         db.commit()
         # return 'ユーザー登録が完了しました'
-        return render_template('test02.html')
+        return redirect('login')
 
     return redirect(url_for('index'))
 @bp.route('/getuser', methods=('GET', 'POST'))
