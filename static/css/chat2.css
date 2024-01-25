@@ -43,7 +43,13 @@
 }    
 
 @media   (max-width:400px) {
-    
+    .chatTemp{
+        width: 98%;
+    }
+    .chatBox{
+        
+        border: #CE579B 4px solid ;
+    }
     .chatMessage p span {
         font-size: 10px;
     }

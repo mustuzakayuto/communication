@@ -6,7 +6,7 @@ import re
 
 from modules import database
 import hashlib
-from . import Chat
+
 import config
 # インスタンス化
 bp = Blueprint('user', __name__)
